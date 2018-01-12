@@ -1,0 +1,129 @@
+<div class="list-link"><%= link_to image_tag("dark_icons/view_listw.png", :width=>"24", :class=>"link-img"), shopping_lists_path %> </div>
+<div class="back-link"><%= link_to image_tag("dark_icons/undow.png", :width=>"24", :class=>"link-img"), :back %></div>
+<style>	
+		table {
+			border-collapse: collapse;
+			vertical-align: middle;
+		}
+		thead, th {
+			border: 1px solid blue;
+		}
+		tbody, tbody td {
+			border: 1px solid blue;
+		}
+		tfoot {
+			border: 0px;
+		}
+		th, td {
+			padding: 5px;
+		}
+		tr:nth-child(even) {
+			background-color: #eeffee;
+		}
+		td {
+			max-width: 250px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+		.tdd {
+			max-width: 100px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}	
+		.image-upload > input {
+			display: none;
+		}
+		/*.updImg {
+			display: block;
+			margin: auto;
+			align: left;*/
+		}
+		.tdimg {
+			width: 15px;
+			max-width: 15px;
+			width-max: 15px;
+		}
+		.thimg {
+			width: 15px;
+			max-width: 15px;
+			width-max: 15px;
+		}
+		.meh {
+			display: inline-block;
+		}
+		.mehh {
+			display: inline-block;
+		} 
+		#small-button {
+		background-image:url("<%= image_path("dark_icons/refresh.png") %>");
+		background-size:cover;
+		width: 15px;
+		height: 15px;
+		line-height:15px;
+	}
+	.noborder {
+		border:0px;
+	}
+		.meh {
+			display: inline-block;
+		}
+	</style>
+<h1>Shopping List</h1>
+<div class="meh">
+	<%= form_tag shopping_lists_path, :method => 'get' do %>
+		<div style="display: table-cell; width:290px;"><%= text_field_tag :search, params[:search], :class => "search-tag" %></div>
+		<div style="display: table-cell; padding-left:3px;"><input type="submit" value="Search" class="button" id="blue-button"></div>
+	<% end %>
+</div>
+<table class="index-table">
+<thead>
+ <tr bgcolor="#aaffaa">
+  <th>Number</th>
+  <th>Manufacturer</th>
+  <th>Name</th>
+  <th>Type</th>
+  <th>Notes</th>
+  <th>Price</th>
+  <th bgcolor="#FFA500">Buy</th>
+  <th bgcolor="#FFA500"><%= image_tag("dark_icons/trash.png", height: "13") %></th>
+  <th bgcolor="#FFA500">Cost</th>
+ </tr>
+ </thead>
+ <tbody>
+<%= form_for :shopping_list, url: shopping_lists_path do |f| %>
+	<% for list in @shopping_lists do %>
+			 <tr valign="top">	
+				<td><%=link_to list.part_number, part_path(list.item_id), :title => list.part_name %></td>
+				<td><%= list.m_full_name %></td>
+				<td><%=list.part_name %></td>
+				<td><%= list.p_type %></td>
+				<td><%=list.p_note %></td>
+				<td class="price" align="right"><%=number_to_currency(list.p_price, :unit => "£") %></td>
+				<td>	<%= f.hidden_field :item_update, :value => 1 %>
+						<%= f.hidden_field :item_ids, :value => list.item_id, multiple: true %>
+						<%= f.hidden_field :item_type, :value => "part"%>
+						<%= f.number_field("item_quantity_"+list.item_id.to_s, :value => list.item_quantity, min: "0", :class=>"ultra-small-text") %>
+				</td>
+				<td>
+					<%= f.check_box "item_del_"+list.item_id.to_s, :class=>"check_box" %>
+				</td>
+				<td align="right"><%=number_to_currency(list.buy_cost, :unit => "£") %></td>
+			</tr>
+	<% end %>	
+	</tbody>
+	<tfoot border="0">
+		<% if @shopping_lists.any? %>
+			<tr class="noborder">
+				<td></td><td></td><td></td><td></td><td></td><td></td>
+				<td align="center" colspan="2"><input type="submit" value="Update all" class="button"></td>
+			</tr>
+			<% end %>
+	</tfoot>
+<% end %>
+</table>
+
+ <% if @shopping_lists.count >0 %>
+ <div class="download-link"><%= link_to image_tag("dark_icons/download.png", :width=>"24", :class=>"link-img"), shopping_lists_path(format: "csv") %> </div>
+ <% end %>

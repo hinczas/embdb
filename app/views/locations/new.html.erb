@@ -1,0 +1,26 @@
+<div class="list-link"><%= link_to image_tag("dark_icons/view_listw.png", :width=>"24", :class=>"link-img"), locations_path %> </div>
+<div class="back-link"><%= link_to image_tag("dark_icons/undow.png", :width=>"24", :class=>"link-img"), :back %></div>
+<h1> New location </h1>
+
+<%= form_for (@location) do |f| %>
+	<p>
+	 <%= f.label 'Name' %></br>
+	 <%= f.text_field :l_name, :size=> "5", :class=>"wide-text" %>
+	</p>
+	<p>
+	 <%= f.label 'Description' %><br>
+	 <%= f.text_area :l_description, :cols=>"30", :rows=>"5", :class=>"wide-text" %>
+	</p>
+	<p>
+	 <%= f.label 'Notes' %><br>
+	 <%= f.text_area :l_note, :cols=>"30", :rows=>"5", :class=>"wide-text" %>
+	</p>
+	<p>
+	 <%= f.label 'Photo' %>
+	 <%= f.file_field :l_photo, multipart: true, :class => "file-browser" %><br/>
+	 <%= label_tag "Web URL" %><br>
+	 <%= text_field_tag :web_photo, nil, :class=>"wide-text" %>
+	</p>
+<div class="float-save"><input type="submit" value="Save" class="button"></div>
+<div id="top-save"><input type="submit" value="" class="button"></div>
+<% end %>

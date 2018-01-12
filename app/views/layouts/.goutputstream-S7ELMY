@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html>
+  <style>
+	* {
+		margin: 0;
+		outline:0px;
+	}
+	.button {
+        outline:0px;
+		background-color: #4CAF50;
+		border: none;
+		color: white;
+		padding: 2px 5px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		width: 80px;
+		/*width: 40px;
+		height: 40px;
+		border-radius: 50%;*/
+		-moz-box-shadow: 0px 0px 5px rgba(76,175,80,.9);
+		-webkit-box-shadow: 0px 0px 5px rgba(76,175,80,.9);
+		box-shadow: 0px 0px 5px rgba(76,175,80,.9);
+	}
+	#blue-button {
+        outline:0px;
+		background-color: #4C7EAF;
+		border: none;
+		color: white;
+		padding: 2px 5px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		width: 80px;
+		-moz-box-shadow: 0px 0px 1px rgba(76,126,175,.9);
+		-webkit-box-shadow: 0px 0px 1px rgba(76,126,175,.9);
+		box-shadow: 0px 0px 1px rgba(76,126,175,.9);
+	}
+	#button-org {
+        outline:0px;
+		background-color: #EF6F6F;
+		border: none;
+		color: white;
+		padding: 2px 5px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		width: 80px;
+		-moz-box-shadow: 0px 0px 1px rgba(239,111,111,.9);
+		-webkit-box-shadow: 0px 0px 1px rgba(239,111,111,.9);
+		box-shadow: 0px 0px 1px rgba(239,111,111,.9);
+	}
+	.header_link, .home_link {
+		margin-right:7px;
+		color:white;
+	}
+	.file-browser {
+		width: 287px;
+		padding-bottom: 3px;
+	}
+	.header {
+		border:0px solid blue;
+		height: 50px;
+		background: #4CAF50;
+			min-width:700px;
+			width:100%;
+	}
+	.header2 {
+		border:0px solid blue;
+		height: 20px;
+		background: #4C7EAF;
+		margin-bottom: -22px;
+			min-width:700px;
+	}
+	.image-tag {
+		vertical-align: middle;
+		align: center;
+		width: 20px;
+		height: 15px;
+		margin-top:-5px;
+	}
+	.page-wrap {
+		min-height: 1080px;
+		margin-bottom: -17px;
+		margin-top: 0px
+		margin-left:auto;
+		margin-right:auto;
+		width:100%;
+	}
+	.page-wrap:after {
+		content: "";
+		/*display: block;*/
+	}
+	.pagination {
+		margin-left: 50px;
+		margin-top: -40px;
+		margin-bottom: 20px;
+		align: center;
+		vertical-align:top;
+		padding:10px;
+	}
+	.search-tag {
+        outline:0px;
+		width: 283px;
+	}
+	.select-tag {
+        outline:0px;
+		background-color: white;
+		border: 1px solid #4CAF50;
+		color: black;
+		padding: 2px 5px;
+		text-align: left;
+		text-decoration: none;
+		display: inline-block;
+		width: 130px;
+	}
+	.site-body {
+		margin: 2px;
+	}
+	.site-footer {
+		/*background: #aaddFF;*/
+		background: #4CAF50;
+		height: -17px;
+			min-width:700px;
+	}
+	.page-wrap:after {
+		height: -17px;
+	}
+	.extra-small-text {
+		width:70px;
+		}
+	.ultra-small-text {
+		width:50px;
+		}
+	.extra-wide-text {
+		width:450px;
+		white-space: pre-wrap;
+		}
+	.wider-wide-text {
+		width:320px;
+		white-space: pre-wrap;
+		}
+	.small-text {
+		width:125px;
+		}
+	.sub-td {
+		max-width:350px;
+		min-width:150px;
+		}
+	.synopsis {
+		width:450px;
+		white-space: pre-wrap;
+		}
+	.upl-img {
+		width:200px;
+		}
+	.wide-text {
+		width:225px;
+		white-space: pre-wrap;
+		}
+	.text {
+		vertical-align: bottom;
+		padding:10px;
+	}
+	a:hover { 
+		text-decoration:none; 
+		background-color: transparent !important;
+	}
+	a:link, a:visited { 
+		text-decoration:none; 
+			color:darkgreen !important;
+	}
+	h1 {
+		margin-top:5px;
+		margin-bottom:5px;
+	}
+	head {
+		min-width:700px;
+		position:absolute;
+		}
+	html, body {
+		height: 100%;
+	}
+	img {
+		margin-top:5px;
+		}
+	label{
+		width: 6em;
+		float: left;
+		text-align: left;
+		margin-right: 0.5em;
+		display: block;
+	}
+	select{
+        outline:0px;
+		width: 10em;
+	}
+	table {			
+		margin-top: 20px;
+		margin-left: 10px;
+		margin-bottom: 50px;
+	}
+	.searchbox { 
+        outline:0px;
+		float: right;
+		vertical-align:top;
+		padding-right:10px;
+		margin-top:-44px;
+	}
+	.searchbox form > div {
+	  vertical-align: top;
+	  display: inline-block;
+	}
+	.icon-search {
+	  margin-top: 12px;
+	  margin-left: 9px;
+	}
+	#selector {
+	  background: #990000;
+	  color: white;
+	  height: 36px;
+	  font-size: 14px;
+	  width: 72px;
+	  border: 0;
+	  -webkit-border-top-left-radius: 5px;
+	  -moz-border-top-left-radius: 5px;
+	  border-top-left-radius: 5px;
+	  -webkit-border-bottom-left-radius: 5px;
+	  -moz-border-bottom-left-radius: 5px;
+	  border-bottom-left-radius: 5px;
+	}
+	.searchbox input, .page-search input {
+	  border: 0;
+	  margin: 0;
+	  font-size: 12px;
+	  padding: 0 8px;
+	  height: 36px;
+	  width: 175px;
+	  /*-webkit-border-top-left-radius: 5px;
+	  -moz-border-top-left-radius: 5px;
+	  border-top-left-radius: 5px;
+	  -webkit-border-bottom-left-radius: 5px;
+	  -moz-border-bottom-left-radius: 5px;
+	  border-bottom-left-radius: 5px;*/
+	}
+	.searchbox button {
+	  position: relative;
+	  cursor: pointer;
+	  background: #4C7EAF;
+	  color: white;
+	  height: 36px;
+	  font-size: 18px;
+	  margin: 0;
+	  margin-left: -4px;
+	  width: 42px;
+	  border: 0;
+	  -webkit-border-top-right-radius: 5px;
+	  -moz-border-top-right-radius: 5px;
+	  border-top-right-radius: 5px;
+	  -webkit-border-bottom-right-radius: 5px;
+	  -moz-border-bottom-right-radius: 5px;
+	  border-bottom-right-radius: 5px;
+	}
+	.searchbox button i, .page-search button i {
+	  position: absolute;
+	  top: 10%;
+	  left: 10%;
+	  margin-top: -12px;
+	  margin-left: -9px;
+	}
+	.float-save {
+		background: #4CAF50;
+		background-image: url("/assets/seamless3.png");
+	}
+	.float-save .button {
+		overflow:hidden;
+		position:fixed;
+		bottom:4%;
+		right:1%;
+		width: 40px;
+		height: 40px;
+		border-radius: 50%;
+		-moz-box-shadow: 0px 0px 5px rgba(76,175,80,.9);
+		-webkit-box-shadow: 0px 0px 5px rgba(76,175,80,.9);
+		box-shadow: 0px 0px 5px rgba(76,175,80,.9);
+	}
+	.home-link {
+		position:fixed;
+		top:5px;
+		left:0px;
+		width: 40px;
+		height: 40px;
+		border-radius: 50%;
+		overflow: hidden;
+		background: #4CAF50;
+		-moz-box-shadow: 0px 0px 5px rgba(76,175,80,.9);
+		-webkit-box-shadow: 0px 0px 5px rgba(76,175,80,.9);
+		box-shadow: 0px 0px 5px rgba(76,175,80,.9);
+	}
+	.list-link {
+		position:fixed;
+		top:5px;
+		left:43px;
+		width: 40px;
+		height: 40px;
+		border-radius: 50%;
+		overflow: hidden;
+		background: #990000;
+		-moz-box-shadow: 0px 0px 5px rgba(239,111,111,.9);
+		-webkit-box-shadow: 0px 0px 5px rgba(239,111,111,.9);
+		box-shadow: 0px 0px 5px rgba(239,111,111,.9);
+	}
+	.back-link {
+		position:fixed;
+		top:5px;
+		left:87px;
+		width: 40px;
+		height: 40px;
+		border-radius: 50%;
+		overflow: hidden;
+		background: #4C7EAF;
+		-moz-box-shadow: 0px 0px 5px rgba(76,126,175,.9);
+		-webkit-box-shadow: 0px 0px 5px rgba(76,126,175,.9);
+		box-shadow: 0px 0px 5px rgba(76,126,175,.9);
+	}	 	
+	.download-link {
+		position:fixed;
+		bottom:4%;
+		right:1%;
+		width: 40px;
+		height: 40px;
+		border-radius: 50%;
+		overflow: hidden;
+		background: #FFA500;
+		-moz-box-shadow: 0px 0px 5px rgba(76,126,175,.9);
+		-webkit-box-shadow: 0px 0px 5px rgba(76,126,175,.9);
+		box-shadow: 0px 0px 5px rgba(76,126,175,.9);
+	}	
+	.link-img, .link-img2 {
+		padding-top:3px;
+		padding-left:8px;
+		padding-right:8px;
+		padding-bottom:8px;
+		overflow:hidden;
+	}
+	.link-img2 {
+		padding-left:7px;
+	}
+	.error-msg {
+		position:fixed;
+		top:11%;
+		right:1%;
+		border-radius: 10px;
+		border: 2px solid #FF0000;
+		padding: 7px; 
+		margin-top:10px;
+		width:300px;
+		background:#FFB6B2;
+		z-index:1;
+	}
+	.notice-msg {
+		position:fixed;
+		top:18%;
+		right:1%;
+		border-radius: 10px;
+		border: 2px solid #008000;
+		padding: 7px; 
+		margin-top:10px;
+		width:300px;
+		background:#71C971;
+		z-index:1;
+	}
+	#linker_select {
+	  background: #990000;
+	  color: white;
+	  height: 20px;
+	  font-size: 12px;
+	  width: 72px;
+	  border: 0;
+        outline:0px;
+	  -webkit-border-top-left-radius: 5px;
+	  -moz-border-top-left-radius: 5px;
+	  border-top-left-radius: 5px;
+	  -webkit-border-bottom-left-radius: 5px;
+	  -moz-border-bottom-left-radius: 5px;
+	  border-bottom-left-radius: 5px;
+	}
+	#linker {
+	  color: white;
+	  font-size: 12px;
+	}
+	/* body {
+		background-image: url("/assets/seamless3.png");
+		background-repeat: repeat;
+	} */
+	.scrollToTop {
+		position:fixed;
+		bottom:13%;
+		right:1%;
+		width: 40px;
+		height: 40px;
+		border-radius: 50%;
+		overflow: hidden;
+		background: #4C7EAF;
+		-moz-box-shadow: 0px 0px 5px rgba(76,126,175,.9);
+		-webkit-box-shadow: 0px 0px 5px rgba(76,126,175,.9);
+		box-shadow: 0px 0px 5px rgba(76,126,175,.9);
+	}
+ </style>
+ <script>
+	 function jsFunction() {
+	  var form = $("#selector").val();
+	  document.getElementById("searcher").action=form;
+	  if (form == "http://www.google.co.uk/search") {
+		  document.getElementById("q").name="q";
+		  document.getElementById("q").placeholder="Google Search";
+	  }
+	  if (form == "http://www.imdb.com/search/title") {
+		  document.getElementById("q").name="title";
+		  document.getElementById("q").placeholder="IMDB Search";
+	  }
+	  if (form == "http://uk.farnell.com/Search") {
+		  document.getElementById("q").name="st";
+		  document.getElementById("q").placeholder="Farnell Search";
+	  }
+	}		
+ </script>
+	<div class="page-wrap">
+		<head>			
+		  <title>Inventory Database WebApp</title>
+		  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+		  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+		  <%= csrf_meta_tags %>	
+		  <div class="header">
+			<div class="image-set" style="display: table-cell;">
+				<%=image_tag("chip.png", :height=>"40")%>
+				<%=image_tag("film.png", :height=>"40")%>
+				<%=image_tag("book.png", :height=>"40")%>
+			</div>
+			<div class="text" style="font-family: arial; font-size:36px; display: table-cell;">.emb Database</div>
+			
+				  
+			<div class="searchbox" style="display: table-cell;">
+				<div class="selector" style="vertical-align:top; display: table-cell;">
+					<select id="selector" onChange="jsFunction()">
+						<option value="http://www.google.co.uk/search">Google</option>
+						<option value="http://www.imdb.com/search/title">IMDB</option>
+						<option value="http://uk.farnell.com/Search">Farnell</option>
+				  </select> 
+				</div>
+				<form role="search" method="get" action="http://www.google.co.uk/search" target="_blank" id="searcher" style="display: table-cell;">             
+				  <div><input placeholder="Google Search" type="text" value="" name="q" id="q"></div>				  
+				  <button type="submit" id="searchsubmit" title="Google Search">				    
+						<%=image_tag("dark_icons/previeww.png", :width=>"25", :style=>"margin-top:4px;")%>						
+				  </button>
+				</form>
+			</div>          
+		  </div>			
+		</head>
+		  <div class="header2">
+			  <div id="linker" style="float:right;">
+				 <select id="linker_select" onChange="follow_link()">
+						<option value="/">Site map</option>
+						<option disabled role=separator>_____________</option>
+						<option value="/projects"><strong>Projects</strong></option>
+						<option disabled role=separator>_____________</option>
+						<option value="/pcbs"><strong>PCB</strong></option>
+						<option value="/parts">&nbsp;Components</option>
+						<option value="/locations">&nbsp;Locations</option>
+						<option value="/packages">&nbsp;Packages</option>
+						<option value="/manufacturers">&nbsp;Manufacturers</option>
+						<option value="/types">&nbsp;Types</option>
+						<option value="/parts/buy">&nbsp;Shopping list</option>
+						<option disabled role=separator>_____________</option>
+						<option value="/movies">Movies</option>
+						<option value="/mformats">&nbsp;Formats</option>
+						<option value="/mlanguages">&nbsp;Languages</option>
+						<option value="/msubtitles">&nbsp;Subtitles</option>
+						<option value="/mtypes">&nbsp;Types</option>
+						<option value="/myears">&nbsp;Years</option>
+						<option value="/qualities">&nbsp;Quality</option>
+						<option value="/threeds">&nbsp;3D</option>
+						<option value="/genres">&nbsp;Genre</option>
+						<option disabled role=separator>_____________</option>						
+						<option value="/books">Books</option>
+						<option value="/authors">&nbsp;Authors</option>
+						<option value="/publishers">&nbsp;Publishers</option>
+										
+				  </select> 
+			  </div>
+		  </div>	
+		<div class="site-body">	
+		<div class="home_link"><%= DateTime.now() %></div>
+		
+			<body style="font-family: sans-serif; font-size:12px">	
+				<%= link_to welcome_index_url do %>
+					<div class="home-link">
+						<%= image_tag("dark_icons/home.png", :width=>"24", :class=>"link-img") %>
+					</div>
+				<% end %>
+				
+					<% if flash[:error] %>
+						<fieldset class="error-msg">
+							<strong><%= flash[:error] %></strong>
+						</fieldset>
+					<% end %>
+					<% if flash[:notice] %>
+						<fieldset class="notice-msg">
+							<strong><%= flash[:notice] %></strong>
+						</fieldset>
+					<% end %>
+	
+				<%= yield %>
+ <div class="scrollToTop" style="display:none;"><%= link_to image_tag("dark_icons/arrow_up2.png", :width=>"24", :class=>"link-img2"), nil %> </div>
+			
+			</body>
+		</div>
+	</div>
+	<footer class="site-footer">
+		 <%= link_to "(v. "+Rails.configuration.version+")", "/welcome/hidden" %> <%= link_to "contact", "mailto:hinczas@gmail.com"  %>
+	</footer>
+</html>

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  pk_number: MyString
+  pk_name: MyString
+  pk_description: MyText
+  pk_note: MyText
+
+two:
+  pk_number: MyString
+  pk_name: MyString
+  pk_description: MyText
+  pk_note: MyText

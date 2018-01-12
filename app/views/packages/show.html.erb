@@ -1,0 +1,64 @@
+<div class="list-link"><%= link_to image_tag("dark_icons/view_listw.png", :width=>"24", :class=>"link-img"), packages_path %> </div>
+<div class="back-link"><%= link_to image_tag("dark_icons/undow.png", :width=>"24", :class=>"link-img"), :back %></div>
+<h1>Package <%= @package.pk_name %></h1>
+<%=link_to image_tag("dark_icons/tools_1.png", :width=>"15", :height=>"15"), edit_package_path(@package) %> <%=link_to image_tag("dark_icons/trash.png", :width=>"15", :height=>"15"), package_path(@package), method: :delete,
+		data: { confirm: 'Are you sure?' } %> <%= link_to image_tag("dark_icons/plus_1.png", :width=>"15", :height=>"15"), new_package_path %>
+<table style="width:500px;">
+	<tr>
+		<td rowspan="5" width="100">
+		<% if @package.pk_photo %>
+			<%= image_tag(@package.pk_photo, :class=>"upl-img")%>
+			<% else %>
+			<%= image_tag("no_photo.png", :class=>"upl-img")%>
+			<% end %>
+		</td>
+		<td>
+			<!--<tr>
+				<td>
+					<b>Number</b></br>
+					<%= @package.pk_number %>
+				</td>
+			</tr>-->
+			<tr>
+				<td>
+					<b>Name</b></br>
+					<%= @package.pk_name %>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<b>Description</b></br>
+					<%= @package.pk_description %>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<b>Notes</b></br>
+					<%= @package.pk_note %>
+				</td>
+			</tr>
+			</td>
+			</tr>
+	<tr>
+		<td colspan="5">
+			<b></br>Parts </b>
+			<% if @package.parts.any? %>
+				(<%= @package.parts.count %>)</br>
+				<table class="sub-result">
+				<col width=80 >
+				<col width=80 >
+				<col width=150 >
+				<col width=200 >
+					 <tr bgcolor="#aaffaa">
+					  <th>Number</th>
+					  <th>Qte</th>
+					  <th>Name</th>
+					  <th>Description</th>
+					  </tr>
+
+						<%= render @package.parts %> 
+
+					</table>
+			<% else %> (0)
+			<% end %>
+	</table>

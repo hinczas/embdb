@@ -1,0 +1,41 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  sub_title: MyString
+  num_title: 1
+  part: 1
+  genres: MyString
+  imdb: MyString
+  postgres: MyText
+  sunopsis: MyText
+  last_seen: 2016-06-06 16:22:04
+  watch_count: 1
+  own: 1
+  mtype_id: 
+  myear_id: 
+  mformat_id: 
+  quality_id: 
+  mlanguage_id: 
+  msubtitle_id: 
+  threed_id: 
+
+two:
+  title: MyString
+  sub_title: MyString
+  num_title: 1
+  part: 1
+  genres: MyString
+  imdb: MyString
+  postgres: MyText
+  sunopsis: MyText
+  last_seen: 2016-06-06 16:22:04
+  watch_count: 1
+  own: 1
+  mtype_id: 
+  myear_id: 
+  mformat_id: 
+  quality_id: 
+  mlanguage_id: 
+  msubtitle_id: 
+  threed_id: 

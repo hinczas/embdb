@@ -1,0 +1,159 @@
+<style>	
+body {
+	background-image: url("/assets/seamless3.png");
+	background-repeat: repeat;
+}
+.container {
+	width:100%;
+	margin-bottom:40px;
+	z-index:-1;
+}
+.project-container {
+	max-width:1050px;
+	margin-left:auto;
+	margin-right:auto;
+	z-index:-1;
+}
+.pagination-container {
+	max-width:200px;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:40px;
+	z-index:1;
+}
+.single-project {
+	position:relative;
+	display: inline-block; 
+	*display: inline; 
+	vertical-align: top;
+	width:230px;
+	margin-right:15px;
+	margin-left:15px;
+	margin-top:30px;
+	border-radius:5px;
+	background-repeat: no-repeat;
+	background-attachment: relative;
+	background-position: center; 
+	background-size:cover;
+	
+}
+.pr-header {	
+	padding:5px;
+	  background: #FFA500;
+	  color: white;
+	  height: 20px;
+	  font-size: 16px;
+	  width: 220px;
+	  border: 1px solid red;
+	  -webkit-border-top-left-radius: 5px;
+	  -moz-border-top-left-radius: 5px;
+	  border-top-left-radius: 5px;
+	  -webkit-border-top-right-radius: 5px;
+	  -moz-border-top-right-radius: 5px;
+	  border-top-right-radius: 5px;
+		text-shadow: 0px 0px 1px #fff;
+}
+.pr-body {	
+	  padding:5px;
+	  background: #fff;
+	  overflow: hidden;
+	  color: black;
+	  height: 300px;
+	  font-size: 8px;
+	  width: 220px;
+	  border: 1px solid red;
+	  -webkit-border-bottom-left-radius: 5px;
+	  -moz-border-bottom-left-radius: 5px;
+	  border-bottom-left-radius: 5px;
+	  -webkit-border-bottom-right-radius: 5px;
+	  -moz-border-bottom-right-radius: 5px;
+	  border-bottom-right-radius: 5px;
+	  margin-top:-1px;
+		opacity: 0.8;
+	  -webkit-transition: opacity .3s;
+	  transition: opacity .3s;
+  }
+  .pr-body:hover {
+	  opacity: 0.7;
+  }
+#container p { 
+	display: inline; }
+.pr-body-x {
+	   overflow: hidden;
+	   text-overflow: ellipsis;
+	   display: -webkit-box;
+	   -webkit-box-orient: vertical;
+	   -webkit-line-clamp: 14; /* number of lines to show */
+	   line-height: 10px;        /* fallback */
+	   max-height: 300px;
+	   
+}
+.pagination {
+	margin:0;
+	margin-right:15px;
+	margin-left:15px;
+}
+.grid-links {
+	position:absolute;
+	top:1px;
+	right:1px;
+}
+.title {
+	max-width:190px;
+	overflow:hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.text-link:link, .text-link:visited { 
+	text-decoration:none; 
+		color:#000 !important;
+}
+</style>
+
+<div class="back-link"><%= link_to image_tag("dark_icons/undow.png", :width=>"24", :class=>"link-img"), :back %></div>
+<div class="list-link"><%= link_to image_tag("dark_icons/view_listw.png", :width=>"24", :class=>"link-img"), projects_path %> </div>
+ <h1>Projects (<%=@projects.count %>) <%= link_to image_tag("dark_icons/plus_1.png", :width=>"20", :height=>"20"), new_project_path %> </h1> 
+	<div class="meh">
+	<%= form_tag import_projects_path, multipart: true do %>
+		<div style="display: table-cell; width:290px;"><%= file_field_tag :file_imp, :class => "file-browser"  %></div>
+		<div style="display: table-cell; padding-left:3px;"><input type="submit" value="Import" class="button"></div>
+	<% end %> 
+	<%= form_tag projects_path, :method => 'get' do %>
+		<div style="display: table-cell; width:290px;"><%= text_field_tag :search, params[:search], :class => "search-tag" %></div>
+		<div style="display: table-cell; padding-left:3px;""><input type="submit" value="Search" class="button" id="blue-button"></div>
+	<% end %>	
+	</div>
+<div class="container">	
+<div class="project-container">
+	<% @projects.each do |project| %>
+		<div class="single-project" style="background-image: url('<%= '/images/backgrounds/'+project.background.to_s %>');">
+				<div class="pr-header">
+					<font size="4" color="brown">
+						<strong><div class="title"><%= link_to project.name+" ("+project.code+")" , project %></div></strong>				
+						<div class="grid-links">
+						<%=link_to image_tag("dark_icons/tools_1.png", :width=>"13", :height=>"13"), edit_project_path(project), :class=>"tdimg",  :style=>"float:right; margin-right:2px;" %>
+						</div>
+					</font>
+				</div>
+				<div class="pr-body">
+					<p class="pr-body-x">
+							<%=link_to simple_format(project.description, :style=>"color: #000;"), project, :class=>"text-link"   %>
+					</p>
+				</div>
+		</div>
+	<% end %>
+	<div class="single-project">
+				<div class="pr-header" style="background: #BFBFBF;" >
+					<font size="4" color="green">
+						<strong>New ...</strong>
+					</font>
+				</div>
+				<div class="pr-body">
+					<%=link_to image_tag("dark_icons/new3.png", :width=>"140", :style=>"margin:40px; margin-top:70px;"), new_project_path %>
+				</div>
+		</div>
+</div>	
+<div class="pagination-container"><%= will_paginate @projects %></div>
+</div>
+

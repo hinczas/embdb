@@ -1,0 +1,920 @@
+/* 
+ * 	Core Owl Carousel CSS File
+ *	v1.3.3
+ */
+
+/* clearfix */
+
+.owl-carousel .owl-wrapper:after {
+	content: ".";
+	display: block;
+	clear: both;
+	visibility: hidden;
+	line-height: 0;
+	height: 0;
+}
+/* display none until init */
+.owl-carousel{
+	display: none;
+	position: relative;
+	width: 100%;
+	-ms-touch-action: pan-y;
+}
+.owl-carousel .owl-wrapper{
+	display: none;
+	position: relative;
+	-webkit-transform: translate3d(0px, 0px, 0px);
+}
+.owl-carousel .owl-wrapper-outer{
+	overflow: hidden;
+	position: relative;
+	width: 100%;
+}
+.owl-carousel .owl-wrapper-outer.autoHeight{
+	-webkit-transition: height 500ms ease-in-out;
+	-moz-transition: height 500ms ease-in-out;
+	-ms-transition: height 500ms ease-in-out;
+	-o-transition: height 500ms ease-in-out;
+	transition: height 500ms ease-in-out;
+}
+	
+.owl-carousel .owl-item{
+	float: left;
+}
+.owl-controls .owl-page,
+.owl-controls .owl-buttons div{
+	cursor: pointer;
+}
+.owl-controls {
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+/* mouse grab icon */
+.grabbing { 
+    cursor:url(grabbing.png) 8 8, move;
+}
+
+/* fix */
+.owl-carousel  .owl-wrapper,
+.owl-carousel  .owl-item{
+	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility:    hidden;
+	-ms-backface-visibility:     hidden;
+  -webkit-transform: translate3d(0,0,0);
+  -moz-transform: translate3d(0,0,0);
+  -ms-transform: translate3d(0,0,0);
+}
+
+/*
+* 	Owl Carousel Owl Demo Theme 
+*	v1.3.3
+*/
+
+
+.owl-theme .owl-controls{
+	margin-top: 10px;
+	text-align: center;
+}
+
+/* Styling Next and Prev buttons */
+
+.owl-theme .owl-controls .owl-buttons div{
+	color: #FFF;
+	display: inline-block;
+	zoom: 1;
+	*display: inline;/*IE7 life-saver */
+	margin: 5px;
+	padding: 3px 10px;
+	font-size: 12px;
+	-webkit-border-radius: 30px;
+	-moz-border-radius: 30px;
+	border-radius: 30px;
+	background: #869791;
+	filter: Alpha(Opacity=50);/*IE7 fix*/
+	opacity: 0.5;
+}
+/* Clickable class fix problem with hover on touch devices */
+/* Use it for non-touch hover action */
+.owl-theme .owl-controls.clickable .owl-buttons div:hover{
+	filter: Alpha(Opacity=100);/*IE7 fix*/
+	opacity: 1;
+	text-decoration: none;
+}
+
+/* Styling Pagination*/
+
+.owl-theme .owl-controls .owl-page{
+	display: inline-block;
+	zoom: 1;
+	*display: inline;/*IE7 life-saver */
+}
+.owl-theme .owl-controls .owl-page span{
+	display: block;
+	width: 12px;
+	height: 12px;
+	margin: 5px 7px;
+	filter: Alpha(Opacity=50);/*IE7 fix*/
+	opacity: 0.5;
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
+	border-radius: 20px;
+	background: #869791;
+}
+
+.owl-theme .owl-controls .owl-page.active span,
+.owl-theme .owl-controls.clickable .owl-page:hover span{
+	filter: Alpha(Opacity=100);/*IE7 fix*/
+	opacity: 1;
+}
+
+/* If PaginationNumbers is true */
+
+.owl-theme .owl-controls .owl-page span.owl-numbers{
+	max-height: auto;
+	width: auto;
+	color: #FFF;
+	padding: 2px 10px;
+	font-size: 12px;
+	-webkit-border-radius: 30px;
+	-moz-border-radius: 30px;
+	border-radius: 30px;
+}
+
+/* preloading images */
+.owl-item.loading{
+	min-height: 150px;
+	background: url(AjaxLoader.gif) no-repeat center center
+}
+/* Style the Image Used to Trigger the Modal */
+/* line 6, /home/dev/blog/app/assets/stylesheets/projects.scss */
+#preview {
+  border-radius: 2px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* line 12, /home/dev/blog/app/assets/stylesheets/projects.scss */
+#preview:hover {
+  opacity: 0.7;
+}
+
+/* The Modal (background) */
+/* line 15, /home/dev/blog/app/assets/stylesheets/projects.scss */
+.modal {
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  padding-top: 20px;
+  /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: black;
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.9);
+  /* Black w/ opacity */
+}
+
+/* Modal Content (Image) */
+/* line 30, /home/dev/blog/app/assets/stylesheets/projects.scss */
+.modal-content {
+  margin: auto;
+  display: block;
+  max-width: 80%;
+  max-height: 500px;
+}
+
+/* Caption of Modal Image (Image Text) - Same Width as the Image */
+/* line 38, /home/dev/blog/app/assets/stylesheets/projects.scss */
+#caption {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+/* Add Animation - Zoom in the Modal */
+/* line 50, /home/dev/blog/app/assets/stylesheets/projects.scss */
+.modal-content, #caption {
+  -webkit-animation-name: zoom;
+  -webkit-animation-duration: 0.6s;
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+
+@-webkit-keyframes zoom {
+  from {
+    -webkit-transform: scale(0);
+  }
+  to {
+    -webkit-transform: scale(1);
+  }
+}
+@keyframes zoom {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+/* The Close Button */
+/* line 68, /home/dev/blog/app/assets/stylesheets/projects.scss */
+.close {
+  position: absolute;
+  top: 10px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+/* line 78, /home/dev/blog/app/assets/stylesheets/projects.scss */
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px) {
+  /* line 87, /home/dev/blog/app/assets/stylesheets/projects.scss */
+  .modal-content {
+    width: 100%;
+  }
+}
+/* line 1, /home/dev/blog/app/assets/stylesheets/scaffolds.scss */
+body {
+  background-color: #fff;
+  color: #333;
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+/* line 9, /home/dev/blog/app/assets/stylesheets/scaffolds.scss */
+p, ol, ul, td {
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+/* line 15, /home/dev/blog/app/assets/stylesheets/scaffolds.scss */
+pre {
+  background-color: #eee;
+  padding: 10px;
+  font-size: 11px;
+}
+
+/* line 21, /home/dev/blog/app/assets/stylesheets/scaffolds.scss */
+a {
+  color: #000;
+}
+/* line 24, /home/dev/blog/app/assets/stylesheets/scaffolds.scss */
+a:visited {
+  color: #666;
+}
+/* line 28, /home/dev/blog/app/assets/stylesheets/scaffolds.scss */
+a:hover {
+  color: #fff;
+  background-color: #000;
+}
+
+/* line 35, /home/dev/blog/app/assets/stylesheets/scaffolds.scss */
+div.field, div.actions {
+  margin-bottom: 10px;
+}
+
+/* line 40, /home/dev/blog/app/assets/stylesheets/scaffolds.scss */
+#notice {
+  color: green;
+}
+
+/* line 44, /home/dev/blog/app/assets/stylesheets/scaffolds.scss */
+.field_with_errors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+/* line 50, /home/dev/blog/app/assets/stylesheets/scaffolds.scss */
+#error_explanation {
+  width: 450px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 0;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+/* line 58, /home/dev/blog/app/assets/stylesheets/scaffolds.scss */
+#error_explanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: -7px;
+  margin-bottom: 0px;
+  background-color: #c00;
+  color: #fff;
+}
+/* line 69, /home/dev/blog/app/assets/stylesheets/scaffolds.scss */
+#error_explanation ul li {
+  font-size: 12px;
+  list-style: square;
+}
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+
+
+
+
+ */
+
+	input, textarea, .select-tag { 
+		min-height:19px;
+		border:1px solid #BFBFBF;
+		box-shadow: 0px 0px 3px #E5E5E5, 0 5px 15px #EEEEEE inset;
+		border-radius:2px;
+	}
+	
+	input:focus, textarea:focus, .select-tag:focus {
+		/*background: #fff;*/
+		border:1px solid #BFBFBF;  
+		box-shadow: 0 0 3px #aaa; 
+	}
+	.file-browser,  .file-browser:focus {
+		border:0;
+		box-shadow: none;
+		border-radius:0;
+		background: none; 
+		
+	}
+	.check_box, #del_photo, #deletions_, .del_box, #m_own, #lookup_api, #searchbox2, #q { 
+		min-height:0;
+		border:0;
+		box-shadow: none;
+		border-radius:0;
+	}
+	
+::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+::-webkit-scrollbar-button {
+  width: 0px;
+  height: 0px;
+}
+::-webkit-scrollbar-thumb {
+  background: #C8C8C8;
+  border: 1px none #ffffff;
+  border-radius: 50px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #AFAFAF;
+}
+::-webkit-scrollbar-thumb:active {
+  background: #7D7D7D;
+}
+::-webkit-scrollbar-track {
+  background: #ffffff;
+  border: 0px none #ffffff;
+  border-radius: 50px;
+}
+::-webkit-scrollbar-track:hover {
+  background: #e1e1e1;
+}
+::-webkit-scrollbar-track:active {
+  background: #E5E5E5;
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+
+
+	* {
+		margin: 0;
+		outline:0px;
+	}
+	.home_link a:link {
+		color:#FFA500 !important;
+	}
+	.home_link a:visited {
+		color:#FFA500 !important;
+	}
+	.button {
+		cursor:pointer;
+		outline:0px;
+		background-color: #4CAF50;
+		border: none;
+		color: white;
+		padding: 2px 5px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		width: 80px;
+		/*width: 40px;
+		height: 40px;
+		border-radius: 50%;*/
+		-moz-box-shadow: 0px 0px 5px rgba(76,175,80,.9);
+		-webkit-box-shadow: 0px 0px 5px rgba(76,175,80,.9);
+		box-shadow: 0px 0px 5px rgba(76,175,80,.9);
+	}
+	#add-button {
+		width: 35px;
+	}
+	#blue-button {
+		cursor:pointer;
+		outline:0px;
+		background-color: #4C7EAF;
+		border: none;
+		color: white;
+		padding: 2px 5px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		width: 80px;
+		-moz-box-shadow: 0px 0px 1px rgba(76,126,175,.9);
+		-webkit-box-shadow: 0px 0px 1px rgba(76,126,175,.9);
+		box-shadow: 0px 0px 1px rgba(76,126,175,.9);
+	}
+	#small-button, #small-button2 {
+		cursor:pointer;
+		background: #fff;
+		background-image:url("<%= image_path("dark_icons/shopping basket.png") %>");
+		background-size:cover;
+		width: 11px;
+		height: 11px;
+		padding:0;
+		line-height:11px;
+		overflow:hidden;
+		border:none;
+	}
+	#small-button2 {
+		cursor:default;
+		background-image:url("<%= image_path("dark_icons/shopping_basket.png") %>");		
+	}
+	#button-org {
+		cursor:pointer;
+		outline:0px;
+		background-color: #EF6F6F;
+		border: none;
+		color: white;
+		padding: 2px 5px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		width: 80px;
+		-moz-box-shadow: 0px 0px 1px rgba(239,111,111,.9);
+		-webkit-box-shadow: 0px 0px 1px rgba(239,111,111,.9);
+		box-shadow: 0px 0px 1px rgba(239,111,111,.9);
+	}
+	.header_link, .home_link {
+		margin-right:7px;
+		color:white;
+	}
+	.file-browser {
+		width: 287px;
+		padding-bottom: 3px;
+	}
+	.header {
+		border:0px solid blue;
+		height: 50px;
+		background: #4CAF50;
+			min-width:700px;
+			width:100%;
+	}
+	.header2 {
+		border:0px solid blue;
+		height: 20px;
+		background: #4C7EAF;
+		margin-bottom: -22px;
+			min-width:700px;
+	}
+	.image-tag {
+		vertical-align: middle;
+		align: center;
+		width: 20px;
+		height: 15px;
+		margin-top:-5px;
+	}
+	.page-wrap {
+		min-height: 1080px;
+		margin-bottom: -17px;
+		margin-top: 0px;
+		margin-left:auto;
+		margin-right:auto;
+		width:100%;
+	}
+	.page-wrap:after {
+		content: "";
+		/*display: block;*/
+	}
+	.pagination {
+		margin-top: -40px;
+		margin-bottom: 20px;
+		align: center;
+		vertical-align:top;
+		padding:10px;
+			text-align: center;
+		padding: 0.3em;
+		cursor: default;
+	}
+	.pagination a, .pagination span, .pagination em {
+		padding: 0.2em 0.5em;
+	}
+	.pagination .disabled {
+		color: #aaaaaa;
+	}
+	.pagination .current {
+		font-style: normal;
+		font-weight: bold;
+		color: #ff0084;
+	}
+	.pagination a {
+		border: 1px solid #dddddd;
+		color: #0063dc;
+		text-decoration: none;
+	}
+	.pagination a:hover, .pagination a:focus {
+		border-color: #003366;
+		background: #0063dc;
+		color: white;
+	}
+	.pagination .page_info {
+		color: #aaaaaa;
+		padding-top: 0.8em;
+	}
+	.pagination .previous_page, .pagination .next_page {
+		border-width: 2px;
+	}
+	.pagination .previous_page {
+		margin-right: 1em;
+	}
+	.pagination .next_page {
+		margin-left: 1em;
+	}
+	.search-tag {
+		outline:0px;
+		width: 283px;
+	}
+	.select-tag {
+		outline:0px;
+		background-color: white;
+		border: 1px solid #BFBFBF;
+		color: black;
+		padding: 2px 5px;
+		text-align: left;
+		text-decoration: none;
+		display: inline-block;
+		width: 130px;
+	}
+	.site-body {
+		margin: 2px;
+	}
+	.site-footer {
+		background: #4CAF50;
+		height: -17px;
+			min-width:700px;
+	}
+	.page-wrap:after {
+		height: -17px;
+	}
+	.extra-small-text {
+		width:70px;
+		}
+	.ultra-small-text {
+		width:50px;
+		}
+	.extra-wide-text {
+		width:450px;
+		white-space: pre-wrap;
+		}
+	.wider-wide-text {
+		width:320px;
+		white-space: pre-wrap;
+		}
+	.small-text {
+		width:128px;
+		}
+	.sub-td {
+		max-width:370px;
+		min-width:60px;
+		white-space: no-wrap;
+		overflow:hidden;
+		text-overflow:ellipsis;
+		}
+	.synopsis {
+		width:450px;
+		white-space: pre-wrap;
+		}
+	.upl-img {
+		width:200px;
+		}
+	.wide-text {
+		width:225px;
+		white-space: pre-wrap;
+		}
+	.text {
+		vertical-align: bottom;
+		padding:10px;
+	}
+	a:hover { 
+		text-decoration:none; 
+		background-color: transparent !important;
+	}
+	a:link, a:visited { 
+		text-decoration:none; 
+		color:darkgreen !important;
+	}
+	h1 {
+		margin-top:5px;
+		margin-bottom:5px;
+	}
+	head {
+		min-width:700px;
+		position:absolute;
+		}
+	html, body {
+		height: 100%;
+	}
+	img {
+		margin-top:5px;
+		}
+	label{
+		width: 6em;
+		float: left;
+		text-align: left;
+		margin-right: 0.5em;
+		display: block;
+	}
+	select{
+		outline:0px;
+		width: 10em;
+	}
+	table {			
+		margin-top: 20px;
+		margin-left: 10px;
+		margin-bottom: 50px;
+	}
+	.searchbox { 
+		outline:0px;
+		float: right;
+		vertical-align:top;
+		padding-right:10px;
+		margin-top:-44px;
+	}
+	.searchbox form > div {
+	  vertical-align: top;
+	  display: inline-block;
+	}
+	.icon-search {
+	  margin-top: 12px;
+	  margin-left: 9px;
+	}
+	#selector {
+	  background: #990000;
+	  color: white;
+	  height: 36px;
+	  font-size: 14px;
+	  width: 72px;
+	  border: 0;
+	  -webkit-border-top-left-radius: 5px;
+	  -moz-border-top-left-radius: 5px;
+	  border-top-left-radius: 5px;
+	  -webkit-border-bottom-left-radius: 5px;
+	  -moz-border-bottom-left-radius: 5px;
+	  border-bottom-left-radius: 5px;
+	}
+	.searchbox input, .page-search input {
+	  border: 0;
+	  margin: 0;
+	  font-size: 12px;
+	  padding: 0 8px;
+	  height: 36px;
+	  width: 175px;
+	  /*-webkit-border-top-left-radius: 5px;
+	  -moz-border-top-left-radius: 5px;
+	  border-top-left-radius: 5px;
+	  -webkit-border-bottom-left-radius: 5px;
+	  -moz-border-bottom-left-radius: 5px;
+	  border-bottom-left-radius: 5px;*/
+	}
+	.searchbox button {
+	  position: relative;
+	  cursor: pointer;
+	  background: #4C7EAF;
+	  color: white;
+	  height: 36px;
+	  font-size: 18px;
+	  margin: 0;
+	  margin-left: -4px;
+	  width: 42px;
+	  border: 0;
+	  -webkit-border-top-right-radius: 5px;
+	  -moz-border-top-right-radius: 5px;
+	  border-top-right-radius: 5px;
+	  -webkit-border-bottom-right-radius: 5px;
+	  -moz-border-bottom-right-radius: 5px;
+	  border-bottom-right-radius: 5px;
+	}
+	.searchbox button i, .page-search button i {
+	  position: absolute;
+	  top: 10%;
+	  left: 10%;
+	  margin-top: -12px;
+	  margin-left: -9px;
+	}
+	.float-save .button {
+		cursor:pointer;
+		overflow:hidden;
+		position:fixed;
+		bottom:4%;
+		right:1%;
+		width: 40px;
+		height: 40px;
+		border-radius: 50%;
+		-moz-box-shadow: 0px 0px 5px rgba(76,175,80,.9);
+		-webkit-box-shadow: 0px 0px 5px rgba(76,175,80,.9);
+		box-shadow: 0px 0px 5px rgba(76,175,80,.9);
+	}
+	
+	#top-save .button {
+		
+		cursor:pointer;
+		position:fixed;
+		top:5px;
+		left:131px;
+		width: 40px;
+		height: 40px;
+		border-radius: 50%;
+		overflow: hidden;
+		z-index:1;
+		background-color: #FFA500;
+		background-image: url("<%= image_path("dark_icons/save2.png") %>");
+		background-size:24px 24px;
+		background-repeat: no-repeat;
+		background-position: center; 
+		-moz-box-shadow: 0px 0px 5px rgba(255,165,0,.9);
+		-webkit-box-shadow: 0px 0px 5px rgba(255,165,0,.9);
+		box-shadow: 0px 0px 5px rgba(255,165,0,.9);
+	}
+	.home-link {
+		position:fixed;
+		top:5px;
+		left:0px;
+		width: 40px;
+		height: 40px;
+		border-radius: 50%;
+		overflow: hidden;
+		background: #4CAF50;
+		-moz-box-shadow: 0px 0px 5px rgba(76,175,80,.9);
+		-webkit-box-shadow: 0px 0px 5px rgba(76,175,80,.9);
+		box-shadow: 0px 0px 5px rgba(76,175,80,.9);
+		z-index:1;
+	}
+	.list-link {
+		position:fixed;
+		top:5px;
+		left:43px;
+		width: 40px;
+		height: 40px;
+		border-radius: 50%;
+		overflow: hidden;
+		background: #990000;
+		-moz-box-shadow: 0px 0px 5px rgba(239,111,111,.9);
+		-webkit-box-shadow: 0px 0px 5px rgba(239,111,111,.9);
+		box-shadow: 0px 0px 5px rgba(239,111,111,.9);
+		z-index:1;
+	}
+	.back-link {
+		position:fixed;
+		top:5px;
+		left:87px;
+		width: 40px;
+		height: 40px;
+		border-radius: 50%;
+		overflow: hidden;
+		background: #4C7EAF;
+		-moz-box-shadow: 0px 0px 5px rgba(76,126,175,.9);
+		-webkit-box-shadow: 0px 0px 5px rgba(76,126,175,.9);
+		box-shadow: 0px 0px 5px rgba(76,126,175,.9);
+		z-index:1;
+	}	 	
+	.download-link {
+		position:fixed;
+		bottom:4%;
+		right:1%;
+		width: 40px;
+		height: 40px;
+		border-radius: 50%;
+		overflow: hidden;
+		background: #FFA500;
+		-moz-box-shadow: 0px 0px 5px rgba(76,126,175,.9);
+		-webkit-box-shadow: 0px 0px 5px rgba(76,126,175,.9);
+		box-shadow: 0px 0px 5px rgba(76,126,175,.9);
+		z-index:1;
+	}	
+	.link-img, .link-img2 {
+		padding-top:3px;
+		padding-left:8px;
+		padding-right:8px;
+		padding-bottom:8px;
+		overflow:hidden;
+	}
+	.link-img2 {
+		padding-left:7px;
+	}
+	.error-msg {
+		position:fixed;
+		top:11%;
+		right:1%;
+		border-radius: 10px;
+		border: 2px solid #FF0000;
+		padding: 7px; 
+		margin-top:10px;
+		width:300px;
+		background:#FFB6B2;
+		z-index:1;
+	}
+	.notice-msg {
+		position:fixed;
+		top:18%;
+		right:1%;
+		border-radius: 10px;
+		border: 2px solid #008000;
+		padding: 7px; 
+		margin-top:10px;
+		width:300px;
+		background:#71C971;
+		z-index:1;
+	}
+	#linker_select {
+	  background: #990000;
+	  color: white;
+	  height: 20px;
+	  font-size: 12px;
+	  width: 80px;
+	  border: 0;
+		outline:0px;
+	  -webkit-border-top-left-radius: 5px;
+	  -moz-border-top-left-radius: 5px;
+	  border-top-left-radius: 5px;
+	  -webkit-border-bottom-left-radius: 5px;
+	  -moz-border-bottom-left-radius: 5px;
+	  border-bottom-left-radius: 5px;
+	}
+	#linker {
+	  color: white;
+	  font-size: 12px;
+	}
+	/* body {
+		background-image: url("/assets/seamless3.png");
+		background-repeat: repeat;
+	} */
+	.scrollToTop {
+		position:fixed;
+		bottom:13%;
+		right:1%;
+		width: 40px;
+		height: 40px;
+		border-radius: 50%;
+		overflow: hidden;
+		background: #4C7EAF;
+		-moz-box-shadow: 0px 0px 5px rgba(76,126,175,.9);
+		-webkit-box-shadow: 0px 0px 5px rgba(76,126,175,.9);
+		box-shadow: 0px 0px 5px rgba(76,126,175,.9);
+	}
+	.basket {
+		margin:0;
+		position:relative;
+	}

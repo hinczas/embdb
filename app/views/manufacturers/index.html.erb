@@ -1,0 +1,71 @@
+<html>
+	<style>	
+		table, th, td {
+			border: 1px solid blue;
+			border-collapse: collapse;
+			vertical-align: top;
+		}
+		th, td {
+			padding: 5px;
+		}
+		tr:nth-child(even) {
+			background-color: #eeffee;
+		}
+		td {
+			max-width: 350px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+		.image-upload > input {
+			display: none;
+		}
+		.tdimg {
+			width: 15px;
+			max-width: 15px;
+			width-max: 15px;
+		}
+		.thimg {
+			width: 15px;
+			max-width: 15px;
+			width-max: 15px;
+		}
+	</style>
+<div class="list-link"><%= link_to image_tag("dark_icons/view_listw.png", :width=>"24", :class=>"link-img"), manufacturers_path %> </div>
+<div class="back-link"><%= link_to image_tag("dark_icons/undow.png", :width=>"24", :class=>"link-img"), :back %></div>
+<h1>Manufacturers (<%= @manufacturers.count %>) <%= link_to image_tag("dark_icons/plus_1.png", :width=>"20", :height=>"20"), new_manufacturer_path %></h1>
+<%= form_tag import_manufacturers_path, multipart: true do %>
+	<%= file_field_tag :file, :class => "file-browser"  %>
+	<input type="submit" value="Import" class="button">
+	<% end %> 
+<%= form_tag move_manufacturer_parts_path, multipart: true do %>
+	<%= select_tag :id, options_for_select(Manufacturer.all.map{|s|[s.m_name, s.id]}), :include_blank => true, :class => "select-tag"     %>
+	<%= image_tag("dark_icons/shuffle.png", :class => "image-tag")%>
+	<%= select_tag :new_manufacturer, options_for_select(Manufacturer.all.map{|s|[s.m_name, s.id]}), :include_blank => true, :class => "select-tag"     %>
+	<input type="submit" value="Move" class="button" id="button-org">
+	<% end %>
+<head>
+</head>
+<table>
+<p></p>
+  <tr bgcolor="#aaffaa">
+  <th>ID</th>
+  <th>Name</th>
+  <th>Description</th>
+  <th>Pts</th>
+ </tr>
+<% for manufacturer in @manufacturers do %>
+ <tr>	
+	<td><%=manufacturer.id %></td>
+	<td><%=link_to manufacturer.m_name, manufacturer_path(manufacturer) %></td>
+	<td><%=manufacturer.m_description %></td>
+	<td><% if manufacturer.parts.any? %>
+				<%= manufacturer.parts.count %>
+		<% else %> 0
+		<% end %> </td>	
+	<td class="tdimg"><%=link_to image_tag("dark_icons/tools_1.png", :width=>"13", :height=>"13"), edit_manufacturer_path(manufacturer) %></td>
+</tr>
+<% end %>
+</table>
+<%= will_paginate @manufacturers %>
+</html>

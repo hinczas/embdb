@@ -1,0 +1,119 @@
+<style>
+		tr {
+			vertical-align: top;
+		}
+		.select-tag {
+			width:225px;
+		}
+</style>
+<%= form_for(@book) do |f| %>
+  <% if @book.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@book.errors.count, "error") %> prohibited this book from being saved:</h2>
+
+      <ul>
+      <% @book.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+ <table>
+	<tr>
+		<td rowspan="10" width="120">
+		<%= f.file_field :cover, multipart: true, :class => "file-browser" %>
+		 <% if @book.cover %>
+			<%= image_tag(@book.cover, :class=>"upl-img")%><br/>
+			<%= check_box_tag :del_photo , 1 %> Delete photo<br/>
+			<% else %>
+			<%= image_tag("no_photo.png", :class=>"upl-img")%><br/>
+		 <% end %>
+		 <%= label_tag "Web URL" %><br>
+		 <%= text_field_tag :web_photo, nil, :class=>"wide-text" %>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<%= f.label "Title" %><br>
+			<%= f.text_field :title, :class=>"wide-text" %>
+		 
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<%= f.label "Sub title" %><br>
+			<%= f.text_field :subtitle, :class=>"wide-text" %>
+		</td>
+	</tr>
+	<tr>		
+		<td colspan="2">
+			<%= f.label "Authors" %> <%= link_to "new", new_author_path, :target=>'_blank' %><br>
+			<%= select_tag "author_ids[]", options_from_collection_for_select(Author.all.order('last_name ASC'), :id, :full_name, @book.author_ids), multiple: true, :include_blank => true, size: '5', :class=>"wide-text" %>
+		  
+		</td>
+	</tr>
+	<tr>			
+		<td colspan="2">
+			<%= f.label "Publisher" %><br>
+		 <% if @book.publisher %>
+			<%= f.select(:publisher_id, options_for_select(Publisher.all.order('name asc').map{|s|[s.name, s.id]},@book.publisher_id), {:include_blank => true}, {:class => "select-tag"})  %>
+		 <% else %>
+			<%= f.select(:publisher_id, options_for_select(Publisher.all.order('name asc').map{|s|[s.name, s.id]}), {:include_blank => true}, {:class => "select-tag"})  %>
+		 	<% end %>
+		 <%= link_to "new", new_publisher_path, :target=>'_blank' %>
+		</td>
+	</tr>
+	<tr>			
+		<td colspan="2">
+			<%= f.label "Owner" %><br>
+		 <% if @book.user %>
+			<%= f.select(:user_id, options_for_select(User.all.order('name asc').map{|s|[s.username, s.id]},@book.user_id), {:include_blank => true}, {:class => "select-tag"})  %>
+		 <% else %>
+			<%= f.select(:user_id, options_for_select(User.all.order('name asc').map{|s|[s.username, s.id]}), {:include_blank => true}, {:class => "select-tag"})  %>
+		 	<% end %>
+		 <%= link_to "new", new_publisher_path, :target=>'_blank' %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<%= f.label "Series num" %><br>
+			<%= f.text_field :series, :size => "2", :class=>"ultra-small-text"  %>
+		</td>
+		<td>
+			<%= f.label "Year" %><br>
+			<%= f.text_field :year, :size => "2", :class=>"ultra-small-text" %>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<%= f.label "ISBN" %><br>
+			<%= f.text_field :isbn, :size => "7", :class=>"wide-text" %>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="5">
+			<%= f.label "Synopsis" %><br>
+			<%= f.text_area :sunopsis, :cols => "60", :rows => "7", :class=>"wide-text" %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<%= f.label "Language" %><br>
+			<%= f.text_field :language, :size => "5", :class=>"extra-small-text" %>
+		</td>
+		<td>
+			<%= f.label "Cover type" %><br>
+			<%= f.text_field :cover_typ, :size => "5", :class=>"small-text" %>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<%= f.label "Notes" %><br>
+			<%= f.text_area :notes, :cols => "30", :rows => "5", :class=>"wide-text" %>
+		</td>
+	</tr>
+  </table>
+<div class="float-save"><input type="submit" value="Save" class="button"></div>
+<div id="top-save"><input type="submit" value="" class="button"></div>
+<% end %>

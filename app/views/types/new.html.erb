@@ -1,0 +1,27 @@
+<div class="list-link"><%= link_to image_tag("dark_icons/view_listw.png", :width=>"24", :class=>"link-img"), types_path %> </div>
+<div class="back-link"><%= link_to image_tag("dark_icons/undow.png", :width=>"24", :class=>"link-img"), :back %></div>
+<h1>New type</h1>
+<%= form_for :type, url: types_path do |f| %>
+<table>
+	<tr>
+		<td>
+			 <%= f.label 'Name' %><br>
+			 <%= f.text_field :name, :class=>"wide-text" %>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			 <%= f.label 'Description' %><br>
+			 <%= f.text_area :t_description, :cols=>"30", :rows=>"5", :class=>"wide-text"  %>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			 <%= f.label 'Notes' %><br>
+			 <%= f.text_area :t_note, :cols=>"30", :rows=>"5", :class=>"wide-text"  %>
+		</td>
+	</tr>
+</table>
+<div class="float-save"><input type="submit" value="Save" class="button"></div>
+<div id="top-save"><input type="submit" value="" class="button"></div>
+<% end %>

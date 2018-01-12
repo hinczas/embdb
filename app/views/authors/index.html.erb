@@ -1,0 +1,79 @@
+	<style>	
+		table, th, td {
+			border: 1px solid blue;
+			border-collapse: collapse;
+			vertical-align: middle;
+		}
+		th, td {
+			padding: 5px;
+		}
+		tr:nth-child(even) {
+			background-color: #ffeeee
+		}
+		td {
+			max-width: 350px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+		.tdd {
+			max-width: 100px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}	
+		.image-upload > input {
+			display: none;
+		}
+		/*.updImg {
+			display: block;
+			margin: auto;
+			align: left;*/
+		}
+		.tdimg {
+			width: 15px;
+			max-width: 15px;
+			width-max: 15px;
+		}
+		.thimg {
+			width: 15px;
+			max-width: 15px;
+			width-max: 15px;
+		}
+		.meh {
+			display: inline-block;
+		}
+	</style>
+<div class="list-link"><%= link_to image_tag("dark_icons/view_listw.png", :width=>"24", :class=>"link-img"), authors_path %> </div>
+<div class="back-link"><%= link_to image_tag("dark_icons/undow.png", :width=>"24", :class=>"link-img"), :back %></div>
+<h1>Authors <%= link_to image_tag("dark_icons/plus_1.png", :width=>"20", :height=>"20"), new_author_path %>	</h1>
+<div class="import">
+	<%= form_tag import_authors_path, multipart: true do %>
+	<%= file_field_tag :file, :class => "file-browser" %>
+		<input type="submit" value="Import" class="button">
+		
+	<% end %></div>
+<table>
+    <tr bgcolor="#ffaaaa">
+      <th>ID</th>
+      <th width="100">Name</th>
+      <th width="100">Surname</th>
+      <th>Notes</th>
+      <th>Pts</th>
+    </tr>
+
+    <% @authors.each do |author| %>
+      <tr>
+        <td><%= author.id %></td>
+        <td><%= link_to author.name, author_path(author) %></td>
+        <td><%= link_to author.last_name, author %></td>
+        <td><%= author.notes %></td>
+		<td><% if author.books.any? %>
+					<%= author.books.count %>
+			<% else %> 0
+			<% end %> </td>		
+		<td class="tdimg"><%=link_to image_tag("dark_icons/tools_1.png", :width=>"13", :height=>"13"), edit_author_path(author) %></td>
+      </tr>
+    <% end %>
+</table>
+<%= will_paginate @authors %>

@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  version: MyString
+  start_date: 2016-07-14
+  end_date: 2016-07-14
+  notes: MyText
+  cost: 
+  changelog: MyText
+  sch_file: MyString
+  brd_file: MyString
+  parent_id: 1
+
+two:
+  name: MyString
+  version: MyString
+  start_date: 2016-07-14
+  end_date: 2016-07-14
+  notes: MyText
+  cost: 
+  changelog: MyText
+  sch_file: MyString
+  brd_file: MyString
+  parent_id: 1

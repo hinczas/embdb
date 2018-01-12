@@ -1,0 +1,42 @@
+<div class="list-link"><%= link_to image_tag("dark_icons/view_listw.png", :width=>"24", :class=>"link-img"), myears_path %> </div>
+<div class="back-link"><%= link_to image_tag("dark_icons/undow.png", :width=>"24", :class=>"link-img"), :back %></div>
+<h1>Year <%= @myear.id %></h1>
+<%=link_to image_tag("dark_icons/tools_1.png", :width=>"15", :height=>"15"), edit_myear_path(@myear) %> <%=link_to image_tag("dark_icons/trash.png", :width=>"15", :height=>"15"), myear_path(@myear), method: :delete,
+		data: { confirm: 'Are you sure?' } %> <%= link_to image_tag("dark_icons/plus_1.png", :width=>"15", :height=>"15"), new_myear_path %>
+<table style="width:500px;">
+	<tr>
+		<td>
+			<strong>Year:</strong>
+			<%= @myear.myear %>
+		</td>
+	</tr>
+
+	<tr>
+		<td>
+			<strong>Notes:</strong></br>
+			<%= @myear.notes %>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="5">
+			<b></br>Movies </b>
+			<% if @myear.movies.any? %>
+				(<%= @myear.movies.count %>)</br>
+				<table class="sub-result">
+				<col width=80 >
+				<col width=100 >
+				<col width=200 >
+					 <tr bgcolor="#aaaaFF">
+					  <th>Title</th>
+					  <th>Sub title</th>
+					  <th>Sunopsis</th>
+					  </tr>
+
+						<%= render @myear.movies %> 
+
+					</table>
+			<% else %> (0)
+			<% end %>
+	</table>
+
+

@@ -1,0 +1,40 @@
+<%= form_for(@publisher) do |f| %>
+  <% if @publisher.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@publisher.errors.count, "error") %> prohibited this publisher from being saved:</h2>
+
+      <ul>
+      <% @publisher.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+    <%= f.label :name %><br>
+    <%= f.text_field :name, :class=>"wide-text" %>
+  </p>
+  <p>
+    <%= f.label :full_name %><br>
+    <%= f.text_field :full_name, :class=>"wide-text" %>
+  </p>
+  <p>
+    <%= f.label :address %><br>
+    <%= f.text_area :address, :cols=>"30", :rows=>"5", :class=>"wide-text" %>
+  </p>
+  <p>
+    <%= f.label :website %><br>
+    <%= f.text_field :website, :class=>"wide-text" %>
+  </p>
+  <p>
+    <%= f.label :contact %><br>
+    <%= f.text_field :contact, :class=>"wide-text" %>
+  </p>
+  <p>
+    <%= f.label :notes %><br>
+    <%= f.text_area :notes, :cols=>"30", :rows=>"5", :class=>"wide-text" %>
+  </p>
+<div class="float-save"><input type="submit" value="Save" class="button"></div>
+<div id="top-save"><input type="submit" value="" class="button"></div>
+<% end %>

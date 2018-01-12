@@ -1,0 +1,42 @@
+<div class="list-link"><%= link_to image_tag("dark_icons/view_listw.png", :width=>"24", :class=>"link-img"), authors_path %> </div>
+<div class="back-link"><%= link_to image_tag("dark_icons/undow.png", :width=>"24", :class=>"link-img"), :back %></div>
+<h1>Author <%= @author.id %></h1>
+<%=link_to image_tag("dark_icons/tools_1.png", :width=>"15", :height=>"15"), edit_author_path(@author) %> <%=link_to image_tag("dark_icons/trash.png", :width=>"15", :height=>"15"), author_path(@author), method: :delete,
+		data: { confirm: 'Are you sure?' } %>  <%= link_to image_tag("dark_icons/plus_1.png", :width=>"15", :height=>"15"), new_author_path %> 
+<table style="width:500px;">
+	<tr>
+		<td>
+			<strong>Author:</strong>
+			<%= @author.name+' '+@author.last_name %>
+		</td>
+	</tr>
+
+	<tr>
+		<td>
+			<strong>Notes:</strong></br>
+			<%= @author.notes %>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="5">
+			<b></br>Books </b>
+			<% if @author.books.any? %>
+				(<%= @author.books.count %>)</br>
+				<table class="sub-result">
+				<col width=80 >
+				<col width=100 >
+				<col width=200 >
+					 <tr bgcolor="#ffaaaa">
+					  <th>Title</th>
+					  <th>Sub title</th>
+					  <th>Synopsis</th>
+					  </tr>
+
+						<%= render @author.books %> 
+
+					</table>
+			<% else %> (0)
+			<% end %>
+	</table>
+
+

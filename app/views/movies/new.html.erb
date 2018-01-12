@@ -1,0 +1,162 @@
+<div>
+	<% if flash[:error] %>
+		<fieldset class="error-msg">
+					<strong><%= flash[:error] %></strong>
+		</fieldset>
+	<% end %>
+</div>
+<div class="list-link"><%= link_to image_tag("dark_icons/view_listw.png", :width=>"24", :class=>"link-img"), movies_path %> </div>
+<div class="back-link"><%= link_to image_tag("dark_icons/undow.png", :width=>"24", :class=>"link-img"), :back %></div>
+<h1>Create new movie</h1>
+<%= form_for(@movie) do |f| %>
+  <% if @movie.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@movie.errors.count, "error") %> prohibited this movie from being saved:</h2>
+
+      <ul>
+      <% @movie.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<table>
+	<tr>
+		<td rowspan="10" width="120">
+		<%= f.file_field :poster, multipart: true, :class => "file-browser" %>
+		 <% if @movie.poster %>
+			<%= image_tag(@movie.poster, :class=>"upl-img")%><br/>
+			<%= check_box_tag :del_photo , 1 %> Delete photo<br/>
+			<% else %>
+			<%= image_tag("no_photo.png", :class=>"upl-img")%><br/>
+		 <% end %>
+		 <%= label_tag "Web URL" %><br>
+		 <%= text_field_tag :web_photo, if params[:poster]; params[:poster]; else nil; end, :class=>"wide-text" %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<%= f.label "Title" %><br>
+			<%= text_field_tag(:title, if params[:title_i]; params[:title_i]; else @movie.title; end, :class=>"wide-text") %>	
+		 
+		</td>
+		<td>
+			<%= f.label "Title num" %><br>
+			<%= f.text_field :num_title, :size => "5", :class=>"small-text" %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<%= f.label "Sub title" %><br>
+			<%= f.text_field :sub_title, :class=>"wide-text" %>
+		</td>
+		<td>
+			<%= f.label "Part" %><br>
+			<%= f.text_field :part, :size => "5", :class=>"small-text" %>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<%= f.label "Director" %><br>	
+				<%= text_field_tag :director,  if params[:director]; params[:director]; else @movie.director; end, :class=>"wide-text"  %>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<%= f.label "Writer" %><br>	
+				<%= text_field_tag :writer,  if params[:writer]; params[:writer]; else @movie.writer; end, :class=>"wide-text"  %>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<%= f.label "Actors" %><br>	
+				<%= text_field_tag :actor,  if params[:actors]; params[:actors]; else @movie.actor; end, :class=>"wide-text"  %>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<%= f.label "iMDB" %><br>	
+			<%= form_tag call_api_movies_path do %>
+				<%= text_field_tag :imdb,  if params[:imdb_i]; params[:imdb_i]; else @movie.imdb; end, :class=>"wide-text"  %>
+			 <input type="image" src="/images/preview.png" height="13" id="lookup_api" name="lookup_api_new" >
+			<% end %> 
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<%= f.label "Synopsis" %><br>			
+			<%= text_area_tag(:sunopsis, if params[:synopsis]; params[:synopsis]; else @movie.sunopsis; end,:cols => "30", :rows => "5", :class=>"wide-text") %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<%= f.label "Last Seen" %><br>
+			<%= f.text_field :last_seen, :class=>"small-text" %>
+		</td>
+		<td>
+			<%= f.label "Watch count" %><br>
+			<%= f.text_field :watch_count, :size => "5", :class=>"small-text" %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<%= f.label "Type" %><br>
+		 <%= f.select(:mtype_id, options_for_select(Mtype.all.map{|s|[s.mtype, s.id]}), {:include_blank => true}, {:class => "select-tag"})  %>
+		 <%= link_to "new", new_mtype_path, :target=>'_blank' %>
+		</td>
+		<td>
+			<%= f.label "Year" %><br>		
+			  <% if params[:year_i] %>
+				<%= f.select(:myear_id, options_for_select(Myear.all.map{|s|[s.myear, s.id]},Myear.search(params[:year_i]).first.id), {:include_blank => true}, {:class => "select-tag"})  %>
+			  <% else %>
+				<%= f.select(:myear_id, options_for_select(Myear.all.map{|s|[s.myear, s.id]}), {:include_blank => true}, {:class => "select-tag"})  %>
+			 <% end %>
+		  <%= link_to "new", new_myear_path, :target=>'_blank' %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<%= f.label "Format" %><br>
+		 <%= f.select(:mformat_id, options_for_select(Mformat.all.map{|s|[s.mformat, s.id]}), {:include_blank => true}, {:class => "select-tag"})  %>
+		 <%= link_to "new", new_mformat_path, :target=>'_blank' %>
+		</td>
+		<td>
+			<%= f.label "Quality" %><br>
+		 <%= f.select(:quality_id, options_for_select(Quality.all.map{|s|[s.quality, s.id]}), {:include_blank => true}, {:class => "select-tag"})  %>
+		 <%= link_to "new", new_quality_path, :target=>'_blank' %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<%= f.label "Language" %><br>
+		 <%= f.select(:mlanguage_id, options_for_select(Mlanguage.all.map{|s|[s.mlanguage, s.id]}), {:include_blank => true}, {:class => "select-tag"})  %>
+		 <%= link_to "new", new_mlanguage_path, :target=>'_blank' %>
+		</td>
+		<td>
+			<%= f.label "Subtitles" %><br>
+		 <%= f.select(:msubtitle_id, options_for_select(Msubtitle.all.map{|s|[s.msubtitle, s.id]}), {:include_blank => true}, {:class => "select-tag"})  %>
+		 <%= link_to "new", new_msubtitle_path, :target=>'_blank' %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<%= f.label "3D" %><br>
+		 <%= f.select(:threed_id, options_for_select(Threed.all.map{|s|[s.threed, s.id]}), {:include_blank => true}, {:class => "select-tag"})  %>
+		 <%= link_to "new", new_threed_path, :target=>'_blank' %>
+		</td>
+		<td>
+			<%= f.label "Own" %>
+			<%= check_box_tag :m_own , 1, false %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<%= f.label "Genres" %><br>
+			<%= select_tag "genre_ids[]", options_from_collection_for_select(Genre.all.order('name ASC'), :id, :name, if params[:genres_i]; Genre.search(params[:genres_i]).ids; else @movie.genres.ids; end), multiple: true, :include_blank => true, size: '5' %>
+		  <%= link_to "new", new_genre_path, :target=>'_blank' %>
+		</td>
+	</tr>
+  </table>
+<div class="float-save"><input type="submit" value="Save" class="button"></div>
+<div id="top-save"><input type="submit" value="" class="button"></div>
+<% end %>

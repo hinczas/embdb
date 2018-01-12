@@ -1,0 +1,43 @@
+<style>
+li {
+	margin-left:10px;
+}
+body {
+	background-image: url("/assets/seamless3.png");
+}
+</style>
+<% if params[:developer] %>
+	<% Rails.configuration.developer=params[:developer] %>
+<% end %>
+<font color="red" size="3"><h3 style="margin-top:10px;">Those are experimental functions. Please note, stability may be significantly reduced.</h3></font>
+
+<font color="crismon" size="3">Developer options: </font></br>
+ <% if Rails.configuration.developer == "true" %>
+	<%= link_to image_tag('dark_icons/stop.png', :height=>"35"), welcome_hidden_path(:params => {:developer=>"false"}) %>
+ <% else %>
+	<%= link_to image_tag('dark_icons/power.png', :height=>"35"), welcome_hidden_path(:params => {:developer=>"true"}) %>
+ <% end %>
+
+<p></br></p>
+<h2><%= link_to 'Projects', controller: 'projects' %> - <%= link_to 'New', new_project_path %></h2> 
+<p></br></p>
+<h2><%= link_to 'PCBs', controller: 'pcbs' %> - <%= link_to 'New', new_pcb_path %></h2> 
+	<li><%= link_to 'Components', controller: 'parts' %> - <%= link_to 'New', new_part_path %></br></li>
+	<li><%= link_to 'Locations', controller: 'locations' %> - <%= link_to 'New', new_location_path %></br></li>
+	<li><%= link_to 'Packages', controller: 'packages'  %> - <%= link_to 'New', new_package_path %></br></li>
+	<li><%= link_to 'Manufacturers', controller: 'manufacturers'  %> - <%= link_to 'New', new_manufacturer_path %></br></li>
+	<li><%= link_to 'Types', controller: 'types'  %> - <%= link_to 'New', new_type_path %></br></li>
+<p></br></p>
+<h2><%= link_to 'Movies', controller: 'movies'  %> - <%= link_to 'New', new_movie_path %></h2>
+	<li><%= link_to 'Formats', controller: 'mformats'  %> - <%= link_to 'New', new_mformat_path %></br></li>
+	<li><%= link_to 'Languages', controller: 'mlanguages'  %> - <%= link_to 'New', new_mlanguage_path %></br></li>
+	<li><%= link_to 'Subtitles', controller: 'msubtitles' %> - <%= link_to 'New', new_msubtitle_path %></br></li>
+	<li><%= link_to 'Types', controller: 'mtypes'  %> - <%= link_to 'New', new_mtype_path %></br></li>
+	<li><%= link_to 'Years', controller: 'myears'  %> - <%= link_to 'New', new_myear_path %></br></li>
+	<li><%= link_to 'Quality', controller: 'qualities'  %> - <%= link_to 'New', new_quality_path %></br></li>
+	<li><%= link_to '3D', controller: 'threeds'  %> - <%= link_to 'New', new_threed_path %></br></li>
+	<li><%= link_to 'Genre', controller: 'genres'  %> - <%= link_to 'New', new_genre_path %></br></li>
+<p></br></p>
+<h2><%= link_to 'Books', controller: 'books'  %> - <%= link_to 'New', new_book_path %></h2>
+	<li><%= link_to 'Authors', controller: 'authors'  %> - <%= link_to 'New', new_author_path %></br></li>
+	<li><%= link_to 'Publishers', controller: 'publishers'  %> - <%= link_to 'New', new_publisher_path %></br></li>

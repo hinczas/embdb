@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<style>
+	#top-save .button {
+		background-image:url(" <%= image_path ("dark_icons/save2.png") %>");
+	}
+</style>
+ <script>
+	 function jsFunction() {
+	  var form = $("#selector").val();
+	  document.getElementById("searcher").action=form;
+	  if (form == "http://www.google.co.uk/search") {
+		  document.getElementById("q").name="q";
+		  document.getElementById("q").placeholder="Google Search";
+	  }
+	  if (form == "http://www.imdb.com/search/title") {
+		  document.getElementById("q").name="title";
+		  document.getElementById("q").placeholder="IMDB Search";
+	  }
+	  if (form == "http://uk.farnell.com/Search") {
+		  document.getElementById("q").name="st";
+		  document.getElementById("q").placeholder="Farnell Search";
+	  }
+	}		
+ </script>
+	<div class="page-wrap">
+		<% if session[:user_id] %>
+			<% @current_user = User.find(session[:user_id]) %>
+		<% end %>
+		<head>			
+		  <title>Inventory Database WebApp</title>
+		  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+		  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+		  <%= csrf_meta_tags %>	
+		  <div class="header">
+			<div class="image-set" style="display: table-cell; min-width:172px;">
+				<%=image_tag("chip.png", :height=>"40")%>
+				<%=image_tag("film.png", :height=>"40")%>
+				<%=image_tag("book.png", :height=>"40")%>
+			</div>
+			<div class="text" style="font-family: arial; font-size:36px; display: table-cell;">.emb Database</div>
+			<div class="searchbox" style="display: table-cell;">
+				<div class="selector" style="vertical-align:top; display: table-cell;">
+					<select id="selector" onChange="jsFunction()">
+						<option value="http://www.google.co.uk/search">Google</option>
+						<option value="http://www.imdb.com/search/title">IMDB</option>
+						<option value="http://uk.farnell.com/Search">Farnell</option>
+				  </select> 
+				</div>
+				<form role="search" method="get" action="http://www.google.co.uk/search" target="_blank" id="searcher" style="display: table-cell;">             
+				  <div><input placeholder="Google Search" type="text" value="" name="q" id="q"></div>				  
+				  <button type="submit" id="searchsubmit" title="Google Search">				    
+						<%=image_tag("dark_icons/previeww.png", :width=>"25", :style=>"margin-top:4px;")%>						
+				  </button>
+				</form>
+			</div>          
+		  </div>			
+		</head>
+		  <div class="header2">
+			  <div id="linker" style="float:right;">
+				 <select id="linker_select" onChange="follow_link()">
+						<option value="/">Go to</option>
+						<option disabled role=separator>_____________</option>
+						<option value="/projects"><strong>Projects</strong></option>
+						<option value="/pcbs"><strong>&nbsp;PCB</strong></option>
+						<option value="/parts">&nbsp;Parts</option>
+						<option value="/locations">&nbsp;Locations</option>
+						<option value="/packages">&nbsp;Packages</option>
+						<option value="/manufacturers">&nbsp;Manufacturers</option>
+						<option value="/types">&nbsp;Types</option>
+						<option value="/shopping_lists">&nbsp;Shopping list</option>
+						<option disabled role=separator>_____________</option>
+						<option value="/movies">Movies</option>
+						<option value="/mformats">&nbsp;Formats</option>
+						<option value="/mlanguages">&nbsp;Languages</option>
+						<option value="/msubtitles">&nbsp;Subtitles</option>
+						<option value="/mtypes">&nbsp;Types</option>
+						<option value="/myears">&nbsp;Years</option>
+						<option value="/qualities">&nbsp;Quality</option>
+						<option value="/threeds">&nbsp;3D</option>
+						<option value="/genres">&nbsp;Genre</option>
+						<option disabled role=separator>_____________</option>						
+						<option value="/books">Books</option>
+						<option value="/authors">&nbsp;Authors</option>
+						<option value="/publishers">&nbsp;Publishers</option>
+						<% if session[:user_id] && @current_user.level < 2  %>
+							<option disabled role=separator>___ADMIN___</option>						
+							<option value="/users">Users</option>
+						<% end %>
+										
+				  </select> 
+			  </div>
+		  </div>	
+		<div class="site-body">	
+		<div class="home_link"><%= DateTime.now() %> <strong><%= if session[:user_id]; link_to User.find(session[:user_id]).username, User.find(session[:user_id]); end %></strong> <%= if session[:user_id]; link_to '(logout)', logout_path; end %></div>
+		
+			<body style="font-family: sans-serif; font-size:12px">	
+				<%= link_to welcome_index_url do %>
+					<div class="home-link">
+						<%= image_tag("dark_icons/home.png", :width=>"24", :class=>"link-img") %>
+					</div>
+				<% end %>
+				
+					<% if flash[:error] %>
+						<fieldset class="error-msg">
+							<strong><%= flash[:error] %></strong>
+						</fieldset>
+					<% end %>
+					<% if flash[:notice] %>
+						<fieldset class="notice-msg">
+							<strong><%= flash[:notice] %></strong>
+						</fieldset>
+					<% end %>
+				<%= yield %>
+ <div class="scrollToTop" style="display:none;"><%= link_to image_tag("dark_icons/arrow_up2.png", :width=>"24", :class=>"link-img2"), nil %> </div>
+			
+			</body>
+		</div>
+	</div>
+	<footer class="site-footer">
+		 <%= link_to "(v. "+Rails.configuration.version+")", "/welcome/hidden" %> <%= link_to "contact", "mailto:hinczas@gmail.com"  %>
+	</footer>
+
+</html>

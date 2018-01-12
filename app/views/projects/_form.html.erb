@@ -1,0 +1,241 @@
+<style>
+	tr {
+		vertical-align: top;
+	}
+	.row {
+		  display: inline-block;
+		  margin-left:5px;
+		  height:280px;
+		  width: 100%;
+		  overflow-y: auto;
+		}
+	.basic {
+			width:375px;
+			margin-top:0px;
+			padding: 7px;  
+			height: 300px;
+		}
+	.life-search-results {
+		padding:7px;
+		}
+	.contain {
+		display: inline-block; 
+		position:relative;
+		}
+	.div_right {
+		display: inline;
+		float:right;
+		}
+	.div_left {
+		display: inline;
+		float:left;
+		min-width:300px;
+		max-width:300px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: pre;	
+		}
+	#big-search-box {
+		margin-bottom:5px;
+		}
+	.lister3 {
+		padding:0;  
+		max-height: 145px; 
+		width:100%;
+		overflow-y: auto;
+	} 
+	.lister3 {
+		padding:0;  
+		max-height: 145px; 
+		width:100%;
+		overflow-y: auto;
+	} 
+	.log-container {
+		margin0;
+		padding:0;  
+		width:450px;
+		height: 165px;
+	}	
+	#images {
+		border:1px solid #4CAF50;
+		width:292px;
+		height:350px;
+	}
+	.del_box {
+		margin-left:-17px;
+		max-width:250px;
+	}
+	.project-upper-left-files {
+		padding:3px;
+		height:70px;
+		width:400px;
+		overflow-y:auto;
+	}
+		.ids_array {
+			display:none;
+		}
+		#hidden {
+			display:none;
+		}
+</style>
+<%= form_for(@project) do |f| %>
+  <% if @project.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
+
+      <ul>
+      <% @project.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<table>
+	<tr align="left">
+	  <td>
+		<%= f.label "Name" %><br>
+		<%= f.text_field :name, :class=>"wide-text" %>
+	  </td>
+	  <% if Rails.configuration.developer=="true" %>
+		  <td>
+			<%= f.label "Code" %><br>
+			<%= f.text_field :code, :class=>"ultra-small-text" %>
+		  </td>
+		  <td>
+			<%= f.label "Ver." %><br>
+			<%= f.text_field :version, :class=>"ultra-small-text"  %>
+		  </td>
+	  <% else %>
+		  <td colspan="2">
+			<%= f.label "Code" %><br>
+			<%= f.text_field :code, :class=>"ultra-small-text" %>
+		  </td>	  
+	  <% end %>
+	  <td rowspan="5">
+			<fieldset class="basic">
+				<legend style="color:green;">PCBs <%= link_to image_tag("dark_icons/plus transparent.png", :width=>"13", :height=>"13"), new_pcb_path, :target=>'_blank' %></legend>			
+				 <div class="row" style="display:inline-block;">	
+					<div id="live-search-results">
+						<%= collection_check_boxes(:project, :pcb_ids, Pcb.all.order('name ASC'), :id, :pcb_list2) do |b| %>
+						<div class="col-xs-1">
+							<div class="contain">
+								<div class="div_left"  style="font-family:monospace;"><%= b.check_box(class: "check_box") +' '+ link_to(b.text, pcb_path(b.value), :target=>'_blank' ) %></div>
+								<div class="div_right"><%=number_field('quantity_'+b.value.to_s, nil, min: "0", max: "1000", :value => if PcbProject.where(pcb_id: b.value, project_id: @project.id).take;  PcbProject.where(pcb_id: b.value, project_id: @project.id).take.quantity.to_s; else "0"; end, :class=>"ultra-small-text") %></div>
+							</div>
+						</div>
+					<% end %>
+					</div>
+				</div>
+				</div>
+				</fieldset>
+		</td>
+	</tr>
+	<tr>
+	  <td colspan="3">
+		<%= f.label "Folder location", :style=>"width: 8em;" %><br>
+		<%= f.text_field :folder_location, :class=>"wide-text"  %>
+	  </td>
+	</tr>
+	<tr>
+	  <td>
+		<%= f.label "Started" %><br>
+		<%= f.text_field :start_date, :type=> "date", :value=> ( @project.start_date ? @project.start_date.strftime("%F") : "") %>
+	  </td>
+	</tr>
+	<tr>
+	  <td>
+		<%= f.label "Finished" %><br>
+		<%= f.text_field :end_date, :type=> "date", :value=> ( @project.end_date ? @project.end_date.strftime("%F") : "") %>
+	  </td>
+	</tr>
+	<tr>
+	  <td colspan="3">
+		<%= f.label "Description" %><br>
+		<%= f.text_area :description, :cols=>"30", :rows=>"10", :class=>"extra-wide-text" %>	  
+	  </td>
+	</tr>
+	<tr>
+	  <td colspan="3">
+		Files : 
+		<%= file_field_tag 'file[]', multipart: true, accept: '*/*', :class => "file-browser", :multiple=>"true" %><br/>
+		<% if @project.documents.any? %>
+		</br>Delete files:</br>
+			<div class="project-upper-left-files">
+				<% @project.documents.each do |doc| %>
+					(<%= check_box_tag 'deletions[]', doc.id, false %> <%= doc.file_file_name %>)					
+				<% end %>
+			</div>
+			<% end %>
+	  </td>
+	  <td rowspan="2">
+		<div id="hidden"><div id="ids_array"><% Part.all.ids %></div></div> 
+			<fieldset class="basic">
+				<legend style="color:green;">Parts <%= link_to image_tag("dark_icons/plus transparent.png", :width=>"13", :height=>"13"), new_part_path, :target=>'_blank' %></legend>			
+				 <form id="live-search-form" method="get" action="<%= search_path %>">
+					  <input id="big-search-box" name="q" type="text" style="float:left;" />
+					  <div id='loader' style="float:right;" ></div>
+					</form>
+				 <div class="row" style="display:inline-block; height:255px;">	
+					<div id="live-search-results">
+						<%= collection_check_boxes(:project, :part_ids, Part.all.order('part_name ASC'), :id, :part_list2) do |b| %>
+						<div class="col-xs-8" id="single_line_<%= b.value.to_s %>" >
+							<div class="contain">
+								<div class="div_left"  style="font-family:monospace;"><%= b.check_box(class: "check_box") +' '+ link_to(b.text, part_path(b.value), :target=>'_blank', :title=> Part.find(b.value).part_number ) %></div>
+								<div class="div_right"><%=number_field('p_quantity_'+b.value.to_s, nil, min: "0", max: "1000", :value => if PartProject.where(part_id: b.value, project_id: @project.id).take;  PartProject.where(part_id: b.value, project_id: @project.id).take.quantity.to_s; else "0"; end, :class=>"ultra-small-text") %></div>
+							</div>
+						</div>
+					<% end %>
+					</div>
+				</div>
+				</div>
+				</fieldset>
+		</td>
+	</tr>
+	<tr>
+	  <td colspan="3">
+		<%= f.label "Notes" %><br>
+		<%= f.text_area :notes,:cols=>"30", :rows=>"10", :class=>"extra-wide-text" %>	  
+	  </td>
+	</tr>
+	<tr>	
+	  <td colspan="3">
+		<%= f.label 'Logs' %><br>
+			<fieldset class="log-container">
+				<div class="lister3">
+					<p>
+						<%= simple_format(@project.log) %>
+					</p>
+				</div>
+			</fieldset>
+		<%= text_field_tag(:date_log, Time.new.to_s, :readonly => true, :class=>"small-text")%><%= text_field_tag(:text_log,"",:class=>"wider-wide-text") %>
+	  </td>
+	  <td colspan="3" rowspan="5" style="max-width:250px;">		
+		<% if @project.photos.any? %>
+			</br>Delete files:</br>
+			<% @project.photos.each do |p| %>
+			  <%= image_tag(p.image(:thumb)) %>
+			  <%= check_box_tag 'destruction[]', p.id, false, class: "del_box" %>
+			<% end %>
+		<% end %>
+	  </td>
+	</tr>
+	<tr>
+	  <td colspan="2" >
+		<%= f.label "Background image", :style=>"width: 9em;"  %><br>
+		<%= f.file_field :background, multipart: true, accept: 'image/*', :class => "file-browser" %><br/>	 
+		<% if @project.background and  @project.background!="default.png" %><%= check_box_tag :del_photo , 1 %> Delete photo<% end %>
+	  </td>
+	</tr>
+	<tr>
+	  <td colspan="1" rowspan="1">
+		Images
+		<%= file_field_tag 'image[]', multipart: true, accept: 'image/*', :class => "file-browser", :multiple=>"true" %>
+	  </td>
+	</tr>
+	  <div class="actions">
+		<div class="float-save"><input type="submit" value="Save" class="button"></div>
+<div id="top-save"><input type="submit" value="" class="button"></div>
+	  </div>
+  </table>
+<% end %>

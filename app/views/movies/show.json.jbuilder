@@ -1,0 +1,1 @@
+json.extract! @movie, :id, :title, :sub_title, :num_title, :part, :genres, :imdb, :postgres, :sunopsis, :last_seen, :watch_count, :own, :mtype, :myear, :mformat, :quality, :mlanguage, :msubtitle, :threed, :created_at, :updated_at

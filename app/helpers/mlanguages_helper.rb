@@ -1,0 +1,2 @@
+module MlanguagesHelper
+end

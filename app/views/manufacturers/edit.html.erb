@@ -1,0 +1,58 @@
+<div class="list-link"><%= link_to image_tag("dark_icons/view_listw.png", :width=>"24", :class=>"link-img"), manufacturers_path %> </div>
+<div class="back-link"><%= link_to image_tag("dark_icons/undow.png", :width=>"24", :class=>"link-img"), :back %></div>
+<h1>Edit</h1> <h2><% if flash[:notice] %> <font color="red"><%= javascript_tag "alert('Already exists. Redirecting to edit.')" %></font>	<% end %></h2>  
+<%= form_for :manufacturer, url: manufacturer_path(@manufacturer), method: :patch do |f| %>
+<table>
+	<tr>
+		<td rowspan="8" width="120">
+		<%= f.file_field :logo, multipart: true, :class => "file-browser" %>
+		 <% if @manufacturer.logo %>
+			<%= image_tag(@manufacturer.logo, :class=>"upl-img")%><br/>
+			<%= check_box_tag :del_photo , 1 %> Delete photo<br/>
+			<% else %>
+			<%= image_tag("no_photo.png", :class=>"upl-img")%><br/>
+		 <% end %>
+		 <%= label_tag "Web URL" %><br>
+		 <%= text_field_tag :web_photo, if params[:logo]; params[:logo]; else nil; end, :class=>"wide-text" %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+	 <%= f.label 'Name' %><br>
+	 <%= f.text_field :m_name, :size => "5", :class=>"wide-text" %>
+		</td>
+		<td>
+	 <%= f.label 'Full name' %><br>
+	 <%= f.text_field :m_full_name, :class=>"wide-text"%>
+		</td>
+	</tr>
+	<tr>
+		<td>
+	 <%= f.label 'Description' %><br>
+	 <%= f.text_area :m_description, :cols=>"30", :rows=>"5", :class=>"wide-text"  %>
+		</td>
+		<td>
+	 <%= f.label 'Address' %><br>
+	 <%= f.text_area :m_address, :cols=>"30", :rows=>"5", :class=>"wide-text"  %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+	 <%= f.label 'Email' %><br>
+	 <%= f.text_field :m_email, :class=>"wide-text" %>
+		</td>
+		<td>
+	 <%= f.label 'Website' %><br>
+	 <%= f.text_field :m_website, :class=>"wide-text" %>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="3">
+	 <%= f.label 'Notes' %><br>
+	 <%= f.text_area :m_note, :cols=>"30", :rows=>"5", :class=>"wide-text"  %>
+		</td>
+	</tr>
+</table>
+<div class="float-save"><input type="submit" value="Save" class="button"></div>
+<div id="top-save"><input type="submit" value="" class="button"></div>
+<% end %>

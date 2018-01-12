@@ -1,0 +1,22 @@
+<style>
+	.description {
+		max-width: 350px;
+		min-width:150px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+	.description2 {
+		max-width: 500px;
+		min-width:200px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+</style>	
+ <tr valign="top">	
+	<td class="description"><%=link_to movie.title, movie_path(movie) %></td>
+	<td class="description"><%=movie.sub_title %></td>
+	<td class="description2"><%=movie.sunopsis %></td>
+	</tr>
+

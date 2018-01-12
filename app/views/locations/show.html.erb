@@ -1,0 +1,58 @@
+<div class="list-link"><%= link_to image_tag("dark_icons/view_listw.png", :width=>"24", :class=>"link-img"), locations_path %> </div>
+<div class="back-link"><%= link_to image_tag("dark_icons/undow.png", :width=>"24", :class=>"link-img"), :back %></div>
+<h1>Location: <%= @location.l_name %></h1>
+<%=link_to image_tag("dark_icons/tools_1.png", :width=>"15", :height=>"15"), edit_location_path(@location) %> <%=link_to image_tag("dark_icons/trash.png", :width=>"15", :height=>"15"), location_path(@location), method: :delete,
+		data: { confirm: 'Are you sure?' } %> <%= link_to image_tag("dark_icons/plus_1.png", :width=>"15", :height=>"15"), new_location_path %>
+<table style="width:500px;">
+	<tr>
+		<td rowspan="4" width="120">
+		<% if @location.l_photo %>
+			<%= image_tag(@location.l_photo, :class=>"upl-img")%>
+			<% else %>
+			<%= image_tag("no_photo.png", :class=>"upl-img")%>
+			<% end %>
+		</td>	
+		<td>
+			<tr>
+				<td>
+					<b>Name</b></br>
+					<%= @location.l_name %>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<b>Description</b></br>
+					<%= @location.l_description %>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<b>Notes</b></br>
+					<%= @location.l_note %>
+				</td>
+			</tr>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="5">
+			<b></br>Parts </b>
+			<% if @location.parts.any? %>
+				(<%= @location.parts.count %>)</br>
+				<table class="sub-result">
+				<col width=80 >
+				<col width=80 >
+				<col width=150 >
+				<col width=200 >
+					 <tr bgcolor="#aaFFaa">
+					  <th>Number</th>
+					  <th>Qte</th>
+					  <th>Name</th>
+					  <th>Description</th>
+					  </tr>
+
+						<%= render @location.parts %> 
+
+					</table>
+			<% else %> (0)
+			<% end %>
+	</table>

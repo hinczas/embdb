@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Item:</strong>
+  <%= @shopping_list.item_id %>
+</p>
+
+<p>
+  <strong>Item type:</strong>
+  <%= @shopping_list.item_type %>
+</p>
+
+<p>
+  <strong>Item quantity:</strong>
+  <%= @shopping_list.item_quantity %>
+</p>
+
+<%= link_to 'Edit', edit_shopping_list_path(@shopping_list) %> |
+<%= link_to 'Back', shopping_lists_path %>

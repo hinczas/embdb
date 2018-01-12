@@ -1,0 +1,230 @@
+<style>
+		tr {
+			vertical-align: top;
+		}
+		.row {
+		  display: inline-block;
+		  margin-left:5px;
+		  height:320px;
+		  width: 100%;
+		  overflow-y: auto;
+		}
+		.basic {
+			width:450px;
+			margin-top:11px;
+			padding: 7px;  
+			height: 365px;
+		}
+		.life-search-results {
+			padding:7px;
+			}
+		.contain {
+			display: inline-block; 
+			position:relative;
+			}
+		.div_right {
+			display: inline;
+			float:right;
+			}
+		.div_left {
+			display: inline;
+			float:left;
+			min-width:350px;
+			max-width:350px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: pre;	
+			}
+		#big-search-box {
+			margin-bottom:5px;
+			}
+	  .loader {
+			border: 4px solid #f3f3f3; /* Light grey */
+			border-top: 4px solid #4C7EAF; /* Blue */
+			border-radius: 50%;
+			width: 15px;
+			height: 15px;
+			animation: spin 2s linear infinite;
+		}
+		@keyframes spin {
+			0% { transform: rotate(0deg); }
+			100% { transform: rotate(360deg); }
+		}
+		.lister3 {
+			padding:0;  
+			max-height: 165px; 
+			width:100%;
+			overflow-y: auto;
+		} 
+		.lister3 {
+			padding:0;  
+			max-height: 165px; 
+			width:100%;
+			overflow-y: auto;
+		} 
+		.log-container {
+			margin0;
+			padding:0;  
+			width:450px;
+			height: 165px;
+		}
+		.ids_array {
+			display:none;
+		}
+		#hidden {
+			display:none;
+		}
+</style>
+<div>
+	<% if flash[:error] %>
+		<fieldset class="error-msg">
+					<strong><%= flash[:error] %></strong>
+		</fieldset>
+	<% end %>
+</div>
+<%= form_for(@pcb) do |f| %>
+  <% if @pcb.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@pcb.errors.count, "error") %> prohibited this pcb from being saved:</h2>
+
+      <ul>
+      <% @pcb.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<script>
+	function calc(som)
+	{
+		var docid='xxx'+som;
+		document.getElementById('partids').value=document.getElementById('partids').value.replace(' ',",");
+		if (document.getElementById(docid).checked) 
+		  {
+			  document.getElementById('partids').value +=','+som;
+			  document.getElementById('partids').value=document.getElementById('partids').value.replace(',,',",");
+		  } else {
+			  document.getElementById('partids').value=document.getElementById('partids').value.replace(som,"");
+			  document.getElementById('partids').value=document.getElementById('partids').value.replace(',,',",");
+		  }
+		  
+	}	
+</script>
+<%= hidden_field_tag :pcbid, @pcb.id%>
+<% if @pcb.id %>
+	<% @pcb_list = Pcb.lookup(@pcb.name, @pcb.id) %>
+<% else %>
+	<% @pcb_list = Pcb.all %>
+	<% end %>
+<% if @pcb.parent_id %>
+	<% @parent_id=@pcb.parent_id %>
+<% else %>
+	<% if Pcb.max_version(@pcb.name, @pcb.id, @pcb.version).first; @parent_id=Pcb.max_version(@pcb.name, @pcb.id, @pcb.version).first.id; else @parent_id=nil; end %>
+<% end %>
+ <table>
+	<tr align="left">
+		<td>
+			<%= f.label "Name" %><br>
+			<%= f.text_field :name, :class=>"small-text", :id=>"pcb_name"%>		 
+		</td>
+		<td>
+			<%= f.label "Version" %><br>
+			<% if @pcb.version %>
+				<%= f.text_field :version, :class=>"ultra-small-text", :readonly => true %>
+			<% else %>
+				<%= f.text_field :version, :class=>"ultra-small-text" %>
+			<% end %>
+		</td>	
+		<td>
+			<%= f.label "Previous" %><br>
+			<div id="search-results">
+					  <%= select_tag(:parent_id, options_for_select(@pcb_list.map{|s|[s.pcb_list, s.id]},@parent_id), {:include_blank => true, :class => "select-tag",:id=>"pcb_parent_id"})  %>
+			</div>
+		</td>
+		<td colspan="1">
+			<%= f.label "Prod £" %><br>
+			<%= f.number_field(:cost, :value=> @pcb.cost, min: "0", :step=> 0.0001, :class=>"small-text") %>
+		</td>		
+	</tr>
+	<tr>
+		<td colspan="3">
+		 <%= f.label 'PCB Folder' %></br>
+		 <%= f.text_field :sch_file, :class => "extra-wide-text" %><br/>
+		</td>
+		<td colspan="1">
+		 <%= f.label 'Image' %><br>
+		 <%= f.file_field :photo_path, multipart: true, :class => "file-browser" %><br/>
+		</td>
+	</tr>	
+	<tr>
+		<td colspan="1">
+			<%= f.label "Started" %><br>		
+			<%= f.text_field :start_date, :type=> "date", :value=> ( @pcb.start_date ? @pcb.start_date.strftime("%F") : "") %>
+		</td>	
+		<td colspan="2">
+			<%= f.label "Finished" %><br>
+			<%= f.text_field :end_date, :type=> "date", :value=> ( @pcb.end_date ? @pcb.end_date.strftime("%F") : "") %>
+		</td>	
+		<td colspan="1">
+			Delete Photo:</br>
+			<!--<% if @pcb.sch_file %><%= check_box_tag :del_file_1 , 1 %> <%= @pcb.sch_file  %></br><% end %>
+			<% if @pcb.brd_file %><%= check_box_tag :del_file_lbr , 1 %> <%= @pcb.brd_file %></br><% end %>-->
+			<% if @pcb.photo %><%= check_box_tag :del_photo , 1 %> <%= @pcb.photo %></br><% end %>
+		</td>
+	</tr>
+	<tr>	
+	</tr>	
+	<tr>
+		<td colspan="3">
+			 <%= f.label 'Notes' %><br>
+			<%= f.text_area :notes, :cols=>"30", :rows=>"10", :class=>"extra-wide-text"%>
+		</td>	
+		<div id="hidden"><div id="ids_array"><% Part.all.ids %></div></div> 
+		<td colspan="10" rowspan="10">
+			<fieldset class="basic">
+				<legend style="color:green;">Parts <%= link_to image_tag("dark_icons/plus transparent.png", :width=>"13", :height=>"13"), new_part_path, :target=>'_blank' %></legend>			
+				  	<form id="live-search-form" method="get" action="<%= search_path %>">
+					  <input id="big-search-box" name="q" type="text" style="float:left;" />
+					  <div id='loader' style="float:right;" ></div>
+					  <%= hidden_field_tag :pcbid, @pcb.id %>
+					</form>
+				<div class="row" style="display:inline-block;">	
+
+					<div id="live-search-results">
+						<%= collection_check_boxes(:pcb, :part_ids, Part.all.order('part_number ASC'), :id, :part_list2) do |b| %>
+						<div class="col-xs-8" id="single_line_<%= b.value.to_s %>" >
+							<div class="contain" >
+								<div class="div_left"  style="font-family:monospace;"><%= b.check_box(class: "check_box") +' '+ link_to(b.text, part_path(b.value), :target=>'_blank', :title=> Part.find(b.value).part_number) %></div>
+								<div class="div_right"><%=number_field('quantity_'+b.value.to_s, nil, min: "1", max: "1000", :value => if PartPcb.where(pcb_id: @pcb.id, part_id: b.value).take;  PartPcb.where(pcb_id: @pcb.id, part_id: b.value).take.quantity.to_s; else "1"; end, :class=>"ultra-small-text") %></div>
+							</div>
+						</div>
+					<% end %>
+					</div>
+				</div>
+				</div>
+				</fieldset>
+		</td>	
+	</tr>	
+	<tr>
+		<td colspan="3">			
+			 <%= f.label 'Logs' %><br>
+			<fieldset class="log-container">
+				<div class="lister3">
+					<p>
+						<%= simple_format(@pcb.changelog) %>
+					</p>
+				</div>
+			</fieldset>
+			<%= text_field_tag(:date_log, Time.new.to_s, :readonly => true, :class=>"small-text")%><%= text_field_tag(:text_log,"",:class=>"wider-wide-text") %>
+		</td>	
+	</tr>	
+	<!--<tr>
+		<td colspan="5">
+		 <strong><%= f.label 'Board' %></strong>
+		 <%= f.file_field :file_lbr, multipart: true, accept: 'application/board', :class => "file-browser" %><br/>
+		</td>
+	</tr>-->
+  </table>
+<div class="float-save"><input type="submit" value="Save" class="button"></div>
+<div id="top-save"><input type="submit" value="" class="button"></div>
+<% end %>

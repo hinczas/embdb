@@ -1,0 +1,80 @@
+<html>
+	<style>	
+		table, th, td {
+			border: 1px solid blue;
+			border-collapse: collapse;
+			vertical-align: top;
+		}
+		th, td {
+			padding: 5px;
+		}
+		th {
+			align: left;
+		}
+		tr:nth-child(even) {
+			background-color: #eeffee;
+		}
+		td {
+			max-width: 350px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+		.image-upload > input {
+			display: none;
+		}
+		.tdimg {
+			width: 15px;
+			max-width: 15px;
+			width-max: 15px;
+		}
+		.thimg {
+			width: 15px;
+			max-width: 15px;
+			width-max: 15px;
+		}
+	</style>
+<div class="list-link"><%= link_to image_tag("dark_icons/view_listw.png", :width=>"24", :class=>"link-img"), locations_path %> </div>
+<div class="back-link"><%= link_to image_tag("dark_icons/undow.png", :width=>"24", :class=>"link-img"), :back %></div>
+<h1>Locations (<%= @locations.count %>) <%= link_to image_tag("dark_icons/plus_1.png", :width=>"20", :height=>"20"), new_location_path %>	</h1>
+<div class="import">
+	<%= form_tag import_locations_path, multipart: true do %>
+	<%= file_field_tag :file, :class => "file-browser"  %>
+		<input type="submit" value="Import" class="button">
+		
+	<% end %></div>
+<div class="move"><%= form_tag move_location_parts_path, multipart: true do %>
+	<%= select_tag :id, options_for_select(Location.all.map{|s|[s.l_name, s.id]}), :include_blank => true, :class => "select-tag"%>
+	<%= image_tag("dark_icons/shuffle.png", :class => "image-tag")%>
+	<%= select_tag :new_location, options_for_select(Location.all.map{|s|[s.l_name, s.id]}), :include_blank => true, :class => "select-tag"   %>
+	<input type="submit" value="Move" class="button" id="button-org">
+	<% end %>
+</div>
+
+<table>
+<p></p>
+  <tr bgcolor="#aaffaa">
+  <th>ID</th>
+  <th>Name</th>
+  <th>Description</th>
+  <th>Pts</th>
+ </tr>
+<% for location in @locations do %>
+ <tr>	
+	<td><%= location.id %></td>
+	<td><%=link_to location.l_name, location_path(location) %></td>
+	<td><%=location.l_description %></td>
+	<td><% if location.parts.any? %>
+				<%= location.parts.count %>
+		<% else %> 0
+		<% end %> </td>		
+	<td class="tdimg"><%=link_to image_tag("dark_icons/tools_1.png", :width=>"13", :height=>"13"), edit_location_path(location) %></td>
+	<td class="tdimg"><%=link_to image_tag("dark_icons/trash.png", :width=>"13", :height=>"13"), location_path(location),
+		method: :delete,
+		data: { confirm: 'Are you sure?
+		This will delete all contained parts!' } %></td>
+</tr>
+<% end %>
+</table>
+<%= will_paginate @locations %>
+</html>

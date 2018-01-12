@@ -1,0 +1,30 @@
+<style>
+	.description {
+		max-width: 120px;
+		min-width:100px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+	.description-small {
+		max-width: 80px;
+		min-width:50px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+	.description2 {
+		max-width: 500px;
+		min-width:200px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+</style>	
+ <tr valign="top">	
+	<td class="description"><%=link_to book.title, book_path(book) %></td>
+	<td class="description"><%=book.subtitle %></td>
+	<td class="description-small"><%=book.year %></td>
+	<td class="description2"><%=book.sunopsis %></td>
+	</tr>
+

@@ -1,0 +1,93 @@
+	<style>	
+		table, th, td {
+			border: 1px solid blue;
+			border-collapse: collapse;
+			vertical-align: middle;
+		}
+		th, td {
+			padding: 5px;
+		}
+		tr:nth-child(even) {
+			background-color: #E5E5E5
+		}
+		td {
+			max-width: 350px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+		.tdd {
+			max-width: 100px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}	
+		.image-upload > input {
+			display: none;
+		}
+		/*.updImg {
+			display: block;
+			margin: auto;
+			align: left;*/
+		}
+		.tdimg {
+			width: 15px;
+			max-width: 15px;
+			width-max: 15px;
+		}
+		.thimg {
+			width: 15px;
+			max-width: 15px;
+			width-max: 15px;
+		}
+		.meh {
+			display: inline-block;
+		}
+	</style>
+<% if @current_user.level < 2  %>
+
+<h1>Users <%= link_to image_tag("dark_icons/plus_1.png", :width=>"20", :height=>"20"), new_user_path(id: params[:id]) %>	</h1>
+
+<table>
+  <thead>
+    <tr bgcolor="#BFBFBF">
+      <th>Name</th>
+      <th>Middle name</th>
+      <th>Surname</th>
+      <th>Birth date</th>
+      <th>Address</th>
+      <th>Mobile</th>
+      <th>Email</th>
+      <th>Photo</th>
+      <th>Password</th>
+      <th>Notes</th>
+      <th>Username</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+	 <% if user.level==0 && @current_user.level != 0 %>
+	 <% else %>
+      <tr>
+        <td><%= link_to user.name, user %></td>
+        <td><%= user.middle_name %></td>
+        <td><%= user.surname %></td>
+        <td><%= user.birth_date %></td>
+        <td><%= user.address %></td>
+        <td><%= user.mobile %></td>
+        <td><%= user.email %></td>
+        <td><%= user.photo %></td>
+        <td><%= user.password %></td>
+        <td><%= user.notes %></td>
+        <td><%= link_to user.username, user %></td>	
+		<td class="tdimg"><%=link_to image_tag("dark_icons/tools_1.png", :width=>"13", :height=>"13"), edit_user_path(user) %></td>
+      </tr>
+     <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<% else %>
+<%= controller.redirect_to :denied %>
+<% end %>

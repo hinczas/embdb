@@ -1,0 +1,41 @@
+<div class="list-link"><%= link_to image_tag("dark_icons/view_listw.png", :width=>"24", :class=>"link-img"), mformats_path %> </div>
+<div class="back-link"><%= link_to image_tag("dark_icons/undow.png", :width=>"24", :class=>"link-img"), :back %></div>
+<h1>Format <%= @mformat.id %></h1>
+<%=link_to image_tag("dark_icons/tools_1.png", :width=>"15", :height=>"15"), edit_mformat_path(@mformat) %> <%=link_to image_tag("dark_icons/trash.png", :width=>"15", :height=>"15"), mformat_path(@mformat), method: :delete,
+		data: { confirm: 'Are you sure?' } %> <%= link_to image_tag("dark_icons/plus_1.png", :width=>"15", :height=>"15"), new_mformat_path %>
+<table style="width:500px;">
+	<tr>
+		<td>
+			<strong>Format:</strong>
+			<%= @mformat.mformat %>
+		</td>
+	</tr>
+
+	<tr>
+		<td>
+			<strong>Notes:</strong></br>
+			<%= @mformat.notes %>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="5">
+			<b></br>Movies </b>
+			<% if @mformat.movies.any? %>
+				(<%= @mformat.movies.count %>)</br>
+				<table class="sub-result">
+				<col width=80 >
+				<col width=100 >
+				<col width=200 >
+					 <tr bgcolor="#aaaaFF">
+					  <th>Title</th>
+					  <th>Sub title</th>
+					  <th>Sunopsis</th>
+					  </tr>
+
+						<%= render @mformat.movies %> 
+
+					</table>
+			<% else %> (0)
+			<% end %>
+	</table>
+

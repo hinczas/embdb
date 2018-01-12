@@ -1,0 +1,72 @@
+	<style>	
+		table, th, td {
+			border: 1px solid blue;
+			border-collapse: collapse;
+			vertical-align: middle;
+		}
+		th, td {
+			padding: 5px;
+		}
+		tr:nth-child(even) {
+			background-color: #eeeeff
+		}
+		td {
+			max-width: 350px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+		.tdd {
+			max-width: 100px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}	
+		.image-upload > input {
+			display: none;
+		}
+		/*.updImg {
+			display: block;
+			margin: auto;
+			align: left;*/
+		}
+		.tdimg {
+			width: 15px;
+			max-width: 15px;
+			width-max: 15px;
+		}
+		.thimg {
+			width: 15px;
+			max-width: 15px;
+			width-max: 15px;
+		}
+		.meh {
+			display: inline-block;
+		}
+	</style>
+<div class="list-link"><%= link_to image_tag("dark_icons/view_listw.png", :width=>"24", :class=>"link-img"), genres_path %> </div>
+<div class="back-link"><%= link_to image_tag("dark_icons/undow.png", :width=>"24", :class=>"link-img"), :back %></div>
+<h1>Genres <%= link_to image_tag("dark_icons/plus_1.png", :width=>"20", :height=>"20"), new_genre_path %>	</h1>
+
+<table>
+    <tr bgcolor="#aaaaff">
+      <th>ID</th>
+      <th>Genre</th>
+      <th>Notes</th>
+      <th>Pts</th>
+    </tr>
+
+    <% @genres.each do |genre| %>
+      <tr>
+        <td><%= genre.id %></td>
+        <td><%= link_to genre.name, genre_path(genre) %></td>
+        <td><%= genre.notes %></td>
+		<td><% if genre.movies.any? %>
+					<%= genre.movies.count %>
+			<% else %> 0
+			<% end %> </td>		
+		<td class="tdimg"><%=link_to image_tag("dark_icons/tools_1.png", :width=>"13", :height=>"13"), edit_genre_path(genre) %></td>
+      </tr>
+    <% end %>
+</table>
+<%= will_paginate @genres %>

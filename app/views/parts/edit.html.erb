@@ -1,0 +1,127 @@
+<html>
+<body>
+<div class="list-link"><%= link_to image_tag("dark_icons/view_listw.png", :width=>"24", :class=>"link-img"), parts_path %> </div>
+<div class="back-link"><%= link_to image_tag("dark_icons/undow.png", :width=>"24", :class=>"link-img"), :back %></div>
+<h1>Edit</h1> 
+<%= form_for :part, url: part_path(@part), method: :patch do |f| %>
+
+<table>
+	<tr>
+		<td>
+		 <%= f.label 'Number' %> 
+		 <%= f.text_field :part_number, :class=>"wide-text"  %>
+		</td>
+		<td>
+		 <%= f.label 'Name' %>
+		 <%= f.text_field :part_name, :class=>"wide-text"  %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+		 <%= f.label 'Describe' %>
+		 <%= f.text_area :p_description, :cols => "30", :rows => "5", :class=>"wide-text", :required=>true %>
+		</td>
+		<td>
+		 <%= f.label 'Notes' %>
+		 <%= f.text_area :p_note, :cols => "30", :rows => "5", :class=>"wide-text", :required=>true  %>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+		 <%= f.label 'Keywords' %>
+		 <%= f.text_field :keywords, :size => "26", :class=>"wide-text"  %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+		 <%= f.label 'Voltage' %>
+		 <%= f.number_field(:voltage, :value=> @part.voltage, min: "0", :step=> 0.0001, :class=>"small-text") %>
+		</td>
+		<td>
+		 <%= f.label 'Current' %>
+		 <%= f.number_field(:current, :value=> @part.current, min: "0", :step=> 0.0001,  :class=>"small-text") %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+		 <%= f.label 'Price' %>
+		 <%= f.number_field(:p_price, :value=> @part.p_price, min: "0", :step=> 0.0001, :class=>"small-text", :required=>true) %>
+		</td>
+		<td>
+		 <%= f.label 'Quantity' %>
+		 <%= f.number_field(:p_quantity, :value=> @part.p_quantity, min: "0", :class=>"small-text", :required=>true) %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+		 <%= f.label 'Pin cnt.' %>
+		 <%= f.number_field(:p_pin_count, :value=> @part.p_pin_count, min: "1", :class=>"small-text") %>
+		</td>
+		<td>
+		 <%= f.label 'Type' %>
+		 <% if @part.type %>
+			<%= f.select(:type_id, options_for_select(Type.all.order('name ASC').map{|s|[s.name, s.id]},@part.type.id), {:include_blank => true}, {:class => "select-tag"}) %>
+		 <% else %>
+			<%= f.select(:type_id, options_for_select(Type.all.order('name ASC').map{|s|[s.name, s.id]}), {:include_blank => true}, {:class => "select-tag"}) %>
+			<% end %>
+		 <%= link_to 'new', new_type_path %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+		 <%= f.label 'Maker' %>
+		 <% if @part.manufacturer %>
+			<%= f.select(:manufacturer_id, options_for_select(Manufacturer.all.order('m_name ASC').map{|s|[s.m_name, s.id]},@part.manufacturer.id), {:include_blank => true}, {:class => "select-tag"})  %>
+		 <% else %>
+			<%= f.select(:manufacturer_id, options_for_select(Manufacturer.all.order('m_name ASC').map{|s|[s.m_name, s.id]}), {:include_blank => true}, {:class => "select-tag"})  %>
+			<% end %>
+		 <%= link_to 'new', new_manufacturer_path %>
+		</td>
+		<td>
+		 <%= f.label 'Package' %>
+		 <% if @part.package %>
+		 <%= f.select(:package_id, options_for_select(Package.all.order('pk_name ASC').map{|s|[s.pk_name, s.id]},@part.package.id), {:include_blank => true}, {:class => "select-tag"})  %>
+		 <% else %>
+		 <%= f.select(:package_id, options_for_select(Package.all.order('pk_name ASC').map{|s|[s.pk_name, s.id]}), {:include_blank => true}, {:class => "select-tag"})  %>
+			<% end %>
+		 <%= link_to 'new', new_package_path %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+		 <%= f.label 'Location' %>
+		 <% if @part.location %>
+		 <%= f.select(:location_id, options_for_select(Location.all.order('l_name ASC').map{|s|[s.l_name, s.id]},@part.location.id), {:include_blank => true}, {:class => "select-tag"}) %>
+		 <% else %>
+		 <%= f.select(:location_id, options_for_select(Location.all.order('l_name ASC').map{|s|[s.l_name, s.id]}), {:include_blank => true}, {:class => "select-tag"})   %>
+			<% end %>
+	 	 <%= link_to 'new', new_location_path %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+		 <%= f.label 'DataSheet' %>
+		 <%= f.file_field :file_1, multipart: true, accept: 'application/pdf', :class => "file-browser" %><br/>
+		 <%= label_tag "DataSheet URL" %><br>
+		 <%= text_field_tag :web_photo, nil, :class=>"wide-text" %>
+		</td>
+		<td>
+		 <%= f.label '.lbr' %>
+		 <%= f.file_field :file_lbr, multipart: true, accept: 'application/lbr', :class => "file-browser" %><br/>
+		 <%= label_tag "Library URL" %><br>
+		 <%= text_field_tag :web_photo2, nil, :class=>"wide-text" %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<b>Delete files:</b></br>
+			<% if @part.file_1 %><%= check_box_tag :del_file_1 , 1 %> <%= @part.file_1 %></br><% end %>
+			<% if @part.file_lbr %><%= check_box_tag :del_file_lbr , 1 %> <%= @part.file_lbr %><% end %>
+		</td>
+	</tr>
+</table>
+<div class="float-save"><input type="submit" value="Save" class="button"></div>
+<div id="top-save"><input type="submit" value="" class="button"></div>
+	<% end %>
+</body>
+</html>

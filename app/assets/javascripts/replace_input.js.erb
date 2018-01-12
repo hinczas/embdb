@@ -1,0 +1,14 @@
+$('#pcb_name').bind('keyup', function() {
+	  var form = $("#versioning"); // grab the form wrapping the search bar.   
+	  var id = $(':input[id="pcbid"]').val();
+	  var url = "/pcbs/live_search?id="+id; // live_search action.    
+	  var pcbname = $(':input[id="pcb_name"]').val();
+	  var formD = 'pcb_name=' // grab the data in the form 
+	  var formData= formD + pcbname
+	  var final = url;
+	  $.get(final, formData, function(html) { // perform an AJAX get
+		$("#search-results").html(html); // replace the "results" div with the results
+
+	  });
+  
+	});

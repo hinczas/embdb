@@ -1,0 +1,103 @@
+<div class="list-link"><%= link_to image_tag("dark_icons/view_listw.png", :width=>"24", :class=>"link-img"), books_path %> </div>
+<div class="back-link"><%= link_to image_tag("dark_icons/undow.png", :width=>"24", :class=>"link-img"), :back %></div>
+	<style>	
+		table, th, td {
+			border: 0px solid blue;
+			border-collapse: collapse;
+			vertical-align: top;
+		}
+		th, td {
+			padding: 10px;
+		}
+		tr {
+			vertical-align: top;
+		}
+		td {
+			max-width: 200px;
+			text-overflow: ellipsis;
+		}
+	</style>
+<h1>Book <%= @book.id %></h1> 
+<%=link_to image_tag("dark_icons/tools_1.png", :width=>"15", :height=>"15"), edit_book_path(@book) %> <%=link_to image_tag("dark_icons/trash.png", :width=>"15", :height=>"15"), book_path(@book), method: :delete,
+		data: { confirm: 'Are you sure?' } %> <%= link_to image_tag("dark_icons/plus_1.png", :width=>"15", :height=>"15"), new_book_path %> </h1>
+<table style="width:500px;">
+	<tr>
+		<td rowspan="10" width="120">
+		 <% if @book.cover %>
+			<%= image_tag(@book.cover, :class=>"upl-img")%>
+			<% else %>
+			<%= image_tag("no_photo.png", :class=>"upl-img")%>
+			<% end %>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="5" style="white-space:nowrap;">
+		  <font size="6" color="brown"><strong><%= @book.title %> <%= @book.series %> </strong></font>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="5" style="white-space:nowrap;">
+		  <font size="4" color="chocolate"><strong><%= @book.subtitle %> </strong></font>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="3" style="white-space:nowrap;">
+		  <strong>Authors:</strong>
+			<% @book.authors.each do |g| %>
+			<%= link_to g.last_name+', '+g.name, author_path(g) %>;
+			<% end %>
+		</td>
+	</tr>
+			<% if @book.publisher_id %>
+				<tr>
+					<td colspan="3">
+					  <strong>Publisher:</strong>
+						<%= link_to @book.publisher.name, publisher_path(:id => @book.publisher.id) %>
+					</td>
+				</tr>
+			<% end %>
+		  <% if @book.isbn %>
+			<tr>
+				<td colspan="3">
+				  <strong>ISBN:</strong>
+				  <%= link_to @book.isbn, 'http://www.isbnsearch.org/isbn/'+@book.isbn, :target=>'_blank' %>
+				</td>
+			</tr>
+		  <% end %>
+	<tr>
+		<td>
+		  <strong>Year:</strong>
+			<%= @book.year %>
+		</td>
+		<td>
+		  <strong>Type:</strong>
+			<%= @book.cover_typ %>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="3">
+		  <strong>Language:</strong>
+			<%= @book.language %>
+		</td>
+	</tr>
+			<% if @book.user_id %>
+				<tr>
+					<td colspan="3">
+					  <strong>Owner:</strong>
+						<%= link_to @book.user.username, user_path(@book.user_id) %>
+					</td>
+				</tr>
+			<% end %>
+	<tr>
+		<td colspan="3">
+		  <strong>Notes:</strong>
+		  <%= @book.notes %>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="10">
+		  <strong>Synopsis:</strong><br/>
+		  <div class="synopsis"><%= simple_format(@book.sunopsis) %></div>
+		</td>
+	</tr>
+</table>

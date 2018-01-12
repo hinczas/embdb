@@ -1,0 +1,108 @@
+<style>
+ .field input {
+	 min-width:150px;
+ }
+ .select-tag {
+	 width:152px;
+ }
+/* .secondary {
+	 display:table-col;
+	 max-width:250px;
+	 opacity:0.1;
+ }
+ .secondary:hover {
+	 opacity:1;
+ }
+ .secondary:active {
+	 opacity:1;
+ }*/	
+</style>
+<%= form_for(@user, :class=>"contact_form") do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :username %>
+    <%= f.text_field :username, :class=>"small-text"  %>
+  </div>
+  <div class="field">
+    <%= f.label :password %>
+    <%= f.password_field :password, :class=>"small-text"  %>
+  </div>
+  <div class="field">
+    Confirm pass:
+    <%= f.password_field :password_confirmation, :class=>"small-text"  %>
+  </div>
+  
+  <div class="secondary">
+	  <% if session[:user_id] %>
+		<% if User.find(session[:user_id]).level==0 %>
+			<% if params[:id] && User.find(params[:id]).level==0 %>
+			<% else %>
+			  <div class="field">  
+				  <%= f.label "user level" %>
+				  <select id="user_level" name="user_level" class="select-tag">
+					<option value=1 <%= @user.level==1 ? "selected" : "" %>>Power user</option>
+					<option value=2 <%= @user.level==2 ? "selected" : "" %>>Reader</option>
+				  </select> 
+			  </div>
+		   <% end %>
+		 <% end %>
+		<!--<% if User.find(session[:user_id]).level==1 %>
+			<% if params[:id] and  User.find(params[:id]).level!=0 %>
+			  <div class="field">  
+				  <%= f.label "user level" %>
+				  <select id="user_level" name="user_level" class="select-tag">
+				  <option value=1 <%= @user.level==1 ? "selected" : "" %>>Power user</option>
+				  <option value=2 <%= @user.level==2 ? "selected" : "" %>>Reader</option>
+				  </select> 
+			  </div>
+			 <% end %>
+		 <% end %> -->
+	  <% end %>
+	  </br>
+	  <div class="field">
+		<%= f.label :name %>
+		<%= f.text_field :name, :class=>"small-text"  %>
+	  </div>
+	  <div class="field">
+		<%= f.label :middle_name %>
+		<%= f.text_field :middle_name, :class=>"small-text"  %>
+	  </div>
+	  <div class="field">
+		<%= f.label :surname %>
+		<%= f.text_field :surname, :class=>"small-text"  %>
+	  </div>
+	  <div class="field">
+		<%= f.label :birth_date %>
+		<%= f.text_field :birth_date, :type=> "date", :value=> ( @user.birth_date ? @user.birth_date.strftime("%F") : "") %>
+	  </div>
+	  <div class="field">
+		<%= f.label :address %><br>
+		<%= f.text_area :address, :rows=>"5", :class=>"wide-text"  %>
+	  </div>
+	  <div class="field">
+		<%= f.label :mobile %>
+		<%= f.text_field :mobile, :class=>"small-text"  %>
+	  </div>
+	  <div class="field">
+		<%= f.label :email %><br>
+		<%= f.text_field :email, :class=>"wide-text"  %>
+	  </div>
+	  <div class="field">
+		<%= f.label :notes %><br>
+		<%= f.text_area :notes, :cols=>"30", :rows=>"5", :class=>"wide-text"  %>
+	  </div>
+  </div>
+<div class="float-save"><input type="submit" value="Save" class="button"></div>
+<div id="top-save"><input type="submit" value="" class="button"></div>
+<% end %>

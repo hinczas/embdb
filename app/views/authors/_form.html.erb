@@ -1,0 +1,28 @@
+<%= form_for(@author) do |f| %>
+  <% if @author.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@author.errors.count, "error") %> prohibited this author from being saved:</h2>
+
+      <ul>
+      <% @author.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+    <%= f.label "First name" %><br>
+    <%= f.text_field :name, :class=>"wide-text" %>
+  </p>
+  <p>
+    <%= f.label "Last Name" %><br>
+    <%= f.text_field :last_name, :class=>"wide-text"  %>
+  </p>
+  <p>
+    <%= f.label "Notes" %><br>
+    <%= f.text_area :notes, :cols=>"30", :rows=>"5", :class=>"wide-text"  %>
+  </p>
+<div class="float-save"><input type="submit" value="Save" class="button"></div>
+<div id="top-save"><input type="submit" value="" class="button"></div>
+<% end %>

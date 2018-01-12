@@ -1,0 +1,487 @@
+<style>
+	body {		
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+		background-position: center; 
+		background-size:cover;
+	}
+	.project-container {
+		width:950px;
+		background: rgba(255, 255, 255, 0.95);
+		box-shadow: 2px 0 0px 5px rgba(255, 255, 255, 0.8), -2px 0 0px 5px rgba(255, 255, 255, 0.8);
+		padding:1px;
+		padding-left:20px;
+		padding-bottom:20px;
+		margin-left:auto;
+		margin-right:auto;
+		margin-top:7px;
+	}
+	.project-header {
+		display:inline-block;
+		margin-top:15px;
+	}
+	.project-title {
+		margin-right:5px;
+	}
+	.project-sums {
+		white-space: nowrap;		
+		padding-left:10px;
+		margin-left:5px;
+	}
+	.project-upper {		
+		height:150px;
+		width:1016px;
+	}
+	.project-upper-left {
+		vertical-align:top;
+		height:350px;
+		width:550px;
+	}
+	.project-upper-left-up {
+		margin-top:5px;
+		height:120px;
+		width:540px;
+		margin-right:10px;
+		overflow-y:auto;
+		white-space: pre-wrap;
+	}
+	.project-upper-left-files {
+		padding:3px;
+		padding-left:20px;
+		padding-right:20px;
+		height:75px;
+		width:474px;
+		overflow-x:auto;
+		white-space: nowrap;
+	}
+	.project-upper-right {
+		height:440px;
+		width:406px;
+	}
+	.project-upper-right-down {
+		height:370px;
+		width:390px;
+	}
+	.project-upper-right-down-icons {
+		padding:3px;
+		height:80px;
+		width:378px;
+		overflow-x:auto;
+		white-space: nowrap;
+	}
+	.project-upper-right-down-preview {
+		position:relative;		
+		text-align:center;
+		padding:3px;
+		height:350px;
+		width:390px;
+	}
+	.project-upper-right-up {
+		height:150px;
+		width:390px;
+		overflow-y:auto;
+		white-space: pre-wrap;
+	}
+	.project-lower {
+		height:285px;
+		width:550px;
+	}
+	.project-lower-left {
+		height:285px;
+		max-height:285px;
+		width:245px;
+		float:left;
+		max-width:245px;
+		overflow-y: auto;
+	}
+	.project-lower-right {
+		height:285px;
+		max-height:285px;
+		width:245px;
+		max-width:245px;
+		overflow-y: auto;
+		overflow-x: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+	.project-footer {
+		height:150px;
+		width:518px;
+		overflow-y:auto;
+	}
+	#label2 {
+	  clear: both;
+	  display: block;
+	  font-size: 0.85em;
+	  font-weight: bold;
+	  padding: 0.8em 0 0.2em 0;
+	  user-select: none;
+	}
+
+	.input2, #button2 {
+	  float: left;
+	  font-size: 1em;
+	  padding: 3px 6px;
+	  margin: 0;
+	  border: 1px solid #333;
+	  outline: 0;
+	  box-shadow: none;
+	}
+
+	::-moz-focus-inner { 
+	  padding: 0;
+	  border: 0;
+	}
+
+	.input2 {
+	  width: 400px;
+	  background-color: #fff;
+	  border-right: 0 none;
+	  border-radius: 3px 0 0 3px;
+	}
+
+	#button2 {
+	  position: relative;
+	  background-color: #FFA500;
+	  border-radius: 0 3px 3px 0;
+	  cursor: pointer;
+	  height:27px;
+	}
+
+	.copied::after {
+	  position: absolute;
+	  top: 12%;
+	  right: 110%;
+	  display: block;
+	  content: "copied";
+	  font-size: 0.75em;
+	  padding: 2px 3px;
+	  color: #fff;
+	  background-color: #22a;
+	  border-radius: 3px;
+	  opacity: 0;
+	  will-change: opacity, transform;
+	  animation: showcopied 1.5s ease;
+	}
+
+	@keyframes showcopied {
+	  0% {
+		opacity: 0;
+		transform: translateX(100%);
+	  }
+	  70% {
+		opacity: 1;
+		transform: translateX(0);
+	  }
+	  100% {
+		opacity: 0;
+	  }
+	}
+	.container {
+		border-radius: 10px;
+		border: 1px solid #73AD21;
+		padding: 7px; 
+		margin-top:5px;
+		width:243px;	
+		max-width:243px;	
+		height:300px;
+		background:white;
+	}
+	.log-container {
+		border-radius: 3px;
+		border: 1px solid #FFA500;
+		padding: 7px; 
+		margin-top:5px;
+		width:500px;
+	}
+	.files-container {
+		border-radius: 3px;
+		border: 1px solid #FFA500;
+		margin-top:5px;
+		width:500px;
+		margin-bottom:5px;
+	}
+	#preview {
+		vertical-align: middle;
+		margin:auto;
+		max-width:368px;
+		max-height:270px;
+	}
+	.leftArrow, .leftArrowD  {
+		position:relative;
+		float:left;
+		z-index=1;
+		bottom:60px;
+		left:1%;
+		width:25px;
+		margin-bottom:-67px;
+		opacity: 0.5;
+	}
+	.rightArrow, .rightArrowD  {
+		position:relative;
+		float:right;
+		z-index=1;
+		bottom:60px;
+		right:1%;
+		width:25px;
+		margin-right:0px;
+		margin-bottom:-67px;
+		opacity: 0.5;
+	}
+	.rightArrow:hover, .leftArrow:hover, .leftArrowD:hover , .rightArrowD:hover  {
+		opacity: 0.9;
+		cursor:pointer;
+	}
+	#container p { display: inline }
+	.pr-list {
+	   overflow: hidden;
+	   text-overflow: ellipsis;
+	   display: -webkit-box;
+	   -webkit-box-orient: vertical;
+	   -webkit-line-clamp: 3; /* number of lines to show */
+	   line-height: 16px;        /* fallback */
+	   max-height: 48px;       /* fallback */
+	   margin-bottom:5px;
+	   margin-left:10px;
+	}
+	.w3-btn-floating {
+		background:#FFA500;
+		cursor:pointer;
+		position:absolute;
+	}
+	#owl-demo .item img{
+		display: block;
+		msize:cover;
+	}
+	.buttonz { 
+		min-height:0px;
+		box-shadow: none;
+	}
+	.buttonz:active { 
+		min-height:0px;
+		box-shadow: none;
+	}
+	.buttonz:hover { 
+		min-height:0px;
+		box-shadow: none;
+	}
+	#small-button, #small-button2 {
+		cursor:pointer;
+		background: #fff;
+		background-image:url("<%= image_path("dark_icons/shopping basket.png") %>");
+		background-size:cover;
+		width: 11px;
+		height: 11px;
+		padding:0;
+		line-height:11px;
+		overflow:hidden;
+		border:none;
+	}
+	#small-button2 {
+		cursor:default;
+		background-image:url("<%= image_path("dark_icons/shopping_basket.png") %>");		
+	}
+</style>
+<script>
+
+(function() {
+
+    'use strict';
+  
+  // click events
+  document.body.addEventListener('click', copy, true);
+
+    // event handler
+    function copy(e) {
+
+    // find target element
+    var 
+      t = e.target,
+      c = t.dataset.copytarget,
+      inp = (c ? document.querySelector(c) : null);
+      
+    // is element selectable?
+    if (inp && inp.select) {
+      
+      // select text
+      inp.select();
+
+      try {
+        // copy text
+        document.execCommand('copy');
+        inp.blur();
+        
+        // copied animation
+        t.classList.add('copied');
+        setTimeout(function() { t.classList.remove('copied'); }, 1500);
+      }
+      catch (err) {
+        alert('please press Ctrl/Cmd+C to copy');
+      }
+      
+    }
+    
+    }
+
+})();
+</script>
+<body style background="/images/backgrounds/<%= @project.background %>"></body>
+<div class="back-link"><%= link_to image_tag("dark_icons/undow.png", :width=>"24", :class=>"link-img"), :back %></div>
+<div class="list-link"><%= link_to image_tag("dark_icons/view_listw.png", :width=>"24", :class=>"link-img"), projects_path %> </div>
+
+<div class="project-container" style="display: block;">
+	<div class="project-header" style="display: in-line;">
+		<div class="project-title" style="display: table-cell; line-height:200%;">
+			<font size="8" color="brown"><strong><%= @project.name%> <font size="6" color="brown"><%= if Rails.configuration.developer=="true"; @project.version; end %> (<%= @project.code%>)</font></strong>
+			</font>			
+		</div>
+		<div class="project-sums" style="display: table-cell;">
+			<strong><font style="font-style:italic;" size="4" color="blue">
+				<% if Rails.configuration.developer=="true" %>
+					Cost: <font color="crismon" style="padding-right:10px;"> <%= if Project.latest_cost(@project.id).first.pr_cost; number_to_currency(Project.latest_cost(@project.id).first.pr_cost, :unit => "£"); else "£0.00"; end %>  </font>
+				<% else %>
+					Cost: <font color="crismon" style="padding-right:10px;"> 
+						<% Project.pcbs_cost(@project.id).first ? @pc_cost=Project.pcbs_cost(@project.id).first.pr_cost : @pc_cost=0.00 %> 
+						<% Project.parts_cost(@project.id).first ? @pa_cost=Project.parts_cost(@project.id).first.pr_cost : @pa_cost=0.00 %> 
+						<% Project.pcbs_pr_cost(@project.id).first ? @pp_cost=Project.pcbs_pr_cost(@project.id).first.pr_cost : @pp_cost=0.00 %>
+						<%= number_to_currency((@pc_cost ? @pc_cost : 0) + (@pa_cost ? @pa_cost : 0) + (@pp_cost ? @pp_cost : 0), :unit => "£") %>  </font>
+				<% end %>
+				Start:<font color="crismon" style="padding-right:10px;"> <%= @project.start_date %>  </font>
+				End:<font color="crismon" style="padding-right:10px;"> <%= @project.end_date %>  </font>
+			</font>
+		</strong>
+		</div>
+	</div>
+	
+	<div>
+		<%=link_to image_tag("dark_icons/tools_1.png", :width=>"15", :height=>"15"), edit_project_path(@project) %> <%=link_to image_tag("dark_icons/trash.png", :width=>"15", :height=>"15"), project_path(@project), method: :delete,
+		data: { confirm: 'Are you sure?' } %> <%= link_to image_tag("dark_icons/plus_1.png", :width=>"15", :height=>"15"), new_project_path %>
+	</div>		
+	<div class="project-upper" style="display:  in-line;">	
+		<div><p>
+			<input class="input2" type="text" id="folder_location" value="<%= @project.folder_location %>" readonly/>
+			<button id="button2" data-copytarget="#folder_location">copy</button>
+			</br></p>
+		</div>
+		<div class="project-upper-left" style="display: table-cell;">
+				<div class="project-upper-left-up"><%= simple_format(@project.description) %></div>
+						
+					
+		</div>
+		<div class="project-upper-right" style="display: table-cell;">
+			<div class="project-upper-right-down">
+				<div class="project-upper-right-down-icons">
+				<% @project.photos.each do |photo| %>
+					<img src="<%= photo.image.url(:thumb) %>" onclick="imgFunction('<%=photo.image.url(:medium) %>')" class="icons" id="icons" />
+				<% end %>
+				</div>
+				<div>
+					<% if @project.photos.any? %>
+						<%= image_tag("dark_icons/arrow-left.png", :width=>"24", :class=>"leftArrow") %>
+						<%= image_tag("dark_icons/arrow-right.png", :width=>"24", :class=>"rightArrow") %>	
+					<% end %>	
+				</div>
+				<div class="project-upper-right-down-preview">
+					<% if @project.photos.any? %>
+						<img src="<%= @project.photos.first.image.url(:medium) %>" class="preview" id="preview" />
+					<% end %>
+					<!-- The Modal -->
+					<div id="myModal" class="modal">
+
+					  <!-- The Close Button -->
+					  <span class="close" onclick="document.getElementById('myModal').style.display='none'">&times;</span>
+					  <!-- Modal Content (The Image) -->
+					  <!--<img class="modal-content" id="img01" src="<%= if @project.photos.any?; @project.photos.first.image.url(:original); else ""; end %>"/> -->
+					  <div id="owl-demo" class="owl-carousel owl-theme modal-content">
+						<% @project.photos.each do |photo| %>
+						  <div class="item"><img class="modal-content" id="img01"  src="<%= photo.image.url(:original) %>"></div>
+						 <% end %>
+					  </div>
+					  <!-- Modal Caption (Image Text) -->
+					  <div id="caption"></div>
+					</div>
+				</div>
+			</div>
+			<div class="project-upper-right-up"><%= simple_format(@project.notes) %></div>
+		</div>
+	</div>
+	<div class="project-lower" style="font-family:monospace;">
+		<fieldset class="container" style="margin-bottom:10px; float: left; margin-right:10px;">
+		  <legend style="color:blue;font-weight:bold;">PCBs (<%= @project.pcbs.count %>)</legend>		
+			<div class="project-lower-left" style="font-family:monospace;">
+				<% @project.pcbs.each do |pcb| %>
+					<%=link_to pcb.name_full+" - ("+PcbProject.where(pcb_id: pcb.id, project_id: @project.id).take.quantity.to_s+")", pcb_path(pcb)%></br>
+						<p class="pr-list">
+							<%= pcb.notes %>
+						</p>
+					<% end %>
+			</div>
+			</fieldset>	
+		<fieldset class="container" style="margin-bottom:10px; float: left;">
+		  <legend style="color:blue;font-weight:bold;">Parts (<%= PartProject.parts_count(@project.id).first.parts_count %>)</legend>		
+			<div class="project-lower-right" style="font-family:monospace;">				
+				<% @project.parts.each do |part| %>
+						<div style="float:left; padding-right:5px;">
+						<%= form_for :shopping_list, url: shopping_lists_path do |f| %>
+							<%= f.hidden_field :item_id, :value => part.id %>
+							<%= f.hidden_field :item_type, :value => "part" %>
+							<%= f.hidden_field :item_quantity, :value=> PartProject.where(part_id: part.id, project_id: @project.id).take.quantity %>
+							<% if (PartProject.where(part_id: part.id, project_id: @project.id).take.quantity ? PartProject.where(part_id: part.id, project_id: @project.id).take.quantity : 0) >0 %>
+							 <input type="submit" value="" class="buttonz" id="small-button">
+							 <% else %>
+							 <input type="submit" value="" class="buttonz" id="small-button2" disabled>
+							<% end %>
+						<% end %></div>
+					<%=link_to part.pcb_parts+" - ("+PartProject.where(part_id: part.id, project_id: @project.id).take.quantity.to_s+")", part_path(part) %></br>
+				<%end %>
+			</div>
+			</fieldset>
+	</div>
+	<fieldset class="log-container" style="margin-bottom:10px;">
+	  <legend style="color:blue;font-weight:bold;">Logs </legend>		
+		<div class="project-footer" style="display:  in-line;"><%= simple_format(@project.log) %></div>
+	</fieldset>
+	
+			<% if @project.documents.any? %>	
+					<fieldset class="files-container">
+					  <legend style="color:blue;font-weight:bold;">Files </legend>	
+					  <div class="project-upper-left-files">
+							<% @project.documents.each do |doc| %>
+							<%= link_to image_tag('dark_icons/file.png', :width=>"40", :style=>"margin-left:10px; margin-right:-42px; margin-bottom:13px;"), doc.file.url, :target=>"_blank"  %>
+							<%= link_to doc.file_file_name, doc.file.url, :target=>"_blank" %>
+							<% end %>
+					  </div>	
+					  <div>
+							<%= image_tag("dark_icons/arrow-left.png", :width=>"24", :class=>"leftArrowD") %>
+							<%= image_tag("dark_icons/arrow-right.png", :width=>"24", :class=>"rightArrowD") %>	
+						
+					  </div>
+					</fieldset>
+				<% end %>
+</div>
+
+ <div class="download-link"><%= link_to image_tag("dark_icons/download.png", :width=>"24", :class=>"link-img"), project_path(format: "csv") %> </div>
+ 
+<script>
+// Get the modal
+var modal = document.getElementById('myModal');
+
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+var img = document.getElementById('preview');
+var modalImg = document.getElementById("img01");
+var captionText = document.getElementById("caption");
+var img_src = img.src.replace("medium","original");
+img.onclick = function(){
+    modal.style.display = "block";
+    //modalImg.src = img_src;
+    captionText.innerHTML = this.alt;
+}
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() { 
+  modal.style.display = "none";
+}
+</script>

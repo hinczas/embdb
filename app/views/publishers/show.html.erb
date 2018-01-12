@@ -1,0 +1,62 @@
+<div class="list-link"><%= link_to image_tag("dark_icons/view_listw.png", :width=>"24", :class=>"link-img"), publishers_path %> </div>
+<div class="back-link"><%= link_to image_tag("dark_icons/undow.png", :width=>"24", :class=>"link-img"), :back %></div>
+<h1>Publisher <%= @publisher.id %></h1>
+<%=link_to image_tag("dark_icons/tools_1.png", :width=>"15", :height=>"15"), edit_publisher_path(@publisher) %> <%=link_to image_tag("dark_icons/trash.png", :width=>"15", :height=>"15"), publisher_path(@publisher), method: :delete,
+		data: { confirm: 'Are you sure?
+		This will delete all contained parts!' } %>  <%= link_to image_tag("dark_icons/plus_1.png", :width=>"15", :height=>"15"), new_publisher_path %> 
+<table style="width:500px;">
+	<tr>
+		<td>
+			<b>Name</b></br>
+			<%= @publisher.name %>
+		</td>
+		<td>
+			<b>Full name</b></br>
+			<%= @publisher.full_name %>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="3">
+			<b>Address</b></br>
+			<%= @publisher.address %>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="3">
+			<b>Website</b></br>
+			<%= link_to @publisher.website,"http://#{@publisher.website}" %>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="3">
+			<b>Email</b></br>
+			<%= link_to @publisher.contact, "mailto:#{@publisher.contact}"  %>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="3">
+			<b>Notes</b></br>
+			<%= @publisher.notes %>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="5">
+			<b></br>Parts </b>
+			<% if @publisher.books.any? %>
+				(<%= @publisher.books.count %>)</br>
+				<table class="sub-result">
+				<col width=80 >
+				<col width=100 >
+				<col width=200 >
+					 <tr bgcolor="#ffaaaa">
+					  <th>Title</th>
+					  <th>Sub title</th>
+					  <th>Synopsis</th>
+					  </tr>
+
+						<%= render @publisher.books %> 
+
+					</table>
+			<% else %> (0)
+			<% end %>
+	</table>

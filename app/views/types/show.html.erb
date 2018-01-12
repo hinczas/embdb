@@ -1,0 +1,47 @@
+<div class="list-link"><%= link_to image_tag("dark_icons/view_listw.png", :width=>"24", :class=>"link-img"), types_path %> </div>
+<div class="back-link"><%= link_to image_tag("dark_icons/undow.png", :width=>"24", :class=>"link-img"), :back %></div>
+<h1>Type: <%= @type.name %></h1>
+<%=link_to image_tag("dark_icons/tools_1.png", :width=>"15", :height=>"15"), edit_type_path(@type) %> <%=link_to image_tag("dark_icons/trash.png", :width=>"15", :height=>"15"), type_path(@type), method: :delete,
+		data: { confirm: 'Are you sure?' } %> <%= link_to image_tag("dark_icons/plus_1.png", :width=>"15", :height=>"15"), new_type_path %>
+<table style="width:500px;">
+	<tr>
+		<td>
+			<b>Name</b></br>
+			<%= @type.name %>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="3">
+			<b>Description</b></br>
+			<%= @type.t_description %>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="3">
+			<b>Notes</b></br>
+			<%= @type.t_note %>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="5">
+			<b></br>Parts </b>
+			<% if @type.parts.any? %>
+				(<%= @type.parts.count %>)</br>
+				<table class="sub-result">
+				<col width=80 >
+				<col width=80 >
+				<col width=150 >
+				<col width=200 >
+					 <tr bgcolor="#aaffaa">
+					  <th>Number</th>
+					  <th>Qte</th>
+					  <th>Name</th>
+					  <th>Description</th>
+					  </tr>
+
+						<%= render @type.parts %> 
+
+					</table>
+			<% else %> (0)
+			<% end %>
+	</table>

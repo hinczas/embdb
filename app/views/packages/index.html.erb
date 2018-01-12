@@ -1,0 +1,72 @@
+<html>
+	<style>	
+		table, th, td {
+			border: 1px solid blue;
+			border-collapse: collapse;
+			vertical-align: top;
+		}
+		th, td {
+			padding: 5px;
+		}
+		tr:nth-child(even) {
+			background-color: #eeffee;
+		}
+		td {
+			max-width: 350px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+		.image-upload > input {
+			display: none;
+		}
+		.tdimg {
+			width: 15px;
+			max-width: 15px;
+			width-max: 15px;
+		}
+		.thimg {
+			width: 15px;
+			max-width: 15px;
+			width-max: 15px;
+		}
+	</style>
+<div class="list-link"><%= link_to image_tag("dark_icons/view_listw.png", :width=>"24", :class=>"link-img"), packages_path %> </div>
+<div class="back-link"><%= link_to image_tag("dark_icons/undow.png", :width=>"24", :class=>"link-img"), :back %></div>
+<h1>Packages (<%= @packages.count %>) <%= link_to image_tag("dark_icons/plus_1.png", :width=>"20", :height=>"20"), new_package_path %> </h1>
+<%= form_tag import_packages_path, multipart: true do %>
+	<%= file_field_tag :file, :class => "file-browser"  %>
+	<input type="submit" value="Import" class="button">
+	<% end %>
+<%= form_tag move_package_parts_path, multipart: true do %>
+	<%= select_tag :id, options_for_select(Package.all.map{|s|[s.pk_name, s.id]}), :include_blank => true, :class => "select-tag"     %>
+	<%= image_tag("dark_icons/shuffle.png", :class => "image-tag")%>
+	<%= select_tag :new_package, options_for_select(Package.all.map{|s|[s.pk_name, s.id]}), :include_blank => true, :class => "select-tag"     %>
+	<input type="submit" value="Move" class="button" id="button-org">
+	<% end %>
+<head>
+</head>
+<table>
+<p></p>
+  <tr bgcolor="#aaffaa">
+  <th>ID</th>
+  <th>Name</th>
+  <th>Description</th>
+  <th>Pts</th>
+ </tr>
+<% for package in @packages do %>
+ <tr>	
+	<td><%=package.id %></td>
+	<td><%=link_to package.pk_name, package %></td>
+	<td><%=package.pk_description %></td>
+	<td><% if package.parts.any? %>
+				<%= package.parts.count %>
+		<% else %> 0
+		<% end %> </td>	
+	<td class="tdimg"><%=link_to image_tag("dark_icons/tools_1.png", :width=>"13", :height=>"13"), edit_package_path(package) %></td>
+
+</tr>
+<% end %>
+</table>
+<%= will_paginate @packages %>
+</html>

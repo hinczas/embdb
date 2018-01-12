@@ -1,0 +1,236 @@
+<style>
+	.ui-content {
+		margin-left:10px;
+		margin-top:10px;
+	}
+	.imgtag, .electronics, .movies, .books, .pcb {
+		border-radius: 5px;
+		-moz-border-radius: 5px;
+		-webkit-border-radius: 5px;	
+		}
+	.electronics {
+		background-color: #4CAF50;	
+	}
+	.movies {
+		background-color: #4C7EAF;			
+	}
+	.books {
+		background-color: #990000;	
+	}
+	.links_to a:link { 
+		text-decoration:none; 
+		color:#eee !important;
+	}
+	.links_to a:visited { 
+		text-decoration:none; 
+		color:#eee !important;
+	}
+	.links_to a:hover { 
+		text-decoration:none; 
+		background-color: transparent !important;
+	}
+	.databaseimg {
+		margin-top: 2px;
+		position:relative;
+		min-width:700px;
+	}
+	table { 
+		border:0;
+		margin-left: auto;
+		margin-right: auto;
+		width:658px;
+		position:relative;
+		margin-bottom: 0px;
+	}
+	.searchall { 
+		margin-left: auto;
+		margin-right: auto;
+	}
+	h2 {
+		margin-bottom:2px;
+		margin-top:2px;
+	}
+	td {
+		padding:5px;
+	}
+	img {
+		margin-top:0px;
+	}
+	tr {
+		vertical-align: top;
+	}
+	.site-body {
+		margin: 0px;
+	}
+	.header {
+		padding-top: 5px;
+		margin-bottom: -5px;
+		}
+	.home_link {
+		margin-left:2px;
+		margin-top:2px;
+		display: block;
+	}
+	#selector2 {
+	  background: #990000;
+	  color: white;
+	  height: 36px;
+	  font-size: 14px;
+	  width: 73px;
+	  border: 0;
+	  margin-right:-2px;
+	  margin-left:0px;
+	  padding:0;
+	  -webkit-border-top-left-radius: 5px;
+	  -moz-border-top-left-radius: 5px;
+	  border-top-left-radius: 5px;
+	  -webkit-border-bottom-left-radius: 5px;
+	  -moz-border-bottom-left-radius: 5px;
+	  border-bottom-left-radius: 5px;
+		-moz-box-shadow: 0px 0px 5px rgba(239,111,111,.9);
+		-webkit-box-shadow: 0px 0px 5px rgba(239,111,111,.9);
+		box-shadow: 0px 0px 5px rgba(239,111,111,.9);
+	}
+	#search {
+	  width: 530px;
+	  margin-right:0px;
+	  padding:0;	
+	  padding-left:5px;
+		position:relative;
+	  -webkit-border-top-left-radius: 0;
+	  -moz-border-top-left-radius: 0;
+	  border-top-left-radius: 0;
+	  -webkit-border-bottom-left-radius: 0;
+	  -moz-border-bottom-left-radius: 5px;
+		-moz-box-shadow: 0px 0px 5px rgba(76,175,80,.9);
+		-webkit-box-shadow: 0px 0px 5px rgba(76,175,80,.9);
+		box-shadow: 0px 0px 5px rgba(76,175,80,.9);
+	}
+	#searchbox2 { 
+		padding:0;
+		width:658px;	
+	 }
+	#searchsubmit2 {
+		margin-left:-4px;
+		margin-right:-4px;
+		padding:0;
+		-moz-box-shadow: 0px 0px 5px rgba(76,126,175,.9);
+		-webkit-box-shadow: 0px 0px 5px rgba(76,126,175,.9);
+		box-shadow: 0px 0px 5px rgba(76,126,175,.9);
+		 }
+	#index-wrap{
+		height: 30%;
+		width:100%;
+		position: absolute;
+		top: 250px;
+	}
+	body {
+		background-image: url("<%= image_path("database3-min.png") %>");
+		background-repeat: no-repeat;
+		background-size:contain;
+	}
+	.link-img {
+		margin-top:8px;
+		margin-left:8px;
+	}
+	.home-link {
+		display:none;
+	}
+	.link-img2 {
+		margin-top:8px;
+	}
+	
+</style>
+ <script>
+	function jsFunction2() {
+	  var form = $("#selector2").val();
+	  document.getElementById("searcher2").action=form;
+	}
+ </script>
+	<% if @current_user.level==0 %>
+		<style>	
+			body {background-image: url("<%= image_path("database3-adm2.png") %>");}		
+		</style>
+		<% end %>
+	<div id="index-wrap">
+	<table>
+		<% if Rails.configuration.developer=="true" %>
+		<tr class="projects" align="center"  height="80">
+			<td colspan="5"><%=link_to image_tag("projects2x.png"), controller: 'projects' %></td>
+		</tr>
+		<% end %>
+		<tr align="left" class="searchall" width="568px">
+			<td colspan="7" style="padding:0;">
+				
+				<div class="searchbox" id="searchbox2">
+				<div class="selector" style="vertical-align:top; display: table-cell;">
+					<select id="selector2" onChange="jsFunction2()">
+						<option value="/welcome/search_all">All</option>
+						<option value="/projects">Project</option>
+						<option value="/pcbs">PCB</option>
+						<option value="/parts">Part</option>
+						<option value="/movies">Movie</option>
+						<option value="/books">Book</option>
+				  </select> </div>
+					<form role="search" method="get" action="/welcome/search_all" id="searcher2" style="display: table-cell;">             
+					  <div><input placeholder="Search Database" type="text" value="" name="search" id="search"></div>				  
+					  <button type="submit" id="searchsubmit2" title="Search Database">						
+							<%=image_tag("dark_icons/previeww.png", :width=>"25", :style=>"margin-top:4px;")%>						
+					  </button>
+				  </form>
+				</div>
+				
+			</td>
+		</tr>
+		<tr>
+			<td class="electronics">
+				<div class="links_to">
+				<%= link_to image_tag("electronics_g1.jpg", :width=>"200", :height=>"125", :class=>"imgtag"), controller: 'projects' %>
+				<font color="white">
+					<h2>
+					<%= link_to 'Projects', controller: 'projects' %></h2>
+					<%= link_to 'PCBs', controller: 'pcbs' %></br>
+					<%= link_to 'Parts', controller: 'parts' %></br>
+					<%= link_to 'Locations', controller: 'locations' %></br>
+					<%= link_to 'Packages', controller: 'packages'  %></br>
+					<%= link_to 'Manufacturers', controller: 'manufacturers'  %></br>
+					<%= link_to 'Types', controller: 'types'  %></br>
+					</br>
+					<b><ins><%= link_to 'Shopping list', shopping_lists_path  %></ins></b></br>
+				</font>
+				</div>
+			</td>
+			<td />
+			<td class="movies">
+				<div class="links_to">
+				<%= link_to image_tag("movies.jpg", :width=>"200", :height=>"125", :class=>"imgtag"), controller: 'movies'%>
+				<font color="white">
+					<h2>
+					<%= link_to 'Movies', controller: 'movies'  %></h2>
+					<%= link_to 'Formats', controller: 'mformats'  %></br>
+					<%= link_to 'Languages', controller: 'mlanguages'  %></br>
+					<%= link_to 'Subtitles', controller: 'msubtitles' %></br>
+					<%= link_to 'Types', controller: 'mtypes'  %></br>
+					<%= link_to 'Years', controller: 'myears'  %></br>
+					<%= link_to 'Quality', controller: 'qualities'  %></br>
+					<%= link_to '3D', controller: 'threeds'  %></br>
+					<%= link_to 'Genre', controller: 'genres'  %></br>
+				</font>
+				</div>
+			</td>
+			<td />
+			<td class="books">
+				<div class="links_to">
+				<%= link_to image_tag("books.jpg", :width=>"200", :height=>"125", :class=>"imgtag"), controller: 'books'%>
+				<font color="#eee">
+					<h2>
+					<%= link_to 'Books', controller: 'books'  %></h2>
+					<%= link_to 'Authors', controller: 'authors'  %></br>
+					<%= link_to 'Publishers', controller: 'publishers'  %></br>
+				</font>
+				</div>
+			</td>
+		</tr>
+		
+	</table>
+	</div>

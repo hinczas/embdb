@@ -1,0 +1,447 @@
+ <style>
+.searchall { 
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.site-body {
+	margin: 0px;
+}
+.home_link {
+	margin-left:2px;
+	margin-top:2px;
+	display: block;
+}
+.search-stay {
+	position:relative;
+	width:100%;
+	margin-top:75px;
+	margin-left:25px;
+	padding-bottom:25px;
+}
+#selector2 {
+  background: #990000;
+  color: white;
+  height: 36px;
+  font-size: 14px;
+  width: 73px;
+  border: 0;
+  margin-right:-2px;
+  margin-left:0px;
+  padding:0;
+  -webkit-border-top-left-radius: 5px;
+  -moz-border-top-left-radius: 5px;
+  border-top-left-radius: 5px;
+  -webkit-border-bottom-left-radius: 5px;
+  -moz-border-bottom-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+	-moz-box-shadow: 0px 0px 5px rgba(239,111,111,.9);
+	-webkit-box-shadow: 0px 0px 5px rgba(239,111,111,.9);
+	box-shadow: 0px 0px 5px rgba(239,111,111,.9);
+}
+#search {
+  width: 530px;
+  margin-right:0px;
+  padding:0;	
+  padding-left:5px;
+	position:relative;
+	-moz-box-shadow: 0px 0px 5px rgba(76,175,80,.9);
+	-webkit-box-shadow: 0px 0px 5px rgba(76,175,80,.9);
+	box-shadow: 0px 0px 5px rgba(76,175,80,.9);
+}
+#searchbox2 { 
+	position:absolute;
+	padding:0;
+	width:658px;
+ }
+ .mainz {
+	 height:100%;
+	margin-top:25px;
+	margin-bottom:25px;
+	padding-left:25px;
+	display:block;
+}
+#searchsubmit2 {
+	margin-left:-4px;
+	margin-right:-4px;
+	padding:0;
+	-moz-box-shadow: 0px 0px 5px rgba(76,126,175,.9);
+	-webkit-box-shadow: 0px 0px 5px rgba(76,126,175,.9);
+	box-shadow: 0px 0px 5px rgba(76,126,175,.9);
+	 }
+body {
+	background-image: url("<%= image_path("seamless3.png") %>");
+	background-repeat: repeat;
+}
+.link-img2 {
+	margin-top:8px;
+}
+table, tr, th, td {
+	border: 1px solid blue;
+	border-collapse: collapse;
+	vertical-align: middle;
+}
+.site-footer {
+	display:none;
+}
+	
+/* Books styling */
+.grid-links {
+	position:absolute;
+	top:1px;
+	right:1px;
+}
+.title {
+	max-width:80px;
+	overflow:hidden;
+	text-overflow: ellipsis;
+}
+.container {
+	width:100%;
+	margin-bottom:40px;
+	z-index:-1;
+	margin-top:10px;
+}
+.project-container {
+	max-width:895px;
+	min-width:895px;
+	/*margin-left:auto;
+	margin-right:auto;*/
+	z-index:-1;
+	padding-bottom:10px;
+	overflow-x:auto;
+	white-space: nowrap;
+}
+.single-project {
+	position:relative;
+	display: inline-block; 
+	*display: inline; 
+	vertical-align: top;
+	width:115px;
+	margin-right:5px;
+	margin-left:5px;
+	margin-top:10px;
+	border-radius:5px;
+	
+}
+.pr-header {	
+	padding:2px;
+	  background: #ffeeee;
+	  color: white;
+	  height: 35px;
+	  font-size: 16px;
+	  width: 111px;
+	  border: 1px solid red;
+	  -webkit-border-top-left-radius: 5px;
+	  -moz-border-top-left-radius: 5px;
+	  border-top-left-radius: 5px;
+	  -webkit-border-top-right-radius: 5px;
+	  -moz-border-top-right-radius: 5px;
+	  border-top-right-radius: 5px;
+		text-shadow: 0px 0px 1px #fff;
+	   overflow: hidden;
+	   text-overflow: ellipsis;
+}
+.pr-body {	
+	  background: #fff;
+	  padding:2px;
+	  overflow: hidden;
+	  color: black;
+	  height: 164px;
+	  font-size: 8px;
+	  width: 111px;
+	  border: 1px solid red;
+	  -webkit-border-bottom-left-radius: 5px;
+	  -moz-border-bottom-left-radius: 5px;
+	  border-bottom-left-radius: 5px;
+	  -webkit-border-bottom-right-radius: 5px;
+	  -moz-border-bottom-right-radius: 5px;
+	  border-bottom-right-radius: 5px;
+	  margin-top:-1px;
+		background-repeat: no-repeat;
+		background-attachment: relative;
+		background-position: center; 
+		background-size:cover;
+  }
+  /* Parts styling */
+		table {
+			border-collapse: collapse;
+			vertical-align: middle;
+		}
+		thead, th {
+			border: 1px solid blue;
+		}
+		tbody, tbody td {
+			border: 1px solid blue;
+		}
+		tfoot {
+			border: 0px;
+		}
+		th, td {
+			padding: 5px;
+		}
+		tr:nth-child(even) {
+			background-color: #eeffee;
+		}
+		td {
+			max-width: 350px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+		.tdd {
+			max-width: 100px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}	
+		.image-upload > input {
+			display: none;
+		}
+		/*.updImg {
+			display: block;
+			margin: auto;
+			align: left;*/
+		}
+		.tdimg {
+			width: 15px;
+			max-width: 15px;
+			width-max: 15px;
+		}
+		.thimg {
+			width: 15px;
+			max-width: 15px;
+			width-max: 15px;
+		}
+		.meh {
+			display: inline-block;
+		}
+		.mehh {
+			display: inline-block;
+			min-width:15px;
+			text-align:right;
+		} 
+	/* PCBs styling */
+	.pcbs-container {
+		position:relative;
+		padding:5px;
+		max-width: 895px;
+		/*margin-left:auto;
+		margin-right:auto;*/
+	}
+	.pcb-group {
+		height:auto;
+	}
+	.latest-version {
+		padding-left:5px;
+		line-height:30px;
+		background-color:#E5E5E5;
+		padding-right:20px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;	
+		margin-top:5px;	
+		
+	  -webkit-border-top-right-radius: 5px;
+	  -moz-border-top-right-radius: 5px;
+	  border-top-right-radius: 5px;
+	  -webkit-border-top-left-radius: 5px;
+	  -moz-border-top-left-radius: 5px;
+	  border-top-left-radius: 5px;
+	  -webkit-border-bottom-left-radius: 5px;
+	  -moz-border-bottom-left-radius: 5px;
+	  border-bottom-left-radius: 5px;
+	}
+	.latest-version:hover {
+		background-color:#d2d2d2;
+	}
+	.previous-versions {
+		background:#F4F2F2;
+		margin-left:50px;
+		line-height:30px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	  -webkit-border-bottom-left-radius: 5px;
+	  -moz-border-bottom-left-radius: 5px;
+	  border-bottom-left-radius: 5px;
+	  -webkit-border-bottom-right-radius: 5px;
+	  -moz-border-bottom-right-radius: 5px;
+	  border-bottom-right-radius: 5px;
+	}
+	.singleline {
+		width:100%;
+		padding-left:5px;
+		line-height:30px;
+		padding-right:20px;
+	}
+	.singleline:hover {
+		background:#d2d2d2;
+	}
+	.previous-filler {
+		position:relative;
+		float:left;
+		background-color:#fff;
+		width:45px;
+		height:100%;
+	  -webkit-border-top-right-radius: 5px;
+	  -moz-border-top-right-radius: 5px;
+	  border-top-right-radius: 5px;
+	}
+ </style>
+ <script>
+	function jsFunction2() {
+	  var form = $("#selector2").val();
+	  document.getElementById("searcher2").action=form;
+	}
+ </script>
+<div class="back-link"><%= link_to image_tag("dark_icons/undow.png", :width=>"24", :class=>"link-img"), :back %></div>
+<div class="search-stay">
+	<div class="searchbox" id="searchbox2">
+		<div class="selector" style="vertical-align:top; display: table-cell;">
+			<select id="selector2" onChange="jsFunction2()">
+				<option value="/welcome/search_all">All</option>
+				<option value="/projects">Project</option>
+				<option value="/pcbs">PCB</option>
+				<option value="/parts">Part</option>
+				<option value="/movies">Movie</option>
+				<option value="/books">Book</option>
+			</select> 
+		</div>
+		<form role="search" method="get" action="/welcome/search_all" id="searcher2" style="display: table-cell;">             
+		  <div>
+			<input placeholder="Search Database" type="text" value="" name="search" id="search">
+		  </div>				  
+		  <button type="submit" id="searchsubmit2" title="Search Database">						
+			<%=image_tag("dark_icons/previeww.png", :width=>"25", :style=>"margin-top:4px;")%>						
+		  </button>
+		</form>
+	</div>
+</div>
+<div class="mainz">
+<% @projects = Project.search(params[:search]) %>
+<% if @projects.any? %>
+	<font size="5" color="brown"><strong>Projects <%= @projects.count %></strong></font>
+	<table>
+	 <tr bgcolor="#aaffaa">
+	  <th>Code</th>
+	  <th>Name</th>
+	  <th>Description</th>
+	  <th>Notes</th>
+	 </tr>
+	<% @projects.each do |proj| %>
+		<tr>
+			<td><%= link_to proj.code, proj %></td>
+			<td width="100"><%= link_to proj.name, proj %></td>
+			<td width="100"><%= link_to proj.description, proj %></td>
+			<td width="100"><%= link_to proj.notes, proj %></td>
+		</tr>
+	<% end %>
+	</table>
+<% end %>
+<% @parts = Part.search3(params[:search]) %>
+<% if @parts.any? %>
+	<font size="5" color="brown"><strong>Parts <%= @parts.count %></strong></font>
+	<table class="index-table">
+	<p></p>
+	 <tr bgcolor="#aaffaa">
+	  <th>Number</th>
+	  <th>Name</th>
+	  <th>Package</th>
+	  <th>Description</th>
+	  <th>Type</th>
+	 </tr>
+	<% for part in @parts do %>
+		 <tr valign="top">	
+			<td nowrap><%=link_to part.part_number, part %></td>
+			<td style="max-width:100px;"><%= link_to part.part_name, part %></td>
+			<td><% if part.package_id %>
+					<%= link_to part.package.pk_name, part %>
+					<% end %></td>
+			<td><%=link_to part.p_description, part %></td>
+			<td><% if part.type_id %>
+					<%= link_to part.type.name, part %>
+					<% end %></td>
+		</tr>	
+		<% end %>
+	</table>
+<% end %>
+<% @pcbs = Pcb.search(params[:search]) %>
+<% if @pcbs.any? %>
+<font size="5" color="brown"><strong>PCBs <%= @pcbs.count %></strong></font>
+<div class="container">	
+	<div class="pcbs-container">
+		<% @pcbs.each do |p| %>
+		<div class="pcb-group">
+				<div class="latest-version">
+						<%=link_to image_tag("dark_icons/tools_1.png", :width=>"13", :height=>"13"), edit_pcb_path(p) %>	
+						<%= link_to pcb_path(p) do %>
+					<font size="4" color="green" style="font-family:monospace; margin-left:10px;"><strong><%= p.name_full.ljust(30,' ') %></strong></font>
+					<font size="3" color="brown"   style="margin-left:10px;"><strong> <i>
+						Parts: <font color="black" style="margin-right:15px;"><%= p.parts.count %> </font>
+						Cost: <font color="black"  style="margin-right:28px;">
+							<% if PartPcb.pcb_price(p.id).first.pcb_cost %>
+								<%=  number_to_currency(PartPcb.pcb_price(p.id).first.pcb_cost + (p.cost ? p.cost : 0), :unit => "£") %>
+							<% else %>
+								 £0.00 
+							<% end %> </font>
+					</strong>
+						<font color="black" style="max-width:250px;"><%= p.notes %></font>
+					</font></i>
+				</div>
+			<% end %>
+		</div>
+		<% end %>
+	</div>
+</div>
+<% end %>
+<% @movies = Movie.search(params[:search]) %>
+<% if @movies.any? %>
+	<font size="5" color="brown"><strong>Movies <%= @movies.count %></strong></font>
+	<div class="container">	
+		<div class="project-container">
+			<% @movies.each do |movie| %>
+				<div class="single-project">
+						<div class="pr-header">
+							<font size="2" color="brown">
+								<strong><div class="title"><%= link_to movie.title+" "+movie.num_title.to_s, movie %></div></strong>
+								<div class="grid-links">
+								<%=link_to image_tag("dark_icons/tools_1.png", :width=>"13", :height=>"13"), edit_movie_path(movie), :class=>"tdimg",  :style=>"float:right; margin-right:2px;" %>
+								</div>
+							</font>
+						</div>
+						<div class="pr-body"  style="background-image: url('<%= image_path('/images/'+movie.poster.to_s) %>');">
+							<%= link_to image_tag('/images/'+movie.poster.to_s, :style=>"width:100%; height:100%; opacity:0;"), movie %>
+						</div>
+				</div>
+			<% end %>
+		</div>	
+	</div>
+<% end %>
+<% @books = Book.search(params[:search]) %>
+<% if @books.any? %>
+	<font size="5" color="brown"><strong>Books <%= @books.count %></strong></font>
+	<div class="container">	
+		<div class="project-container">
+			<% @books.each do |book| %>
+				<div class="single-project">
+						<div class="pr-header">
+							<font size="2" color="brown">
+								<strong><div class="title"><%= link_to book.title+" "+book.series.to_s, book  %></div></strong>						
+								<div class="grid-links">
+									<%=link_to image_tag("dark_icons/tools_1.png", :width=>"13", :height=>"13"), edit_book_path(book), :class=>"tdimg",  :style=>"float:right; margin-right:2px;" %>
+								</div>
+							</font>
+						</div>
+						<div class="pr-body"  style="background-image: url('<%= image_path('/images/'+book.cover.to_s) %>');">
+							<%= link_to image_tag('/images/'+book.cover.to_s, :style=>"width:100%; height:100%; opacity:0;"), book %>
+						</div>
+				</div>
+			<% end %>
+		</div>	
+	</div>
+<% end %>
+<% if @projects.empty? and @pcbs.empty? and @parts.empty? and @books.empty? and @movies.empty? %>
+<font size="4" color="brown"><strong>No results for '<%= params[:search] %>'</strong></font>
+<% end %>
+</div>

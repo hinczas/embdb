@@ -1,0 +1,84 @@
+<style>
+table, th, td {
+	border: 1px solid blue;
+	border-collapse: collapse;
+	vertical-align: middle;
+}
+th, td {
+	padding: 5px;
+}
+tr:nth-child(even) {
+	background-color: #FFECC8
+}
+td {
+	max-width: 100px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.tdd {
+	max-width: 100px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}	
+.image-upload > input {
+	display: none;
+}
+.tdimg {
+	width: 15px;
+	max-width: 15px;
+	width-max: 15px;
+}
+.thimg {
+	width: 15px;
+	max-width: 15px;
+	width-max: 15px;
+}
+.meh {
+	display: inline-block;
+}
+</style>
+
+<div class="back-link"><%= link_to image_tag("dark_icons/undow.png", :width=>"24", :class=>"link-img"), :back %></div>
+<div class="list-link"><%= link_to image_tag("dark_icons/view_listw.png", :width=>"24", :class=>"link-img"), projects_path %> </div>
+ <h1>Projects (<%=@projects.count %>) <%= link_to image_tag("dark_icons/plus_1.png", :width=>"20", :height=>"20"), new_project_path %> </h1> 
+	<div class="meh">
+	<%= form_tag import_projects_path, multipart: true do %>
+		<div style="display: table-cell; width:290px;"><%= file_field_tag :file_imp, :class => "file-browser"  %></div>
+		<div style="display: table-cell; padding-left:3px;"><input type="submit" value="Import" class="button"></div>
+	<% end %> 
+	<%= form_tag projects_path, :method => 'get' do %>
+		<div style="display: table-cell; width:290px;"><%= text_field_tag :search, params[:search], :class => "search-tag" %></div>
+		<div style="display: table-cell; padding-left:3px;""><input type="submit" value="Search" class="button" id="blue-button"></div>
+	<% end %>	
+	</div>
+<table>
+    <tr bgcolor="#FFA500">
+      <th><%= sortable "code", "Code" %></th>
+      <th><%= sortable "name", "Name" %></th>
+      <th><%= sortable "version", "Version" %></th>
+      <th><%= sortable "start_date", "Start date" %></th>
+      <th><%= sortable "end_date", "End date" %></th>
+      <th><%= sortable "description", "Description" %></th>
+    </tr>
+
+    <% @projects.each do |project| %>
+      <tr valign="top">
+        <td><%= link_to project.code, project %></td>
+        <td><%= link_to project.name, project  %></td>
+        <td><%= project.version %></td>
+        <td><%= project.start_date %></td>
+        <td><%= project.end_date %></td>
+        <td style="max-width:300px;"><%= project.description %></td>
+        <td class="tdimg"><%=link_to image_tag("dark_icons/tools_1.png", :width=>"13", :height=>"13"), edit_project_path(project) %></td>
+		<td class="tdimg"><%=link_to image_tag("dark_icons/trash.png", :width=>"13", :height=>"13"), project_path(project),
+		method: :delete,
+		data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+</table>
+<%= will_paginate @pcbs %>
+ <% if @projects.count >0 %>
+ <div class="download-link"><%= link_to image_tag("dark_icons/download.png", :width=>"24", :class=>"link-img"), projects_path(format: "tsv") %> </div>
+ <% end %>

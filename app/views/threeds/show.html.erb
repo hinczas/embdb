@@ -1,0 +1,42 @@
+<div class="list-link"><%= link_to image_tag("dark_icons/view_listw.png", :width=>"24", :class=>"link-img"), threeds_path %> </div>
+<div class="back-link"><%= link_to image_tag("dark_icons/undow.png", :width=>"24", :class=>"link-img"), :back %></div>
+<h1>3D <%= @threed.id %></h1>
+<%=link_to image_tag("dark_icons/tools_1.png", :width=>"15", :height=>"15"), edit_threed_path(@threed) %> <%=link_to image_tag("dark_icons/trash.png", :width=>"15", :height=>"15"), threed_path(@threed), method: :delete,
+		data: { confirm: 'Are you sure?' } %> <%= link_to image_tag("dark_icons/plus_1.png", :width=>"15", :height=>"15"), new_threed_path %>
+<table style="width:500px;">
+	<tr>
+		<td>
+			<strong>3D:</strong>
+			<%= @threed.threed %>
+		</td>
+	</tr>
+
+	<tr>
+		<td>
+			<strong>Notes:</strong></br>
+			<%= @threed.notes %>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="5">
+			<b></br>Movies </b>
+			<% if @threed.movies.any? %>
+				(<%= @threed.movies.count %>)</br>
+				<table class="sub-result">
+				<col width=80 >
+				<col width=100 >
+				<col width=200 >
+					 <tr bgcolor="#aaaaFF">
+					  <th>Title</th>
+					  <th>Sub title</th>
+					  <th>Sunopsis</th>
+					  </tr>
+
+						<%= render @threed.movies %> 
+
+					</table>
+			<% else %> (0)
+			<% end %>
+	</table>
+
+

@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  part_number: MyString
+  part_name: MyText
+  p_type: MyString
+  p_description: MyText
+  keywords: MyText
+  voltage: 1.5
+  current: 1.5
+  p_note: MyText
+  p_quantity: 1
+  p_pin_count: 1
+  package_id: 
+  location_id: 
+  manufacturer_id: 
+
+two:
+  part_number: MyString
+  part_name: MyText
+  p_type: MyString
+  p_description: MyText
+  keywords: MyText
+  voltage: 1.5
+  current: 1.5
+  p_note: MyText
+  p_quantity: 1
+  p_pin_count: 1
+  package_id: 
+  location_id: 
+  manufacturer_id: 

@@ -1,0 +1,160 @@
+<div class="list-link"><%= link_to image_tag("dark_icons/view_listw.png", :width=>"24", :class=>"link-img"), movies_path %> </div>
+<div class="back-link"><%= link_to image_tag("dark_icons/undow.png", :width=>"24", :class=>"link-img"), :back %></div>
+<head>
+	<style>	
+		table, th, td {
+			border: 0px solid blue;
+			border-collapse: collapse;
+			vertical-align: top;
+		}
+		th, td {
+			padding: 10px;
+		}
+		tr {
+			vertical-align: top;
+		}
+	</style>
+</head>
+<h1>Movie <%= @movie.id %></h1> 
+<%=link_to image_tag("dark_icons/tools_1.png", :width=>"15", :height=>"15"), edit_movie_path(@movie) %> <%=link_to image_tag("dark_icons/trash.png", :width=>"15", :height=>"15"), movie_path(@movie), method: :delete,
+		data: { confirm: 'Are you sure?' } %> <%= link_to image_tag("dark_icons/plus_1.png", :width=>"15", :height=>"15"), new_movie_path %> </h1>
+		
+<table style="width:500px;">
+	<tr>
+		<td rowspan="8" width="120">
+		 <% if @movie.poster %>
+			<%= image_tag(@movie.poster, :class=>"upl-img")%>
+			<% else %>
+			<%= image_tag("no_photo.png", :class=>"upl-img")%>
+			<% end %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+		  <strong>Title:</strong>
+		  <%= @movie.title %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+		  <strong>Sub title:</strong>
+		  <%= @movie.sub_title %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+		  <strong>Num title:</strong>
+		  <%= @movie.num_title %>
+		</td>
+		<td>
+		  <strong>Part:</strong>
+		  <%= @movie.part %>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+		  <strong>Director:</strong>
+		  <%= @movie.director %>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+		  <strong>Writer:</strong>
+		  <%= @movie.writer %>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+		  <strong>Actors:</strong>
+		  <%= @movie.actor %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+		  <strong>Imdb:</strong>
+		  <% if @movie.imdb %>
+		  <%= link_to @movie.imdb,"http://www.imdb.com/title/#{@movie.imdb}", :target=>"_blank" %>
+		  <% end %>
+		</td>
+		<td>
+		  <strong>Own:</strong>
+		  <%= check_box_tag :m_own , 1, @movie.own ? true : false %>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+		  <strong>Synopsis:</strong>
+		  <%= simple_format(@movie.sunopsis) %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+		  <strong>Last seen:</strong>
+		  <% if @movie.last_seen %>
+		  <%= @movie.last_seen.strftime("%d %B %Y")  %>
+		  <% end %>
+		</td>
+		<td>
+		  <strong>Watch count:</strong>
+		  <%= @movie.watch_count %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+		  <strong>Year:</strong>
+			<% if @movie.myear_id %>
+			<%= link_to @movie.myear.myear, myear_path(:id => @movie.myear.id) %>
+			<% end %>
+		</td>
+		<td>
+		  <strong>Type:</strong>
+			<% if @movie.mtype_id %>
+			<%= link_to @movie.mtype.mtype, mtype_path(:id => @movie.mtype.id) %>
+			<% end %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+		  <strong>Format:</strong>
+			<% if @movie.mformat_id %>
+			<%= link_to @movie.mformat.mformat, mformat_path(:id => @movie.mformat.id) %>
+			<% end %>
+		</td>
+		<td>
+		  <strong>Quality:</strong>
+			<% if @movie.quality_id %>
+			<%= link_to @movie.quality.quality, quality_path(:id => @movie.quality.id) %>
+			<% end %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+		  <strong>Language:</strong>
+			<% if @movie.mlanguage_id %>
+			<%= link_to @movie.mlanguage.mlanguage, mlanguage_path(:id => @movie.mlanguage.id) %>
+			<% end %>
+		</td>
+		<td>
+		  <strong>Subtitle:</strong>
+			<% if @movie.msubtitle_id %>
+			<%= link_to @movie.msubtitle.msubtitle, msubtitle_path(:id => @movie.msubtitle.id) %>
+			<% end %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+		  <strong>3D:</strong>
+			<% if @movie.threed_id %>
+			<%= link_to @movie.threed.threed, threed_path(:id => @movie.threed.id) %>
+			<% end %>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<strong>Genres:</strong>
+			<% @movie.genres.each do |g| %>
+			<%= link_to g.name, genre_path(g) %>;
+			<% end %>
+		</td>
+	</tr>
+</table>

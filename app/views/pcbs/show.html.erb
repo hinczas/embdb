@@ -1,0 +1,377 @@
+<div class="list-link"><%= link_to image_tag("dark_icons/view_listw.png", :width=>"24", :class=>"link-img"), pcbs_path %> </div>
+<div class="back-link"><%= link_to image_tag("dark_icons/undow.png", :width=>"24", :class=>"link-img"), :back %></div>
+<style>	
+	table, th, td {
+		border: 0px solid blue;
+		border-collapse: collapse;
+		vertical-align: top;
+	}
+	th, td {
+		padding: 10px;
+	}
+	tr {
+		vertical-align: top;
+	}
+	td {
+		max-width: 200px;
+		text-overflow: ellipsis;
+	}
+	.container, .log-container, .notes-container, .pr-container {
+		border-radius: 10px;
+		border: 2px solid #73AD21;
+		padding: 7px; 
+		margin-top:5px;
+	}
+	.log-container, .notes-container {
+		width:300px;
+		height:250px;
+		margin-left:7px;
+	}
+	.container {
+		width:600px;	
+		max-width:600px;	
+		height:250px;		
+	}
+	.pr-container {
+		width:925px;
+		height:272px;
+	}
+	.basic {
+		width:200px;
+		margin-top:5px;
+	}
+	.lister {
+		padding: 3px;  
+		max-height: 192px; 
+		width:350px;
+		overflow-y: auto;
+	}
+	.lister2 {
+		padding: 3px;  
+		max-height: 200px; 
+		min-width: 200px;
+		max-width:345px;
+		overflow-y: auto;
+		overflow-x: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+	.lister3 {
+		padding: 3px;  
+		max-height: 230px; 
+		min-width: 200px;
+		overflow-y: auto;
+	}
+	.lister4 {
+		padding: 3px;  
+		max-height: 250px; 
+		height:250px;
+		min-width: 200px;
+		width:918px;
+		overflow-y: auto;
+	}
+	.italic {
+		font-style: italic;
+	}
+	.link_text {
+		max-width:250px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: pre;		
+	}
+	.pcb-photo {
+		margin-left:20px;
+		max-height: 217px;
+		max-width:350px;
+	}			
+	#label2 {
+	  clear: both;
+	  display: block;
+	  font-size: 0.85em;
+	  font-weight: bold;
+	  padding: 0.8em 0 0.2em 0;
+	  user-select: none;
+	}
+
+	.input2, #button2 {
+	  float: left;
+	  font-size: 1em;
+	  padding: 3px 6px;
+	  margin: 0;
+	  border: 1px solid #333;
+	  outline: 0;
+	  box-shadow: none;
+	}
+
+	::-moz-focus-inner { 
+	  padding: 0;
+	  border: 0;
+	}
+
+	.input2 {
+	  width: 150px;
+	  background-color: #fff;
+	  border-right: 0 none;
+	  border-radius: 3px 0 0 3px;
+	}
+
+	#button2 {
+	  position: relative;
+	  background-color: #FFA500;
+	  border-radius: 0 3px 3px 0;
+	  cursor: pointer;
+	  height:27px;
+	}
+
+	.copied::after {
+	  position: absolute;
+	  top: 12%;
+	  right: 110%;
+	  display: block;
+	  content: "copied";
+	  font-size: 0.75em;
+	  padding: 2px 3px;
+	  color: #fff;
+	  background-color: #22a;
+	  border-radius: 3px;
+	  opacity: 0;
+	  will-change: opacity, transform;
+	  animation: showcopied 1.5s ease;
+	}
+
+	@keyframes showcopied {
+	  0% {
+		opacity: 0;
+		transform: translateX(100%);
+	  }
+	  70% {
+		opacity: 1;
+		transform: translateX(0);
+	  }
+	  100% {
+		opacity: 0;
+	  }
+	}
+	.pr-list {
+	   overflow: hidden;
+	   text-overflow: ellipsis;
+	   display: -webkit-box;
+	   -webkit-box-orient: vertical;
+	   -webkit-line-clamp: 5; /* number of lines to show */
+	   line-height: 16px;        /* fallback */
+	   max-height: 85px;       /* fallback */
+	   margin-bottom:10px;
+	}
+	.buttonz { 
+		min-height:0px;
+		box-shadow: none;
+	}
+	.buttonz:active { 
+		min-height:0px;
+		box-shadow: none;
+	}
+	.buttonz:hover { 
+		min-height:0px;
+		box-shadow: none;
+	}
+	#small-button, #small-button2 {
+		cursor:pointer;
+		background: #fff;
+		background-image:url("<%= image_path("dark_icons/shopping basket.png") %>");
+		background-size:cover;
+		width: 11px;
+		height: 11px;
+		padding:0;
+		line-height:11px;
+		overflow:hidden;
+		border:none;
+	}
+</style>	
+<script>
+
+(function() {
+
+    'use strict';
+  
+  // click events
+  document.body.addEventListener('click', copy, true);
+
+    // event handler
+    function copy(e) {
+
+    // find target element
+    var 
+      t = e.target,
+      c = t.dataset.copytarget,
+      inp = (c ? document.querySelector(c) : null);
+      
+    // is element selectable?
+    if (inp && inp.select) {
+      
+      // select text
+      inp.select();
+
+      try {
+        // copy text
+        document.execCommand('copy');
+        inp.blur();
+        
+        // copied animation
+        t.classList.add('copied');
+        setTimeout(function() { t.classList.remove('copied'); }, 1500);
+      }
+      catch (err) {
+        alert('please press Ctrl/Cmd+C to copy');
+      }
+      
+    }
+    
+    }
+
+})();
+
+</script>
+<h1>PCB <%= @pcb.name %></h1> 
+<%=link_to image_tag("dark_icons/tools_1.png", :width=>"15", :height=>"15"), edit_pcb_path(@pcb) %> <%=link_to image_tag("dark_icons/trash.png", :width=>"15", :height=>"15"), pcb_path(@pcb), method: :delete,
+		data: { confirm: 'Are you sure?' } %> <%= link_to image_tag("dark_icons/plus_1.png", :width=>"15", :height=>"15"), new_pcb_path %> </h1>
+<div style="display: table;" >
+	<div class="main-left" style="display: table-cell;">
+		<fieldset class="container">
+		  <legend style="color:blue;font-weight:bold;">Info</legend>
+		  
+		  <div class="info-left" style="display: table-cell;">
+			<p style="white-space: nowrap ;">
+			  <font size="6" color="brown"><%= @pcb.name_full %></font>
+			</p>
+			<% if @pcb.parent_id and Pcb.exists?(@pcb.parent_id) %>
+				<p class="italic">
+				  <font size="2" color="blue" style="margin-left:5px;">Previous v. </font>
+				  <font size="2">
+						<%= link_to Pcb.find(@pcb.parent_id).name_full, Pcb.find(@pcb.parent_id) %>
+					</font>
+				</p>
+			<% end %>			
+			<% if @pcb.children.any? %>
+				<p class="italic">
+				  <font size="2" color="blue" style="margin-left:5px;">Next v. </font>
+				  <font size="2">
+					  <% @pcb.children.each do |child| %>
+						<%= link_to child.name_full, child %>
+					<% end %>
+					
+					</font>
+				</p>
+				<% else %>
+					<font size="2" color="blue" style="margin-left:5px;">Latest </font>
+			<% end %>
+			<p style="margin-top:10px;">
+			  <font size="3" color="brown">Production cost </font> <font size="3" color="black" class="italic"><%= if @pcb.cost; number_to_currency(@pcb.cost, :unit => "£"); else "£0.00"; end %></font>
+			</p>
+			<p style="margin-top:10px;">
+			  <font size="3" color="brown">Total cost </font> <font size="3" color="black" class="italic"><%= if @pcb.pcb_cost; number_to_currency((@pcb.pcb_cost ? @pcb.pcb_cost : 0) +( @pcb.cost ? @pcb.cost : 0), :unit => "£"); else "£0.00"; end %></font>
+			</p>
+				<p>
+					<input class="input2" type="text" id="sch" value="<%= @pcb.sch_file %>" readonly/>
+					<button id="button2" data-copytarget="#sch">copy</button>
+				</p>
+		  </div>
+		  <div class="info-right" style="display: table-cell; align:bottom; vertical-align:bottom;" >
+			  <% if @pcb.photo %>
+			  <%= image_tag(@pcb.photo, :class=>"pcb-photo")%>
+			  <% end %>
+		  </div>
+		</fieldset>
+
+		<fieldset class="container">
+		  <legend style="color:blue;font-weight:bold;">Parts (<%= PartPcb.parts_count(@pcb.id).first.parts_count %>)</legend>
+		  <div style="display: table-cell;">
+			<strong>Owned (<%= PartPcb.parts_owned(@pcb.id).first.parts_owned%>)</strong>
+			<div class="lister2">
+				<% @pcb.parts.owned.each do |p| %>
+					<% if PartPcb.where(pcb_id: @pcb.id, part_id: p.id).take.quantity > if p.p_quantity; p.p_quantity; else; 0; end; %>
+					<p>
+						<div class="link_text" style="display: table-cell; font-family:monospace;"><%= link_to p.pcb_parts, p %></div>
+						<div style="display: table-cell; padding-right:15px;"><%='- ('+p.p_quantity.to_s+')' %></div>
+					</p>
+					<% else %>	
+					<p>	
+						<div class="link_text"style="display: table-cell; font-family:monospace;"><%= link_to p.pcb_parts, p %></div>
+						<div style="display: table-cell; padding-right:15px;"><%='- ('+PartPcb.where(pcb_id: @pcb.id, part_id: p.id).take.quantity.to_s+')' %></div>
+					</p>
+					<% end %>
+				<% end %>
+			</div>
+		  </div>
+		  <div style="display: table-cell;">
+			<strong>Buy list (<%= PartPcb.parts_buy(@pcb.id).first.parts_buy %>)  <%= link_to image_tag("dark_icons/shopping basket.png", :width=>"12", :height=>"12"), add_all_path(:id => @pcb.id) %></strong>
+			<div class="lister2">
+				<% @pcb.parts.each do |p| %>
+					<%= @b_qte = if PartPcb.where(pcb_id: @pcb.id, part_id: p.id).take.quantity > if p.p_quantity; p.p_quantity; else; 0; end; end; %>
+					<% if PartPcb.where(pcb_id: @pcb.id, part_id: p.id).take.quantity > if p.p_quantity; p.p_quantity; else; 0; end; %>
+					<p>
+						<div style="display: table-cell; padding-right:5px;"><%= form_for :shopping_list, url: shopping_lists_path do |f| %>
+							<%= f.hidden_field :item_id, :value => p.id%>
+							<%= f.hidden_field :item_type, :value => "part"%>
+							<%= f.hidden_field :item_quantity, :value=> (PartPcb.where(pcb_id: @pcb.id, part_id: p.id).take.quantity-(if p.p_quantity; p.p_quantity; else; 0; end;)) %>
+								<input type="submit" value="" class="buttonz" id="small-button">
+						<% end %></div>
+						<div class="link_text" style="display: table-cell; font-family:monospace;"><%= link_to p.pcb_parts, p %></div>				
+						<div style="display: table-cell; padding-right:15px;"><%='- ('+(PartPcb.where(pcb_id: @pcb.id, part_id: p.id).take.quantity-(if p.p_quantity; p.p_quantity; else; 0; end;)).to_s+')' %></br></div>
+					</p>
+					<% end %>
+				<% end %>
+			</div>
+		  </div>
+		</fieldset>
+	</div>
+	<div class="main-right" style="display: table-cell;">
+		<fieldset class="notes-container">
+		  <legend style="color:blue;font-weight:bold;">Notes </legend>
+			<fieldset class="basic" style="margin-top:0; width:250px;">
+				<legend style="color:green;">Dates</legend>
+				<p>
+				  <strong><%= @pcb.start_date %></strong> to 
+				  <% if @pcb.end_date %>
+					<strong><%= @pcb.end_date %></strong>
+					<% else %>
+						( In development )
+					<% end %>	
+				</p>
+			</fieldset>
+			<div class="lister3" style="max-height: 175px; margin-top:5px;">
+			<p>
+			  <%= simple_format(@pcb.notes) %>
+			</p>
+			</div>
+		</fieldset>
+		<fieldset class="log-container">
+		  <legend style="color:blue;font-weight:bold;">Log </legend>
+			<div class="lister3">
+				<p>
+					<%= simple_format(@pcb.changelog) %>
+				</p>
+			</div>
+		</fieldset>
+	</div>
+</div>
+
+
+
+<div  style="display: table-row;">
+	<fieldset class="pr-container">
+	  <legend style="color:blue;font-weight:bold;">Projects </legend>
+		<div class="lister4">
+			<% if @pcb.projects.any? %>
+				<% @pcb.projects.each do |project| %>
+					<%=link_to project.name+" "+(project.version ? project.version : '')+" ("+project.code+")", project_path(project) %></br>
+					<ul><p class="pr-list">
+						<%= project.description %>
+					</p></ul>
+				<% end %>
+			<% end %>
+		</div>
+	</fieldset>
+</div>
+
+ <div class="download-link"><%= link_to image_tag("dark_icons/download.png", :width=>"24", :class=>"link-img"), pcb_path(format: "csv") %> </div>
+ 

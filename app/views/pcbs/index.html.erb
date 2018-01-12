@@ -1,0 +1,182 @@
+<style>	
+	table, th, td {
+		border: 1px solid blue;
+		border-collapse: collapse;
+		vertical-align: middle;
+	}
+	th, td {
+		padding: 5px;
+	}
+	tr:nth-child(even) {
+		background-color: #F6E6FF
+	}
+	td {
+		max-width: 100px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+	.tdd {
+		max-width: 100px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}	
+	.image-upload > input {
+		display: none;
+	}
+	.tdimg {
+		width: 15px;
+		max-width: 15px;
+		width-max: 15px;
+	}
+	.thimg {
+		width: 15px;
+		max-width: 15px;
+		width-max: 15px;
+	}
+	.meh {
+		display: inline-block;
+	}
+	.pcbs-container {
+		position:absolute;
+		padding:5px;
+		max-width: 900px;
+	}
+	.pcb-group {
+		height:auto;
+	}
+	.latest-version {
+		padding-left:5px;
+		line-height:30px;
+		background-color:#DADADA;
+		padding-right:20px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;	
+		margin-top:5px;	
+	  -webkit-transition: background .3s;
+		transition:background .3s;
+		
+	  -webkit-border-top-right-radius: 5px;
+	  -moz-border-top-right-radius: 5px;
+	  border-top-right-radius: 5px;
+	  -webkit-border-top-left-radius: 5px;
+	  -moz-border-top-left-radius: 5px;
+	  border-top-left-radius: 5px;
+	  -webkit-border-bottom-left-radius: 5px;
+	  -moz-border-bottom-left-radius: 5px;
+	  border-bottom-left-radius: 5px;
+	}
+	.latest-version:hover {
+		background-color:#d2d2d2;
+	}
+	.previous-versions {
+		background:#F4F2F2;
+		margin-left:40px;
+		line-height:30px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	  -webkit-border-bottom-left-radius: 5px;
+	  -moz-border-bottom-left-radius: 5px;
+	  border-bottom-left-radius: 5px;
+	  -webkit-border-bottom-right-radius: 5px;
+	  -moz-border-bottom-right-radius: 5px;
+	  border-bottom-right-radius: 5px;
+	}
+	.singleline {
+		width:100%;
+		padding-left:10px;
+		line-height:30px;
+		text-overflow: ellipsis;
+	  -webkit-transition: background .3s;
+		transition:background .3s;
+	}
+	.singleline:hover {
+		background:#DADADA;
+	}
+	.corner {
+	  -webkit-border-top-right-radius: 5px;
+	  -moz-border-top-right-radius: 5px;
+	  border-top-right-radius: 5px;		
+	}
+</style>
+<div class="back-link"><%= link_to image_tag("dark_icons/undow.png", :width=>"24", :class=>"link-img"), :back %></div>
+<div class="list-link"><%= link_to image_tag("dark_icons/view_listw.png", :width=>"24", :class=>"link-img"), pcbs_path %> </div>
+ <h1>PCBs (<%=@pcbs.count %>) <%= link_to image_tag("dark_icons/plus_1.png", :width=>"20", :height=>"20"), new_pcb_path %> </h1> 
+<div class="meh">
+	<%= form_tag import_pcbs_path, multipart: true do %>
+		<div style="display: table-cell; width:290px;"><%= file_field_tag :file, :class => "file-browser"  %></div>
+		<div style="display: table-cell; padding-left:3px;"><input type="submit" value="Import" class="button"></div>
+	<% end %> 
+	<%= form_tag pcbs_path, :method => 'get' do %>
+		<div style="display: table-cell; width:290px;"><%= text_field_tag :search, params[:search], :class => "search-tag" %></div>
+		<div style="display: table-cell; padding-left:3px;""><input type="submit" value="Search" class="button" id="blue-button"></div>
+	<% end %>	
+</div>
+
+<div class="pcbs-container">
+Sort by <%= sortable "id", "ID" %> <%= sortable "name", "Name" %>
+
+<% @pcbs.each do |p| %>
+<div class="pcb-group">
+	<% if p.children.empty? %>
+		<div class="latest-version">
+				<%=link_to image_tag("dark_icons/tools_1.png", :width=>"13", :height=>"13"), edit_pcb_path(p) %>	
+				<%= link_to pcb_path(p) do %>
+			<font size="4" color="green" style="font-family:monospace; margin-left:10px;"><strong><%= p.name_full.ljust(30,' ') %></strong></font>
+			<font size="3" color="brown"   style="margin-left:10px;"><strong> <i>
+				Parts: <font color="black" style="margin-right:15px;"><%= p.parts.count %> </font>
+				Cost: <font color="black"  style="margin-right:28px;">
+					<% if PartPcb.pcb_price(p.id).first.pcb_cost %>
+						<%=  number_to_currency(PartPcb.pcb_price(p.id).first.pcb_cost + (p.cost ? p.cost : 0), :unit => "£") %>
+					<% else %>
+						 £0.00 
+					<% end %> </font>
+			</strong>
+				<font color="black" style="max-width:250px;"><%= p.notes %></font>
+			</font></i>
+			<% end %>
+		</div>
+		
+		<% if p.parent %><div class="breaker" style="float:left; background:#DADADA; width:40px; height:30px;">
+						<div class="corner" style="background:#fff; width:40px; height:30px;"></div>
+		</div><% end %>
+		<% @tmp = p %>
+			<div class="previous-versions">
+				<% loop do %>
+				  <% break if @tmp.parent.nil? %>
+						 <div class="breaker2" style="float:left; background:#DADADA; width:5px; height:30px; margin-right:5px;"></div>
+						 <div class="singleline">
+							 <%=link_to image_tag("dark_icons/tools_5.png", :width=>"13", :height=>"13"), edit_pcb_path(@tmp.parent) %>	 
+							<%= link_to pcb_path(@tmp.parent) do %>
+							 <font size="2" color="brown" style="margin-left:10px;">
+								<font size="3" color="green" style="font-family:monospace; margin-right:10px;"> <%= @tmp.parent.version %></font>
+								 <i>									
+								Parts: <font color="black"  style="margin-right:15px;"><%= @tmp.parent.parts.count %> </font>
+								Cost: <font color="black"  style="margin-right:28px;">
+									<% if PartPcb.pcb_price(@tmp.parent.id).first.pcb_cost %>
+										<%=  number_to_currency(PartPcb.pcb_price(@tmp.parent.id).first.pcb_cost + (@tmp.parent.cost ? @tmp.parent.cost : 0), :unit => "£") %>
+									<% else %>
+										£0.00 
+									<% end %> </font>
+								<font color="black" style="max-width:250px;"><%= @tmp.parent.notes %></font>
+								</i>
+							</font>
+							<% end %>
+						</div>
+					<% @tmp = @tmp.parent %>
+				<% end %>
+				<% if p.parent %>
+				<div class="breaker2" style="float:left; background:#DADADA; width:100%; height:5px; margin-top:-5px;"></div>
+		<% end %>				
+		</div>
+	<% end %>
+</div>
+<% end %>
+</div>
+<%= will_paginate @pcbs %>
+ <% if @pcbs.count >0 %>
+ <div class="download-link"><%= link_to image_tag("dark_icons/download.png", :width=>"24", :class=>"link-img"), pcbs_path(format: "tsv") %> </div>
+ <% end %>

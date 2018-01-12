@@ -1,0 +1,21 @@
+<style>
+	.description {
+		max-width: 400px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+	.description2 {
+		max-width: 500px;
+		min-width:200px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+</style>	
+ <tr valign="top">	
+	<td nowrap class="sub-td"><%=link_to part.part_number, part_path(part) %></td>
+	<td nowrap class="sub-td" align="right"><%=part.p_quantity %></td>
+	<td nowrap class="sub-td" align="right"><%=part.part_name %></td>
+	<td nowrap class="description2"><%=part.p_description %></td>
+	</tr>

@@ -1,0 +1,154 @@
+	<style>	
+		table {
+			border-collapse: collapse;
+			vertical-align: middle;
+		}
+		thead, th {
+			border: 1px solid blue;
+		}
+		tbody, tbody td {
+			border: 1px solid blue;
+		}
+		tfoot {
+			border: 0px;
+		}
+		th, td {
+			padding: 5px;
+		}
+		tr:nth-child(even) {
+			background-color: #eeffee;
+		}
+		td {
+			max-width: 350px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+		.tdd {
+			max-width: 100px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}	
+		.image-upload > input {
+			display: none;
+		}
+		/*.updImg {
+			display: block;
+			margin: auto;
+			align: left;*/
+		}
+		.tdimg {
+			width: 15px;
+			max-width: 15px;
+			width-max: 15px;
+		}
+		.thimg {
+			width: 15px;
+			max-width: 15px;
+			width-max: 15px;
+		}
+		.meh {
+			display: inline-block;
+		}
+		.mehh {
+			display: inline-block;
+			min-width:15px;
+			text-align:right;
+		} 
+	  .loader-all {
+			border: 4px solid #f3f3f3; /* Light grey */
+			border-top: 4px solid #4C7EAF; /* Blue */
+			border-radius: 50%;
+			width: 15px;
+			height: 15px;
+			animation: spin 2s linear infinite;
+		}
+		@keyframes spin {
+			0% { transform: rotate(0deg); }
+			100% { transform: rotate(360deg); }
+		}
+		.clickable-row {
+			cursor:pointer;
+		}
+	</style>
+<div class="list-link"><%= link_to image_tag("dark_icons/view_listw.png", :width=>"24", :class=>"link-img"), parts_path %> </div>
+<div class="back-link"><%= link_to image_tag("dark_icons/undow.png", :width=>"24", :class=>"link-img"), :back %></div>
+ <h1>Parts (<%=@parts.count %>) <%= link_to image_tag("dark_icons/plus_1.png", :width=>"20", :height=>"20"), new_part_path %> </h1> 
+<div class="meh">
+	<%= form_tag import_parts_path, multipart: true do %>
+		<div style="display: table-cell; width:290px;"><%= file_field_tag :file, :class => "file-browser"  %></div>
+		<div style="display: table-cell; padding-left:3px;""><input type="submit" value="Import" class="button"></div>
+	<% end %>
+	<%= form_tag parts_path, :method => 'get' do %>
+		<div style="display: table-cell; width:290px;"><%= text_field_tag :search, params[:search], :class => "search-tag" %></div>
+		<div style="display: table-cell; padding-left:3px;"><input type="submit" value="Search" class="button" id="blue-button"></div>
+	<% end %>
+</div>
+<table class="index-table">
+<p></p>
+ <tr bgcolor="#aaffaa">
+  <th><%= sortable "part_number", "Number" %></th>
+  <th><%= sortable "part_name", "Name"  %></th>
+  <th>Package</th>
+  <th>Description</th>
+  <th><%= sortable "type_id", "Type"  %></th>
+  <th><%= sortable "p_price", "Price"  %></th>
+  <th><%= sortable "p_quantity", "Quantity"  %></th>
+  <th>Cart</th>
+  <th>Doc</th>
+ </tr>
+<%= form_for :shopping_list, url: shopping_lists_path do |f| %>
+	<% for part in @parts do %>
+	 <tr valign="top">	
+		<td nowrap style="max-width:150px;" class='clickable-row' data-href='<%= part_path(part) %>'><%=link_to part.part_number, part %></td>
+		<td style="max-width:150px;" class='clickable-row' data-href='<%= part_path(part) %>'><%=part.part_name %></td>
+		<td class='clickable-row' data-href='<%= part_path(part) %>'><% if part.package_id %>
+				<%= part.package.pk_name %>
+				<% end %></td>
+		<td class='clickable-row' data-href='<%= part_path(part) %>'><%=part.p_description %></td>
+		<td class='clickable-row' data-href='<%= part_path(part) %>'><% if part.type_id %>
+				<%= part.type.name %>
+				<% end %></td>
+		<td class="price" align="right" class='clickable-row' data-href='<%= part_path(part) %>'><%=number_to_currency(part.p_price, :unit => "£") %></td>
+		<td>
+			<%= link_to image_tag("dark_icons/minus.png", height: "13"), del_qte_path(:id => part.id) %>
+			<div class="mehh"><%= part.p_quantity%></div>			
+			<%= link_to image_tag("dark_icons/plus.png", height: "13"), add_qte_path(:id => part.id) %>
+		</td>
+		<td>
+			<%= f.hidden_field :item_add_all, :value => "1" %>
+			<%= f.hidden_field :item_ids, :value => part.id, multiple: true %>
+			<%= f.hidden_field :item_type, :value => "part"%>
+			<%= f.number_field("item_quantity_"+part.id.to_s, :value=> "0", min: "0", :class=>"ultra-small-text") %>	
+		</td>
+		<td class="tdd"><% if part.file_1 %>
+			<%= link_to part.file_1 , '/uploads/'+part.file_1 %>
+			<% end %></td>
+		<td class="tdimg"><%=link_to image_tag("dark_icons/tools_1.png", :width=>"13", :height=>"13"), edit_part_path(part) %></td>
+	</tr>	
+	<% end %>
+
+	<tfoot border="0">
+		<% if @parts.any? %>
+			<tr class="noborder">
+				<td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+				<td align="center"><input type="submit" value="Add" class="button" id="add-button">
+				</td>
+			</tr>
+		<% end %>		
+	</tfoot>			
+<% end %>
+</table>
+<%= will_paginate @parts %>
+ <% if @parts.count >0 %>
+ <div class="download-link"><%= link_to image_tag("dark_icons/download.png", :width=>"24", :class=>"link-img"), parts_path(format: "tsv") %> </div>
+ <% end %>
+
+<script>
+$(document).ready(function($) {
+    $(".clickable-row").click(function() {
+        window.location = $(this).data("href");
+    });
+});
+</script>

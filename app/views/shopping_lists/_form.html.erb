@@ -1,0 +1,35 @@
+<style>
+.field {
+	display:table-cell;
+	padding-left:5px;
+}
+</style>
+
+<%= form_for(@shopping_list) do |f| %>
+  <% if @shopping_list.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@shopping_list.errors.count, "error") %> prohibited this shopping_list from being saved:</h2>
+
+      <ul>
+      <% @shopping_list.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label "Item ID" %><br>
+	 <%= f.number_field(:item_id, :value=> "0", min: "0", :step=>1, :class=>"ultra-small-text") %>
+  </div>
+  <div class="field">
+    <%= f.label :item_type %><br>
+    <%= f.text_field :item_type %>
+  </div>
+  <div class="field">
+    <%= f.label :item_quantity %><br>
+	 <%= f.number_field(:item_quantity, :value=> "0", min: "0", :step=>1,  :class=>"ultra-small-text") %>
+  </div>
+<div class="float-save"><input type="submit" value="Save" class="button"></div>
+<div id="top-save"><input type="submit" value="" class="button"></div>
+<% end %>

@@ -1,0 +1,99 @@
+<% if (session[:user_id] && @current_user.level == 0)  or (params[:id] && User.find(params[:id]).level!=0) %>
+<div class="back-link"><%= link_to image_tag("dark_icons/undow.png", :width=>"24", :class=>"link-img"), :back %></div>
+<div class="list-link"><%= link_to image_tag("dark_icons/view_listw.png", :width=>"24", :class=>"link-img"), users_path %> </div>
+<h1>User <%= @user.username %></h1>
+<%=link_to image_tag("dark_icons/tools_1.png", :width=>"15", :height=>"15"), edit_user_path(@user) %> 
+<% if User.find(params[:id]).level!=0 %> 
+	<%= link_to image_tag("dark_icons/trash.png", :width=>"15", :height=>"15"), user_path(@user), method: :delete,
+		data: { confirm: 'Are you sure?' } %> 
+<% end %>
+<table>
+	<tr>
+		<td width="100">
+		  <strong>Username:</strong>
+		</td>
+		<td>
+		  <%= @user.username %>
+		</td>
+	</tr>
+	<tr>
+		<td width="100">
+		  <strong>Name:</strong>
+		</td>
+		<td>
+		  <%= @user.name %>
+		</td>	
+		<td>
+		  <%= @user.middle_name %>
+		</td>
+		<td>
+		  <%= @user.surname %>
+		</td>
+	</tr>
+		<td>
+		  <strong width="100">Birth date:</strong>
+		</td>
+		<td>
+		  <%= @user.birth_date %>
+		</td>
+	</tr>
+	<tr>
+
+		<td>
+		  <strong width="100">Address:</strong>
+		</td>
+		<td>
+		  <%= @user.address %>
+		</td>
+
+	</tr>
+	<tr>
+		<td>
+		  <strong width="100">Mobile:</strong>
+		</td>
+		<td>
+		  <%= @user.mobile %>
+		</td>
+
+	</tr>
+	<tr>
+		<td>
+		  <strong width="100">Email:</strong>
+		</td>
+		<td>
+		  <%= @user.email %>
+		</td>
+
+	</tr>
+	<tr>
+		<td>
+		  <strong width="100">Notes:</strong>
+		</td>
+		<td>
+		  <%= @user.notes %>
+		</td>
+	</tr>
+	<tr><td></br></td></tr>
+	<tr>
+		<td colspan="5">
+			<% if @user.books.any? %>
+				<strong>Books (<%= @user.books.count %>)</br></strong>
+				<table class="sub-result">
+					 <tr bgcolor="#aaFFaa">
+					  <th>Title</th>
+					  <th>Sub - title</th>
+					  <th>Year</th>
+					  <th>Synopsis</th>
+					  </tr>
+
+						<%= render @user.books %> 
+
+					</table>
+			<% else %> (0)
+			<% end %>
+		</td>
+	</tr>
+</table>
+<% else %>
+<%= controller.redirect_to :denied %>
+<% end %>
