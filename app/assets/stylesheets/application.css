@@ -126,7 +126,7 @@
 	#small-button, #small-button2 {
 		cursor:pointer;
 		background: #fff;
-		background-image:url("<%= image_path("dark_icons/shopping basket.png") %>");
+		background-image:url("<%= image_path('dark_icons/shopping basket.png') %>");
 		background-size:cover;
 		width: 11px;
 		height: 11px;
