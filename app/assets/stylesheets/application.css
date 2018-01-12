@@ -137,7 +137,7 @@
 	}
 	#small-button2 {
 		cursor:default;
-		background-image:url("<%= image_path("dark_icons/shopping_basket.png") %>");		
+		background-image:url("<%= image_path('dark_icons/shopping_basket.png') %>");		
 	}
 	#button-org {
 		cursor:pointer;
