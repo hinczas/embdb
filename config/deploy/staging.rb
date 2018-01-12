@@ -59,10 +59,3 @@
 #     auth_methods: %w(publickey password)
 #     # password: "please use keys"
 #   }
-
-server '54.171.112.193', user: 'ubuntu', roles: %w{web app db},
-ssh_options: {
-keys: %w(/home/hinczas/.ssh/deploy.pub),
-forward_agent: false,
-auth_methods: %w(publickey)
-}
