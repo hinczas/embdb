@@ -13,7 +13,10 @@ port        ENV.fetch("PORT") { 3000 }
 
 # Specifies the `environment` that Puma will run in.
 #
-environment ENV.fetch("RAILS_ENV") { "development" }
+environment ENV.fetch("RAILS_ENV") { "production" }
+
+# Set up socket location
+bind "unix://#{shared_dir}/tmp/sockets/puma.sock"
 
 # Specifies the number of `workers` to boot in clustered mode.
 # Workers are forked webserver processes. If using threads and workers together
