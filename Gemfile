@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 
+gem 'nokogiri', '>= 1.8.1'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5'
 # Use sqlite3 as the database for Active Record
@@ -47,21 +48,22 @@ gem 'owlcarousel-rails'
 
 gem 'bcrypt', :require => 'bcrypt' 
 
+
 # END
 
 # AWS setup start
 
-gem 'figaro'
-gem 'puma'
-
-group :development do
-  gem 'capistrano'
-  gem 'capistrano3-puma'
-  gem 'capistrano-rails', require: false
-  gem 'capistrano-bundler', require: false
-  gem 'capistrano-rvm'
-end
-
+# gem 'figaro'
+# gem 'puma'
+# 
+# group :development do
+#   gem 'capistrano'
+#   gem 'capistrano3-puma'
+#   gem 'capistrano-rails', require: false
+#   gem 'capistrano-bundler', require: false
+#   gem 'capistrano-rvm'
+# end
+# 
 # AWS end
 
 group :development, :test do
