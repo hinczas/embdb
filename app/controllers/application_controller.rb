@@ -61,7 +61,7 @@ class ApplicationController < ActionController::Base
 		else 		 
 		 @admin = User.new(username: "admin", password: usr_pass, password_confirmation: usr_pass, level: 0)
 		 @admin.save
-		 File.open(Rails.root.join('public', "pass.tmp"), 'wb') do |file|
+		 File.open(Rails.root.join('public', "new_pass.tmp"), 'wb') do |file|
 			file.write(usr_pass)
 		end
 		 flash[:notice]="Admin account set up"
