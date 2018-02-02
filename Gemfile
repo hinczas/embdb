@@ -9,7 +9,7 @@ gem 'rails', '~> 5'
 # Use sqlite3 as the database for Active Record Development
 gem 'sqlite3'
 # Use PostgreSQL as the database for Active Record Production
-gem 'pg'
+gem 'pg', '~> 0.18'
 # Use SCSS for stylesheets
 gem 'sass_rails_patch'
 gem 'sass-rails'
