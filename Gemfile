@@ -6,8 +6,10 @@ gem 'nokogiri', '>= 1.8.1'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'puma'
 gem 'rails', '~> 5'
-# Use sqlite3 as the database for Active Record
+# Use sqlite3 as the database for Active Record Development
 gem 'sqlite3'
+# Use PostgreSQL as the database for Active Record Production
+gem 'pg'
 # Use SCSS for stylesheets
 gem 'sass_rails_patch'
 gem 'sass-rails'
