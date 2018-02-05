@@ -42,7 +42,7 @@ def self.all_csv
 	  left join packages pk on pk.id=p.package_id
 	  left join manufacturers m on m.id=p.manufacturer_id
 	  where item_type='part'
-	  group by i.item_id, p.part_name, p.part_number, p.p_price, pk.pk_name, p.p_quantity, p.p_type
+	  group by i.item_id, p.part_name, p.part_number, p.p_price, p.p_note, m.m_name, m.m_full_name, pk.pk_name, p.p_quantity, p.p_type
 	SQL
 
 self.find_by_sql(query)
