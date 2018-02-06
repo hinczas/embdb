@@ -45,7 +45,19 @@ class ApplicationController < ActionController::Base
 	def check_permissions(id="")
 		id = params[:id].to_f
 		level = User.find(session[:user_id]).level
-		if session[:user_id]==id or level < 2
+		if session[:user_id]==id or level < 2 
+			return true
+		else 
+			redirect_to :back
+			flash[:error]="You do not have the permissions"
+			return false 
+		end
+	end
+	
+	def check_allowed(id="")
+		id = params[:id].to_f
+		level = User.find(session[:user_id]).level
+		if session[:user_id]==id or level < 1 
 			return true
 		else 
 			redirect_to :back

@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 	#skip_before_action :authenticate_user, :only => [:new, :create]
 	before_action :check_admin, :only => [:new, :create]
 	before_action :set_user, only: [:show, :edit, :update, :destroy]
-	before_action :check_permissions, only: [:show, :edit, :update, :destroy]
+	before_action :check_allowed, only: [:show, :edit, :update, :destroy]
   # GET /users
   # GET /users.json
   def index

@@ -1,3 +1,379 @@
+0.36.4
+	 * Users are no longer able to change/see another user details
 0.36.3
-	* Fixed New Book in Grid view pointing to New Movie
-	* Removed permissions and link for new user registration
+	 * Fixed New Book in Grid view pointing to New Movie
+	 * Removed permissions and link for new user registration
+0.36.2
+	 * Deployed on AWS
+0.36.0
+	 New
+	 * BOM for projects
+	 * BOM for PCB
+	 * Production READY
+	 Improved
+	 * UI improvements
+	 * Fixed admin creation
+	 * Fixed users deletion breaking books
+	 * MAJOR BUG of infinite loop when first PCB version is set as new version of Latest version
+0.35.0
+	 New
+	 * User authentication
+	 * Owner for books
+0.34.3
+	 * Fixed background tile issue for projects
+	 * Implemented live search for PCBs parts
+	 * Added search all from main index page
+0.34.2
+	 * part description change to white space break
+	 * PCB cost increase space between verionb
+	 * part_list show white spaces so that quantity is aligned on right
+	 * location: show; wider name in parts list
+	 * packages / manufacturers / type / etc: show: missing column in parts list
+	 * sub_part lists quantity and name right adjust and name auto width
+	 * sub_part lists quantity do not recalculate used ones. just show quantity
+	 * export button for shopping list
+	 * Projects fix background
+	 * project: edit: fix delete photos location
+	 * List of PCBs (in project view) add PCB version to the PCB name
+	 * In lists, e.g. list of parts in a project, change the + icon to a little cart/basket, so its more obvious its adding to the shopping list
+	 * Open new link in the same window (I keep opning too many tabs all the time)
+	 * Sitemap - make wa bit wider, so the "shooping list" fits in it.
+	 * sitemap - move projects just above PCB
+	 * sitemap - remove the "sitemap" text from the list
+	 * Component view - replace the ID number with Part Number (should still say "Component" then the number)
+	 * Location view - replace location ID number with Location name
+	 * Package view - replace package ID number with package Name
+	 * Manufacturer view - replace Manufacturer ID number with Manufacturer full name
+	 * Types view - replace type ID number with type name
+	 * Prevent parts being added to shopping list with quantity==0
+	 * Remove the "bin" icon from all index lists (projects, PCBs, parts, locations, etc) Delete will only be accessible when viewing a particular item. for safety
+	 * Important. Components list - make the NUMBER column auto adjusting to the longest name. whether it has spaces or not
+	 * Cannot open shopping basket (even once parts were added to it)
+	 * part quantity make it input updatable
+	 * Shopping list update all / selected for buy quantity
+	 * Parts list add all to basket
+	 * Shopping list remove from list button
+	 * Welcome#index: Project now fits drop down menu
+	KNOWN ISSUES:
+	 * Parts: Index: Cannot add to basket if pagination is active (i.e. when user browses any other page than first)
+0.34.0
+	 * Introduced NEW Shopping cart
+	 * Parts: Index / Show: add items to cart
+	 * Pcb: Show: add parts to basket (all or single)
+	 * Project: Show: add parts to cart
+	 * Redesigned Welcome#Index
+	KNOWN ISSUES:
+	 * Cannot mark parts as bought
+	 * Cannot remove parts from shopping cart
+	 * Projects: background image broken.
+0.33.0
+	 * Component quantity used counter - it is near impossible and too difficult to show how many parts are used across all projects and PCBs. THe list of projects and PCB's the part is in is enough. I.e. remove the "Used: xx" from the part view.
+	 * In part view, where it says location, remove how many that location has available of this part (since it calculates negative numbers for not owned parts)
+	 * Location view - the part number column should be autoqidening for longer part names. THe quantity should be in the next column, not in the brackets.
+	 * Further update to add separate components to a project, in addition to PCBs, so that hardware pieces not part of any PCB can be added.
+	 * List of parts in a project will list all the separately added parts, not ones from PCB
+	 * PCB list - make another column for version, do not show in the PCB name (no longer right adjust the name). This pending on the tree view.
+	 * Bottom of components list - make the Page Next, 1, 2, ... Previous text bigger and a bit more separated. E.g. 1 is further away from 2 and so on (easier to click)
+	 * PCB view - if a next version exists, show a link, just like the previous version is shown (if not, show "current ver.")
+	 * Project edit - possible to have an edit window to choose which part of the picture is the background, such as is with avatars for some websites. Basically one could choose the central part to show. Currently it stretches the picture so that only the corner is shown, which actually doesn't convey much about the project.
+	 * PCB view - make the location without a frame (just like in Project view)
+	 * PCB - add the production costs. this will be shown above Total costs in PCB view (under PCB name) Total cost will include this value
+	 * Updated costs for PCB
+	 * updated costs for Projects
+	 * parts list (in PCB view for example) parts with longer names  overrun into the package column (see picture)
+0.32.2
+	 * PCB view - show PCB version just after the PCB name (same font and size), no space, no description
+	 * PCB naming system: Name is sandalone, repeats amongs all PCB of the same type. The version, a separate field also typed in manually. THe previous version would be a smart thing, it would search all PCBs and from the ones with the same name it would select the most recent previous version. THis is to be manually overrideable in cases where there are parallel PCB branches, e.g. 1C and 2A.
+	 * All - add another save button to the top of window, (next to the 3 ones, if possible)
+	 * Project view - long project names split into two lines. the second line overlaps the first line and letter are joined.
+	 * Project view - long project names - the end date is split into two lines and the day is separated from month and year. Possible to make the entire END date be on the next line?
+	 * Creating new location -it pops up a note saying "location already exists. Editing instead" But still created the location no problem and shows it's view page, not editing.
+	 * When editing PCB - no way to delete a photo (no tick box), it just says there is no photo
+	 * Component price - the number of significant figures must be more than 2 (i.e. prices may be as varied as 0.0001)
+	 * Component properties - current, voltage etc should be in numbers more detailed that 0.00. e.g. current can be 0.001 but it wants rounded to 0.00.
+	 * change welcome index page background
+	 * change Project background and layout
+	 * changed welcome index project logo
+	 * Getting ready for updated in 0.33.0
+0.32.1
+	 * Project: Show: PCB versioning removed
+	 * Project: Show: log shows Project instead of PCB when created
+	 * Project: Show / Edit / Create : version number removed
+	 * Project: Edit / Create : change log behaviours (date taken of actual save)
+	 * Project: Edit / Create : PCB quantity can now be 0
+	 * Project / Movies / Books : Index: tiles work as links
+	 * Project / Movies / Books : Index: Tile header height adjusted to hide 3rd row of text
+	 * Project / Movies / Books : Index: Tile view: centre the pictures horizontally and vertically, without stretching;
+	 * Movies / Books : Index: grid / list layout buttons moved up on header
+	 * PCB / Project : Show: - cost shows as £0.00 instead of blank
+	 * PCB: Show: dates are bold (the word "to" remains not bold)
+	 * PCB: Show: Files frame renamed to "Location" and removed the "Folder:" text within it
+	 * PCB: Show: PCB is not a new version of something (i.e. the prev ver is empty) do not show the "Previous v." text under name
+	 * All: Add trailing zeros for prices (£12.0 --> £12.00)
+	 * All: Scrollbars are now 9mm thick
+	 * All: Index: Right adjusted all price columns
+	 * Welcome: Index: add Projects to search drop down menu
+	 
+0.32.0
+	Improvements
+	 * background on the tile view isn't as good as I want it to be
+	 * aspect ratio of the background image to be conserved
+	 * make save button larger
+	 * add a next/previous <> in the picture slide view
+	 * site map doesnt work on home screen
+	 * project edit - pictures align in line wrap to grid
+	 * open files in separate tab (e.g. datasheets or files)
+	 * tile view - edit remove icons disappear when title is long
+	 * ***PCB - instead of keeping two locations for SCH and BRD, keep just PCB location (a folder)****
+	 * Match projects list font and size to be the same as the PCB views
+	 * latest PCB are highlighted 
+	Added 
+	 * Project: when creating adding project you can specify number of PCBc included
+	KNOWN BUGS:
+	 * Used Parts availability and to buy as well as PCB counts are showing wrong sums
+0.31.2
+	Improvements
+	 * UI improvements
+	   - Introduced grid / list view for movies and books
+	 * Bug fixes
+	 * rearrange boxes as in email to make it more compact and save some space
+	Added:
+	 * Developer option (for advanced users)
+0.31.1
+	Improvements
+	 * UI improvements
+	 * Bug fixes
+0.31.0
+	Improvements
+	 * Projects are now official
+	 * UI improvements
+	 * Bug fixes
+0.30.0_RC1
+	ADDED:
+	 * Project
+0.20.8
+	Improved
+	 * PCB deletion releases used Parts (bug fix)
+	 * Part deletion prohibited if part used in PCB (feature upgrade)
+	 * Fix price shown for PCB (double price bug)
+0.20.7
+	Improved 
+	 * Back to top changed to visually match standard across the website
+	 * p_type doesnt export in buy_parts list
+	 * cost doesn''t export in all_pcbs list
+	 * to buy parts must have a column with notes for each part and no pincount
+	 * Minor bug fixes
+0.20.6
+	Improved:
+	 * Shopping list link in 'Site map'
+	Added:
+	 * Float notification system for each action
+	 * Back to top on all pages
+0.20.4
+	Improved:
+	 * UI tweaks:
+	   - buttons and drop down lists no longer have annoying border when clicked on
+	   - new background on welcome page
+	   - standardised colours
+	   - tables' width adjusted
+	 * Performance tweaks
+	   - cannot download file if list is empty
+	   - various improvement to avoid crashing
+	Added:
+	 * Export to csv added for following 9entire table export)
+	   - PCBs
+	   - Components
+	   - Books
+	   - Movies
+0.20.3
+	Improved:
+	 * don't show home button on home page
+	 * Error when saving files for PCBs
+	 * copy button now works
+	 * Export shopping list
+	 * Minor bug fixed and UI improvements
+0.20.1
+	Improved:
+	 * pcb - sch and brd files path only, not a copy in database
+	 * maximum pcb part count to be 1000 instead of 100
+	 * numbers cannot be negative. (price, quantity, etc)
+	 * keep aspect ratio for pcb pictures (scale to largest dimension)
+	 * home, list back floating icons on top (like save on bottom) - big round somethings (save still rectangle)
+0.20.0
+	Improved:
+	 * "PCB - adding parts with search box
+	 * Suggestion for parts search in PCB - not a complete search winow, but a filter that selects type and shows only parts of the selected type. E.g. drop down menu. I click Resistors and it lists all resistors I have and then I choose as normal. Then select Capacitors and again..."
+	 * pcb - dsheet -> datasheet
+	 * pcb - change datasheet and library into schematics and board
+	 * pcb - open file defaults to pdf
+	 * pcb modify - new part - change word "new" to a + icon
+	 * pcb modify - remove option to provide URL - this will always be local drive
+	 * pcb new - in "previous version" only put name - no need for version since name always has version in it
+	 * pcb list view - add £ symbol to price
+	 * all vies  - home, back <list etc buttons separated more
+	 * all views - change date and time stamps to say month as 3 letters instead of digits, e.g. Jun instead of 06
+	 * pcb view - parts don't scroll in the list
+	 * pcb edit-create - wen clicking a part name in the parts list, open part in new window
+	 * add picture to PCB view (importable from local or, preferably, from clipboard)
+	 * pcb view - notes move where log is. move log under notes (same column) put picture where the notes were
+	 * pcb view - put dates into the notes section. instead of dates pt location (same as components' location)
+	 * pcb view/edit - log entries can only be added and so that the date andtime are a property (unchangeable) so that I can't delete all logs by accident
+	 * The above more notes: then the log view would have the date and time then colon then the log note, e.g. "2016-07-25 22:23:12:  edit."
+	 * pcb modify - if selected file for sch or brd doesnt have the same name as the pcb name - make popup that filename doesnt match pcb name
+	 * pcb view - if part quantity is less than used, put remainder as to buy
+	 * home - in components "section" add a submenu "shopping list" that will list all components to buy with quantities
+	 * pcb modify/view - parts to be listed such that name and package are arranged in columns so that all names are in line and all packages are inline
+0.19.7
+	Improved:
+	 * Part: new: default values 0 for numerical fields
+	 * Index: Layout fixed
+	 * Minor bug fixes
+	Added:
+	 * Index: search for parts, movies, books, pcbs from single place
+0.19.6
+	Improved:
+	 * All: Look and feel improved
+	 * PCB: create: - parts list make wider, because some parts are too long and the quantity overlaps to the next line
+	 * PCB: create: - parts list when scrolling through parts, the top of list overlaps the top end of the table/window
+	 * PCB: create: - parts list showing part name and package instead of part number (part number is a bit meaningless sometimes)
+	 * PCB: create: - parts list make parts clickable and it opens a new window with this part (to check details)
+	 * Movies:/PCB: Minor bug fixes
+	Added:
+	 * All: Google, Farnell, IMDB search added
+0.19.2
+	Improved:
+	 * PCB: Price is a virtual field. Any change in parts are automatically shown in pcb
+	 * Parts:/PCB:/Locations: Used / Available parts listing improved
+	 * PCB: Show: Removed version field
+	Add:
+	 * PCB: when part is used in a PCB, decrease its quantity by the amount used in PCB
+	 * Parts: Show: show list of PCBs that contain that part (with used quantity)
+	 * PCB: Add files to PCB
+	 * PCB: Edit:/New: Search through components development started
+0.18.11	
+	Improved:
+	 * All: Remove file from Server when 'delete file' is ticked (update pages)
+0.18.10:
+	Add:
+	 * Movies: Add poster (manual upload, url or pull from IMDB)
+0.18.9
+	Improved:
+	 * Enable multiple authors to be saved for each book
+0.18.8
+	Added:
+	 * Movies: Add Director, Writer and actors (IMDB lookup)
+0.18.7
+	Improved:
+	 * Movies: Lookup Title, Year and synopsis based on imdb ID
+0.18.6
+	Improved:
+	 * Fix random notice message
+	 * Introduce pop up for existing components/locations/etc
+	 
+0.18.5
+	Improved:
+	 * listing components - add a column with a field and a button to subtract from quantity (instead of going to modify)
+	 * Allow supplying www link as a document or photo, not just from local storage
+	 * Make pictures on the main database front page also the link
+0.18.4
+	Improved:
+	 * When viewing coponents by package/tpe etc, the description column is now wider to show more info
+	 * Movie imdb - is now a clickable link
+	 * Last seen - in movie - made date format: dd mmm year e.g. 26 dec 2016 (no time or time zone)
+	 * In Books, Movies and Components, display number of items in the Index title (e.g. 12 Movies) at the top
+	 * When displaying info of a components/book/movie, make the add button appear to be able to create new item without going back to the list
+	 * Component list tables should have Package after Name column
+	 * Popup when part exists and allow to edit original part partially done (ONLY for Components, locations, manufacturers, types and packages)
+	 * Remember list order
+	 * Components new part - made the Number field as wide as the describe field
+	 * Made books first and last name fields wider - same as Notes field
+	 * Pictures - display in original apect ratio, don't stretch
+	 * Book view - make the synopsis 3x wider 
+	 * listing components by packaget/type/etc makes a table and the table has the Name column too narrow (it folds names on space, it should make the width as wide as the text is) - fixed
+	 
+0.18.0
+	Improved:
+	 * Bug fixes
+	   - Label lengths improved
+	   - Spelling and naming fixed
+	 * Look and feel improved
+	   - Colours adjusted to match index page.
+	   - Links colours changed
+	   - Book titles looks changed
+	   - Adjusted Index page home links
+	 * Controller code improved to include pagination for all pages
+	 * All tables default sort by name ASC
+	 * Speed improvements (image compression)
+	 * ISBN lookup added
+	 * All import functionality
+	   - Cannot import 'no file'
+	   - Only CSV accepted (rest ignored during processing)
+	 
+0.17.1
+	Improved:
+	 * Bug fixes (cover type not saving)
+	 
+0.17.0
+	Improved:
+	 * Altered Index page to include Books related data
+	New:
+	 * Books pages and underlying database
+	 * Authors pages and underlying database
+	 * Publishers pages and underlying database
+	 
+0.16.0 ( STABLE )
+	Improved:
+	 * look and feel of main index page
+	 * minor bug fixes
+	 * css layout simplified
+	New:
+	 * Pagination of Movies index and Parts index (25 items per page each)
+
+0.15.15
+	New:
+	 * Install will_paginate for future pagination of index pages
+	 
+0.15.14
+	Improved:
+	 * General bug fixes
+	 
+0.15.13
+	Improved:
+	 * New Index page
+	 
+0.15.9
+	Improved:
+	 * Index Page
+	 * Movies New page - include genres selection
+	 * Movies Edit page - include genres selection
+	 * Movies Show page - include list genres with links
+	 * version number
+	 * Installer update
+	New (movies):
+	 * Genre - Complete
+	 * Assign multiple genres to a movie
+	 * List all movies for selected Genre
+
+0.13.0
+	Improved:
+	 * Index Page
+	 * Format New page
+	 * Format Edit page
+	 * version number
+	 * Installer update
+	New (movies):
+	 * Years - Complete
+	 * Types - Complete
+	 * Languages - Complete
+	 * Subtitles - Complete
+	 * Quality - Complete
+	 * 3D - Complete
+
+0.0.1
+	Improved:
+	 * Formats INDEX page
+	 * Formats SHOW page
+	 * Formats Movies sub list
+	 * Application shared view (version number in footer)
+	New
+	 * Formats Index Import CSV functionality
