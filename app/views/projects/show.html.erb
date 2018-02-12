@@ -325,7 +325,7 @@
 
 })();
 </script>
-<body style background="/images/backgrounds/<%= @project.background %>"></body>
+<body style background="/public/images/backgrounds/<%= @project.background %>"></body>
 <div class="back-link"><%= link_to image_tag("dark_icons/undow.png", :width=>"24", :class=>"link-img"), :back %></div>
 <div class="list-link"><%= link_to image_tag("dark_icons/view_listw.png", :width=>"24", :class=>"link-img"), projects_path %> </div>
 
@@ -372,7 +372,7 @@
 			<div class="project-upper-right-down">
 				<div class="project-upper-right-down-icons">
 				<% @project.photos.each do |photo| %>
-					<img src="<%= photo.image.url(:thumb) %>" onclick="imgFunction('<%=photo.image.url(:medium) %>')" class="icons" id="icons" />
+					<img src="<%= '/public'+photo.image.url(:thumb) %>" onclick="imgFunction('<%='/public'+photo.image.url(:medium) %>')" class="icons" id="icons" />
 				<% end %>
 				</div>
 				<div>
@@ -383,7 +383,7 @@
 				</div>
 				<div class="project-upper-right-down-preview">
 					<% if @project.photos.any? %>
-						<img src="<%= @project.photos.first.image.url(:medium) %>" class="preview" id="preview" />
+						<img src="<%= '/public'+@project.photos.first.image.url(:medium) %>" class="preview" id="preview" />
 					<% end %>
 					<!-- The Modal -->
 					<div id="myModal" class="modal">
@@ -391,10 +391,10 @@
 					  <!-- The Close Button -->
 					  <span class="close" onclick="document.getElementById('myModal').style.display='none'">&times;</span>
 					  <!-- Modal Content (The Image) -->
-					  <!--<img class="modal-content" id="img01" src="<%= if @project.photos.any?; @project.photos.first.image.url(:original); else ""; end %>"/> -->
+					  <!--<img class="modal-content" id="img01" src="<%= if @project.photos.any?; '/public'+@project.photos.first.image.url(:original); else ""; end %>"/> -->
 					  <div id="owl-demo" class="owl-carousel owl-theme modal-content">
 						<% @project.photos.each do |photo| %>
-						  <div class="item"><img class="modal-content" id="img01"  src="<%= photo.image.url(:original) %>"></div>
+						  <div class="item"><img class="modal-content" id="img01"  src="<%= '/public'+photo.image.url(:original) %>"></div>
 						 <% end %>
 					  </div>
 					  <!-- Modal Caption (Image Text) -->
@@ -447,8 +447,8 @@
 					  <legend style="color:blue;font-weight:bold;">Files </legend>	
 					  <div class="project-upper-left-files">
 							<% @project.documents.each do |doc| %>
-							<%= link_to image_tag('dark_icons/file.png', :width=>"40", :style=>"margin-left:10px; margin-right:-42px; margin-bottom:13px;"), doc.file.url, :target=>"_blank"  %>
-							<%= link_to doc.file_file_name, doc.file.url, :target=>"_blank" %>
+							<%= link_to image_tag('dark_icons/file.png', :width=>"40", :style=>"margin-left:10px; margin-right:-42px; margin-bottom:13px;"), '/public'+doc.file.url, :target=>"_blank"  %>
+							<%= link_to doc.file_file_name, '/public'+doc.file.url, :target=>"_blank" %>
 							<% end %>
 					  </div>	
 					  <div>

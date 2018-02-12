@@ -127,7 +127,7 @@ body {
 <div class="container">	
 <div class="project-container">
 	<% @projects.each do |project| %>
-		<div class="single-project" style="background-image: url('<%= '/images/backgrounds/'+project.background.to_s %>');">
+		<div class="single-project" style="background-image: url('<%= '/public/images/backgrounds/'+project.background.to_s %>');">
 				<div class="pr-header">
 					<font size="4" color="brown">
 						<strong><div class="title"><%= link_to project.name+" ("+project.code+")" , project %></div></strong>				
