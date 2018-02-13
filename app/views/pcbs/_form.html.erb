@@ -118,8 +118,10 @@
 	<% end %>
 <% if @pcb.parent_id %>
 	<% @parent_id=@pcb.parent_id %>
-<% else %>
+<% elsif @pcb.id  %>
 	<% if Pcb.max_version(@pcb.name, @pcb.id, @pcb.version).first; @parent_id=Pcb.max_version(@pcb.name, @pcb.id, @pcb.version).first.id; else @parent_id=nil; end %>
+<% else %>
+	<% @parent_id=nil %>
 <% end %>
  <table>
 	<tr align="left">

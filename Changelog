@@ -1,3 +1,5 @@
+0.36.9
+	 * Changed ruby code for PCB existing parent id lookup (partial fix for issue #5)
 0.36.8
 	 * Fixed issues not previously resolved in 0.36.7
 0.36.7
