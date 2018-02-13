@@ -31,8 +31,8 @@ class PackagesController < ApplicationController
 			end
 		else 
 			if uploaded_io
-				file_name = uploaded_io.original_filename
-				File.open(Rails.root.join('public', 'images', uploaded_io.original_filename), 'wb') do |file|
+				file_name = SecureRandom.hex
+				File.open(Rails.root.join('public', 'images', file_name), 'wb') do |file|
 				file.write(uploaded_io.read)
 			 end
 			end		
@@ -67,8 +67,8 @@ class PackagesController < ApplicationController
 			end
 		else 
 			if uploaded_io
-				file_name = uploaded_io.original_filename
-				File.open(Rails.root.join('public', 'images', uploaded_io.original_filename), 'wb') do |file|
+				file_name = SecureRandom.hex
+				File.open(Rails.root.join('public', 'images', file_name), 'wb') do |file|
 				file.write(uploaded_io.read)
 			 end
 			end		
