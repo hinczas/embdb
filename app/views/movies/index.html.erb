@@ -188,8 +188,8 @@ body {
 						</div>
 					</font>
 				</div>
-				<div class="pr-body"  style="background-image: url('<%= image_path('/images/'+movie.poster.to_s) %>');">
-					<%= link_to image_tag('/images/'+movie.poster.to_s, :style=>"width:100%; height:100%; opacity:0;", :title=> movie.sunopsis ), movie %>
+				<div class="pr-body"  style="background-image: url('<%= image_path('/public/images/'+movie.poster.to_s) %>');">
+					<%= link_to image_tag('/public/images/'+movie.poster.to_s, :style=>"width:100%; height:100%; opacity:0;", :title=> movie.sunopsis ), movie %>
 				</div>
 		</div>
 	<% end %>

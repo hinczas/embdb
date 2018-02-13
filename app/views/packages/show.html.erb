@@ -7,7 +7,7 @@
 	<tr>
 		<td rowspan="5" width="100">
 		<% if @package.pk_photo %>
-			<%= image_tag(@package.pk_photo, :class=>"upl-img")%>
+			<%= image_tag('/public'+@package.pk_photo, :class=>"upl-img")%>
 			<% else %>
 			<%= image_tag("no_photo.png", :class=>"upl-img")%>
 			<% end %>

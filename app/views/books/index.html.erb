@@ -187,8 +187,8 @@ body {
 						</div>
 					</font>
 				</div>
-				<div class="pr-body"  style="background-image: url('<%= image_path('/images/'+book.cover.to_s) %>');">
-					<%= link_to image_tag('/images/'+book.cover.to_s, :style=>"width:100%; height:100%; opacity:0;"), book, :title=> book.sunopsis  %>
+				<div class="pr-body"  style="background-image: url('<%= image_path('/public/images/'+book.cover.to_s) %>');">
+					<%= link_to image_tag('/public/images/'+book.cover.to_s, :style=>"width:100%; height:100%; opacity:0;"), book, :title=> book.sunopsis  %>
 				</div>
 		</div>
 	<% end %>

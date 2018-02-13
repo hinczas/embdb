@@ -23,7 +23,7 @@
 	<tr>
 		<td rowspan="8" width="120">
 		 <% if @movie.poster %>
-			<%= image_tag(@movie.poster, :class=>"upl-img")%>
+			<%= image_tag('/public'+@movie.poster, :class=>"upl-img")%>
 			<% else %>
 			<%= image_tag("no_photo.png", :class=>"upl-img")%>
 			<% end %>

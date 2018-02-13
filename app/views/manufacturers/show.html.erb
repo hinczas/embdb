@@ -7,7 +7,7 @@
 	<tr>
 		<td rowspan="8" width="120">
 		 <% if @manufacturer.logo %>
-			<%= image_tag(@manufacturer.logo, :class=>"upl-img")%>
+			<%= image_tag('/public'+@manufacturer.logo, :class=>"upl-img")%>
 			<% else %>
 			<%= image_tag("no_photo.png", :class=>"upl-img")%>
 			<% end %>
