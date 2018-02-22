@@ -27,7 +27,14 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
+  	uploaded_io = params[:user][:photo]
+  	if uploaded_io
+		file_name=SecureRandom.hex
+		File.open(Rails.root.join('public', 'images', file_name), 'wb') do |file|
+		file.write(uploaded_io.read)
+	end
     @user = User.new(user_params)
+	if uploaded_io; @user.photo = file_name; end	
     lev = 2
     if params[:user_level]
 		lev = params[:user_level]
@@ -46,12 +53,26 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     lev = 2
+    del = params[:del_photo]
+	file_name = @user.photo
+	org_name = @user.photo
+	uploaded_io = params[:user][:photo]
+  	if uploaded_io
+		file_name=SecureRandom.hex
+		File.open(Rails.root.join('public', 'images', file_name), 'wb') do |file|
+		file.write(uploaded_io.read)
+	end
+	if uploaded_io; @user.photo = file_name; end
     if params[:user_level]
 		lev = params[:user_level]
 		@user.level=lev	
 		@user.save
 	end
 	  if @user.update(user_params)
+		if del; file_name=nil;File.delete(Rails.root.join('public', 'images', org_name)); end
+		 if del or uploaded_io or web_url
+			@user.photo = file_name
+		 end
 		flash[:notice]= 'User was successfully updated.' 
 		@user.save
 		redirect_to @user 
