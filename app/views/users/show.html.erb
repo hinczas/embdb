@@ -13,7 +13,7 @@
 		 <% if @user.photo %>
 			<%= image_tag('/public/images/'+@user.photo, :class=>"upl-img")%>
 			<% else %>
-			<%= image_tag("no_avatar.jpeg", :class=>"upl-img")%>
+			<%= image_tag("/public/images/no_avatar.jpeg", :class=>"upl-img")%>
 			<% end %>
 		</td>
 	</tr>
