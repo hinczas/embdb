@@ -70,7 +70,7 @@
 	 <% else %>
       <tr>
         <td><% if user.photo %>
-				<%= image_tag(user.photo, :class=>"avatar") %>
+				<%= image_tag('/public/images/'+user.photo, :class=>"avatar") %>
 			<% end %>
 		</td>
         <td><%= link_to user.name, user %></td>
