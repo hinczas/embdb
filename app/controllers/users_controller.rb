@@ -13,6 +13,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+	@user = User.find(params[:id])
   end
 
   # GET /users/new
@@ -22,12 +23,13 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+	@user = User.find(params[:id])
   end
 
   # POST /users
   # POST /users.json
   def create
-  	uploaded_io = params[:user][:photo]
+  	uploaded_io = params[:user][:avatar]
   	if uploaded_io
 		file_name=SecureRandom.hex
 		File.open(Rails.root.join('public', 'images', file_name), 'wb') do |file|
@@ -53,34 +55,38 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
-    lev = 2
-    del = params[:del_photo]
-	file_name = @user.photo
+    console
+	@user = User.find(params[:id])
+	uploaded_io = params[:user][:avatar]
+	lev = 2
+	del = params[:del_photo]
 	org_name = @user.photo
-	uploaded_io = params[:user][:photo]
-  	if uploaded_io
+	if uploaded_io
 		file_name=SecureRandom.hex
+		print "file_name"
 		File.open(Rails.root.join('public', 'images', file_name), 'wb') do |file|
-		file.write(uploaded_io.read)
-	   end
+			file.write(uploaded_io.read)
+		end
+		@user.photo = file_name
+		
 	end
-	if uploaded_io; @user.photo = file_name; end
-    if params[:user_level]
+	if del
+		file_name=nil
+		File.delete(Rails.root.join('public', 'images', org_name))
+		@user.photo = file_name
+	end
+	if params[:user_level]
 		lev = params[:user_level]
 		@user.level=lev	
 		@user.save
 	end
-	  if @user.update(user_params)
-		if del; file_name=nil;File.delete(Rails.root.join('public', 'images', org_name)); end
-		 if del or uploaded_io
-			@user.photo = file_name
-		 end
+	if @user.update(user_params)
 		flash[:notice]= 'User was successfully updated.' 
 		@user.save
 		redirect_to @user 
-	  else
-		 render 'edit'
-	  end
+	else
+		render 'edit'
+	end
   end
 
   # DELETE /users/1

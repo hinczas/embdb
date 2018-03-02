@@ -31,7 +31,7 @@
   <% end %>
 
   <div class="field">
-		<%= f.file_field :photo, multipart: true, :class => "file-browser" %>
+		<%= f.file_field :avatar, multipart: true, :class => "file-browser" %>
 		 <% if @user.photo %>
 			<%= image_tag(@user.photo, :class=>"upl-img")%><br/>
 			<%= check_box_tag :del_photo , 1 %> Delete photo<br/>

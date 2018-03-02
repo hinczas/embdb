@@ -51,6 +51,7 @@
 <table>
   <thead>
     <tr bgcolor="#BFBFBF">
+      <th>Avatar</th>
       <th>Name</th>
       <th>Middle name</th>
       <th>Surname</th>
@@ -69,7 +70,7 @@
 	 <% else %>
       <tr>
         <td><% if user.photo %>
-				<%= image_tag(user.photo, :class=>"upl-img") %>
+				<%= image_tag(user.photo, :class=>"avatar") %>
 			<% end %>
 		</td>
         <td><%= link_to user.name, user %></td>
