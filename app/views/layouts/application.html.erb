@@ -42,10 +42,12 @@
 			<div class="searchbox" style="display: table-cell;">
 				<div class="user_details" style="vertical-align:middle; display: table-cell;">
 					<div style="vertical-align:middle; display: table-cell; padding-right:10px; padding-top:2px;">
-						<% if @current_user.photo %>
-							<%= image_tag('/public/images/'+@current_user.photo, :class=>"avatar2") %>
-						<% else %>
-							<%= image_tag("/public/images/no_avatar.jpeg", :class=>"avatar2")%>
+						<% if session[:user_id] %>
+							<% if @current_user.photo %>
+								<%= image_tag('/public/images/'+@current_user.photo, :class=>"avatar2") %>
+							<% else %>
+								<%= image_tag("/public/images/no_avatar.jpeg", :class=>"avatar2")%>
+							<% end %>
 						<% end %>
 					</div>	
 					<div style="vertical-align:middle; display: table-cell; padding-right:10px; padding-top:2px;">
