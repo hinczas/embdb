@@ -55,9 +55,9 @@
 		  <body>
 			  <tr>
 				<td><% if user.photo %>
-						<%= image_tag(user.photo, :class=>"avatar") %>
+						<%= image_tag('/public/images/'+user.photo, :class=>"avatar") %>
 					<% else %>
-						<%= image_tag("no_avatar.jpeg", :class=>"avatar")%>
+						<%= image_tag('/public/images/'+"no_avatar.jpeg", :class=>"avatar")%>
 					<% end %>
 				</td>
 				<td>
