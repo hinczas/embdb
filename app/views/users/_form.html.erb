@@ -35,7 +35,7 @@
 			<%= image_tag('/public/images/'+@user.photo, :class=>"upl-img")%><br/>
 			<%= check_box_tag :del_photo , 1 %> Delete photo<br/>
 			<% else %>
-			<%= image_tag('/public/images/'+"no_avatar.jpeg", :class=>"upl-img")%><br/>
+			<%= image_tag("no_avatar.jpeg", :class=>"upl-img")%><br/>
 		 <% end %>
 		<%= f.file_field :avatar, multipart: true, :class => "file-browser" %>
   </div>

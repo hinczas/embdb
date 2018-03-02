@@ -55,7 +55,6 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
-    console
 	@user = User.find(params[:id])
 	uploaded_io = params[:user][:avatar]
 	lev = 2
