@@ -1,6 +1,6 @@
 	<style>	
 		table, th, td {
-			border: 1px solid blue;
+			border: 0px;
 			border-collapse: collapse;
 			vertical-align: middle;
 		}
@@ -48,46 +48,28 @@
 
 <h1>Users <%= link_to image_tag("dark_icons/plus_1.png", :width=>"20", :height=>"20"), new_user_path(id: params[:id]) %>	</h1>
 
-<table>
-  <thead>
-    <tr bgcolor="#BFBFBF">
-      <th>Avatar</th>
-      <th>Name</th>
-      <th>Middle name</th>
-      <th>Surname</th>
-      <th>Birth date</th>
-      <th>Address</th>
-      <th>Mobile</th>
-      <th>Email</th>
-      <th>Notes</th>
-      <th>Username</th>
-    </tr>
-  </thead>
-
-  <tbody>
     <% @users.each do |user| %>
 	 <% if user.level==0 && @current_user.level != 0 %>
-	 <% else %>
-      <tr>
-        <td><% if user.photo %>
-				<%= image_tag('/public/images/'+user.photo, :class=>"avatar") %>
-			<% end %>
-		</td>
-        <td><%= link_to user.name, user %></td>
-        <td><%= user.middle_name %></td>
-        <td><%= user.surname %></td>
-        <td><%= user.birth_date %></td>
-        <td><%= user.address %></td>
-        <td><%= user.mobile %></td>
-        <td><%= user.email %></td>
-        <td><%= user.notes %></td>
-        <td><%= link_to user.username, user %></td>	
-		<td class="tdimg"><%=link_to image_tag("dark_icons/tools_1.png", :width=>"13", :height=>"13"), edit_user_path(user) %></td>
-      </tr>
+	 <% else %>	 
+		<table>
+		  <body>
+			  <tr>
+				<td><% if user.photo %>
+						<%= image_tag(user.photo, :class=>"avatar") %>
+					<% else %>
+						<%= image_tag("no_avatar.jpeg", :class=>"avatar")%>
+					<% end %>
+				</td>
+				<td>
+					<h3  style="color:black;"><%= link_to user.username, user %> <%=link_to image_tag("dark_icons/edit.png", :width=>"13", :height=>"13"), edit_user_path(user) %></h3>	
+					<%= user.name %> <%= user.surname %> </br>
+				    <p style="color:gray;"><%= user.notes %></p>
+				</td>
+			 </tr>
+		  </body>
+		</table>
      <% end %>
     <% end %>
-  </tbody>
-</table>
 
 <% else %>
 <%= controller.redirect_to :denied %>

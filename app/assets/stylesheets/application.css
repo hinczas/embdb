@@ -41,41 +41,39 @@
 		border-radius:0;
 	}
 	
-::-webkit-scrollbar {
-  width: 9px;
-  height: 9px;
-}
-::-webkit-scrollbar-button {
-  width: 0px;
-  height: 0px;
-}
-::-webkit-scrollbar-thumb {
-  background: #C8C8C8;
-  border: 1px none #ffffff;
-  border-radius: 50px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #AFAFAF;
-}
-::-webkit-scrollbar-thumb:active {
-  background: #7D7D7D;
-}
-::-webkit-scrollbar-track {
-  background: #ffffff;
-  border: 0px none #ffffff;
-  border-radius: 50px;
-}
-::-webkit-scrollbar-track:hover {
-  background: #e1e1e1;
-}
-::-webkit-scrollbar-track:active {
-  background: #E5E5E5;
-}
-::-webkit-scrollbar-corner {
-  background: transparent;
-}
-
-
+	::-webkit-scrollbar {
+	  width: 9px;
+	  height: 9px;
+	}
+	::-webkit-scrollbar-button {
+	  width: 0px;
+	  height: 0px;
+	}
+	::-webkit-scrollbar-thumb {
+	  background: #C8C8C8;
+	  border: 1px none #ffffff;
+	  border-radius: 50px;
+	}
+	::-webkit-scrollbar-thumb:hover {
+	  background: #AFAFAF;
+	}
+	::-webkit-scrollbar-thumb:active {
+	  background: #7D7D7D;
+	}
+	::-webkit-scrollbar-track {
+	  background: #ffffff;
+	  border: 0px none #ffffff;
+	  border-radius: 50px;
+	}
+	::-webkit-scrollbar-track:hover {
+	  background: #e1e1e1;
+	}
+	::-webkit-scrollbar-track:active {
+	  background: #E5E5E5;
+	}
+	::-webkit-scrollbar-corner {
+	  background: transparent;
+	}
 
 	* {
 		margin: 0;
@@ -89,6 +87,13 @@
 	}
 	.avatar {
 		border-radius: 50%;
+		width:  50px;
+		height: 50px;
+	}
+	.avatar2 {
+		border-radius: 50%;
+		width:  30px;
+		height: 30px;
 	}
 	.button {
 		cursor:pointer;
@@ -168,14 +173,15 @@
 	.header {
 		border:0px solid blue;
 		height: 50px;
-		background: #4CAF50;
+		/*background: #4CAF50;*/
+		background: #F5F5F5;
 			min-width:700px;
 			width:100%;
 	}
 	.header2 {
 		border:0px solid blue;
 		height: 20px;
-		background: #4C7EAF;
+		background: #F5F5F5;
 		margin-bottom: -22px;
 			min-width:700px;
 	}
@@ -370,14 +376,14 @@
 	table {			
 		margin-top: 20px;
 		margin-left: 10px;
-		margin-bottom: 50px;
+		margin-bottom: 5px;
 	}
 	.searchbox { 
 		outline:0px;
 		float: right;
 		vertical-align:top;
 		padding-right:10px;
-		margin-top:-44px;
+		margin-top:-51px;
 	}
 	.searchbox form > div {
 	  vertical-align: top;
@@ -394,9 +400,9 @@
 	  font-size: 14px;
 	  width: 72px;
 	  border: 0;
-	  -webkit-border-top-left-radius: 5px;
-	  -moz-border-top-left-radius: 5px;
-	  border-top-left-radius: 5px;
+	  -webkit-border-top-left-radius: 0px;
+	  -moz-border-top-left-radius: 0px;
+	  border-top-left-radius: 0px;
 	  -webkit-border-bottom-left-radius: 5px;
 	  -moz-border-bottom-left-radius: 5px;
 	  border-bottom-left-radius: 5px;
@@ -426,9 +432,9 @@
 	  margin-left: -4px;
 	  width: 42px;
 	  border: 0;
-	  -webkit-border-top-right-radius: 5px;
-	  -moz-border-top-right-radius: 5px;
-	  border-top-right-radius: 5px;
+	  -webkit-border-top-right-radius: 0px;
+	  -moz-border-top-right-radius: 0px;
+	  border-top-right-radius: 0px;
 	  -webkit-border-bottom-right-radius: 5px;
 	  -moz-border-bottom-right-radius: 5px;
 	  border-bottom-right-radius: 5px;

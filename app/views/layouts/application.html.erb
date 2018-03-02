@@ -37,9 +37,21 @@
 				<%=image_tag("chip.png", :height=>"40")%>
 				<%=image_tag("film.png", :height=>"40")%>
 				<%=image_tag("book.png", :height=>"40")%>
-			</div>
-			<div class="text" style="font-family: arial; font-size:36px; display: table-cell;">.emb Database</div>
+				<%=image_tag("logo.png", :height=>"40")%>
+			</div>		
 			<div class="searchbox" style="display: table-cell;">
+				<div class="user_details" style="vertical-align:middle; display: table-cell;">
+					<div style="vertical-align:middle; display: table-cell; padding-right:10px; padding-top:2px;">
+						<% if @current_user.photo %>
+							<%= image_tag(@current_user.photo, :class=>"avatar2") %>
+						<% else %>
+							<%= image_tag("no_avatar.jpeg", :class=>"avatar2")%>
+						<% end %>
+					</div>	
+					<div style="vertical-align:middle; display: table-cell; padding-right:10px; padding-top:2px;">
+						<strong style="horizontal-align:right;"><%= if session[:user_id]; link_to User.find(session[:user_id]).username, User.find(session[:user_id]); end %></strong> <%= if session[:user_id]; link_to '(logout)', logout_path; end %>
+					</div>
+				</div>	
 				<div class="selector" style="vertical-align:top; display: table-cell;">
 					<select id="selector" onChange="jsFunction()">
 						<option value="http://www.google.co.uk/search">Google</option>
@@ -92,7 +104,7 @@
 			  </div>
 		  </div>	
 		<div class="site-body">	
-		<div class="home_link"><strong><%= if session[:user_id]; link_to User.find(session[:user_id]).username, User.find(session[:user_id]); end %></strong> <%= if session[:user_id]; link_to '(logout)', logout_path; end %></div>
+		
 		
 			<body style="font-family: sans-serif; font-size:12px">	
 				<%= link_to welcome_index_url do %>
