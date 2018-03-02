@@ -101,6 +101,7 @@ GEM
       cocaine (~> 0.5.5)
       mime-types
       mimemagic (~> 0.3.0)
+    pg (0.21.0)
     puma (3.11.2)
     rack (2.0.4)
     rack-test (0.6.3)
@@ -194,6 +195,7 @@ DEPENDENCIES
   nokogiri (>= 1.8.1)
   owlcarousel-rails
   paperclip (>= 5.2.0)
+  pg (~> 0.18)
   puma
   rails (~> 5)
   rest-client

@@ -32,6 +32,7 @@ class UsersController < ApplicationController
 		file_name=SecureRandom.hex
 		File.open(Rails.root.join('public', 'images', file_name), 'wb') do |file|
 		file.write(uploaded_io.read)
+	   end
 	end
     @user = User.new(user_params)
 	if uploaded_io; @user.photo = file_name; end	
@@ -61,6 +62,7 @@ class UsersController < ApplicationController
 		file_name=SecureRandom.hex
 		File.open(Rails.root.join('public', 'images', file_name), 'wb') do |file|
 		file.write(uploaded_io.read)
+	   end
 	end
 	if uploaded_io; @user.photo = file_name; end
     if params[:user_level]
@@ -70,7 +72,7 @@ class UsersController < ApplicationController
 	end
 	  if @user.update(user_params)
 		if del; file_name=nil;File.delete(Rails.root.join('public', 'images', org_name)); end
-		 if del or uploaded_io or web_url
+		 if del or uploaded_io
 			@user.photo = file_name
 		 end
 		flash[:notice]= 'User was successfully updated.' 

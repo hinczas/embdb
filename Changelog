@@ -1,3 +1,7 @@
+0.36.11
+	 * Partially implemented photo for users.
+	 * Fixed siete footer to stick at the bottom
+	 * Slight UI changes
 0.36.10
 	 * Added option to add/delete photo for users
 0.36.9

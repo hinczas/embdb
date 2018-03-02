@@ -58,8 +58,6 @@
       <th>Address</th>
       <th>Mobile</th>
       <th>Email</th>
-      <th>Photo</th>
-      <th>Password</th>
       <th>Notes</th>
       <th>Username</th>
     </tr>
@@ -70,6 +68,10 @@
 	 <% if user.level==0 && @current_user.level != 0 %>
 	 <% else %>
       <tr>
+        <td><% if user.photo %>
+				<%= image_tag(user.photo, :class=>"upl-img") %>
+			<% end %>
+		</td>
         <td><%= link_to user.name, user %></td>
         <td><%= user.middle_name %></td>
         <td><%= user.surname %></td>
@@ -77,8 +79,6 @@
         <td><%= user.address %></td>
         <td><%= user.mobile %></td>
         <td><%= user.email %></td>
-        <td><%= user.photo %></td>
-        <td><%= user.password %></td>
         <td><%= user.notes %></td>
         <td><%= link_to user.username, user %></td>	
 		<td class="tdimg"><%=link_to image_tag("dark_icons/tools_1.png", :width=>"13", :height=>"13"), edit_user_path(user) %></td>

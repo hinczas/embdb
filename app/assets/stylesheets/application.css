@@ -87,6 +87,9 @@
 	.home_link a:visited {
 		color:#FFA500 !important;
 	}
+	.avatar {
+		border-radius: 50%;
+	}
 	.button {
 		cursor:pointer;
 		outline:0px;
@@ -258,9 +261,18 @@
 		margin: 2px;
 	}
 	.site-footer {
-		background: #4CAF50;
+	/*	background: #4CAF50;
 		height: -17px;
 			min-width:700px;
+	}
+	.footer {*/
+	  position: absolute;
+	  right: 0;
+	  bottom: 0;
+	  left: 0;
+	  padding: 0.3rem;
+	  background-color: #efefef;
+	  text-align: left;
 	}
 	.page-wrap:after {
 		height: -17px;
@@ -320,8 +332,26 @@
 		min-width:700px;
 		position:absolute;
 		}
-	html, body {
+	/*html, body {
 		height: 100%;
+	}*/
+	html {
+	  height: 100%;
+	  box-sizing: border-box;
+	}
+
+	/**,
+	*:before,
+	*:after {
+	  box-sizing: inherit;
+	}*/
+
+	body {
+	  position: relative;
+	  margin: 0;
+	  padding-bottom: 0rem;
+	  min-height: 100%;
+	  font-family: "Helvetica Neue", Arial, sans-serif;
 	}
 	img {
 		margin-top:5px;

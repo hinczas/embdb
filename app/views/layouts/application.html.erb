@@ -92,7 +92,7 @@
 			  </div>
 		  </div>	
 		<div class="site-body">	
-		<div class="home_link"><%= DateTime.now() %> <strong><%= if session[:user_id]; link_to User.find(session[:user_id]).username, User.find(session[:user_id]); end %></strong> <%= if session[:user_id]; link_to '(logout)', logout_path; end %></div>
+		<div class="home_link"><strong><%= if session[:user_id]; link_to User.find(session[:user_id]).username, User.find(session[:user_id]); end %></strong> <%= if session[:user_id]; link_to '(logout)', logout_path; end %></div>
 		
 			<body style="font-family: sans-serif; font-size:12px">	
 				<%= link_to welcome_index_url do %>
@@ -118,7 +118,7 @@
 		</div>
 	</div>
 	<footer class="site-footer">
-		 <%= link_to "(v. "+Rails.configuration.version+")", "/welcome/hidden" %> <%= link_to "contact", "mailto:hinczas@gmail.com"  %>
+		 <%= DateTime.now().iso8601() %> <%= link_to "(v. "+Rails.configuration.version+")", "/welcome/hidden" %> <%= link_to "contact", "mailto:hinczas@gmail.com"  %>
 	</footer>
 
 </html>
