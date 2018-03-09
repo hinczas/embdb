@@ -20,7 +20,7 @@ module Blog
     # config.i18n.default_locale = :de
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
-    config.version = "0.36.15"
+    config.version = "0.36.16"
     config.p_sort  = nil
     config.p_dir  = nil
     config.m_sort = nil
